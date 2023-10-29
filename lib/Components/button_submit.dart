@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 
-//Button for Login/Registration
-class ButtonSubmit extends StatelessWidget {
+//Button for Login/Registration submit
+class ButtonSubmit extends StatefulWidget {
   final String text;
   final Function onPressed;
 
-  const ButtonSubmit({super.key, required this.text, required this.onPressed});
+  const ButtonSubmit({
+    Key? key,
+    required this.text,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
+  ButtomSubmitState createState() => ButtomSubmitState();
+}
+
+class ButtomSubmitState extends State<ButtonSubmit> {
+  @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        onPressed();
-      },
-      child: Text(text),
+    return SizedBox(
+      child: ElevatedButton(
+        child: Text(widget.text),
+        onPressed: () {
+          widget.onPressed();
+        },
+      ),
     );
   }
 }
