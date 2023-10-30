@@ -14,10 +14,10 @@ class ButtonLink extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  ButtomSubmitState createState() => ButtomSubmitState();
+  ButtonLinkState createState() => ButtonLinkState();
 }
 
-class ButtomSubmitState extends State<ButtonLink> {
+class ButtonLinkState extends State<ButtonLink> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
