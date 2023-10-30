@@ -1,0 +1,9 @@
+{
+    "@@locale": "ja",
+    
+    "username": "ユーザー名",
+    "password":"パスワード",
+    "login": "ログイン",
+    "newuser": "新しいユーザー？ ",
+    "registerhere": "ここに登録"
+}
