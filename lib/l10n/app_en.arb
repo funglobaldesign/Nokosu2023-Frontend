@@ -1,6 +1,6 @@
 {
     "username": "Username",
-    "password":"Password",
+    "password": "Password",
     "login": "Login",
     "newuser": "New User? ",
     "registerhere": "Register here"
