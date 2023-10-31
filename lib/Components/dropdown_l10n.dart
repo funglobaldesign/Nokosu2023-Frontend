@@ -23,6 +23,14 @@ class DropdownL10nState extends State<DropdownL10n> {
             value: Locale('ja'),
             child: Text('日本語'),
           ),
+          DropdownMenuItem(
+            value: Locale('ko'),
+            child: Text('한국어'),
+          ),
+          DropdownMenuItem(
+            value: Locale('zh'),
+            child: Text('中文'),
+          ),
         ],
         onChanged: (newLocale) {
           Provider.of<LocaleProvider>(context, listen: false)

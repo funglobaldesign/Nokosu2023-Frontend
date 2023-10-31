@@ -1,0 +1,9 @@
+{
+    "@@locale": "zh",
+
+    "username": "用户名",
+    "password": "密码",
+    "login": "登录",
+    "newuser": "新用户？",
+    "registerhere": "在此注册"
+}

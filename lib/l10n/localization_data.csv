@@ -1,6 +1,6 @@
-﻿key,en,ja
-username,Username,ユーザー名
-password,Password,パスワード
-login,Login,ログイン
-newuser,New User? ,新しいユーザー？ 
-registerhere,Register here,ここに登録
+﻿key,en,ja,ko,zh
+username,Username,ユーザー名,사용자 이름,用户名
+password,Password,パスワード,비밀번호,密码
+login,Login,ログイン,로그인,登录
+newuser,New User?,新しいユーザー？,신규 사용자이신가요?,新用户？
+registerhere,Register here,ここに登録,여기에서 등록하세요,在此注册
