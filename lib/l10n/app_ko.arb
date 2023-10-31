@@ -1,0 +1,9 @@
+{
+    "@@locale": "ko",
+
+    "username": "사용자 이름",
+    "password": "비밀번호",
+    "login": "로그인",
+    "newuser": "신규 사용자이신가요?",
+    "registerhere": "여기에서 등록하세요"
+}

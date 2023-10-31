@@ -25,6 +25,9 @@ class ButtonLinkState extends State<ButtonLink> {
       text: TextSpan(
         text: widget.textLabel,
         children: <TextSpan>[
+          const TextSpan(
+            text: ' ',
+          ),
           TextSpan(
               text: widget.textLink,
               recognizer: TapGestureRecognizer()
