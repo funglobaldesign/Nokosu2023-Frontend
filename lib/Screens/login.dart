@@ -6,6 +6,7 @@ import 'package:nokosu2023/Components/input_field.dart';
 import 'package:nokosu2023/Components/popup_info.dart';
 import 'package:nokosu2023/Screens/registration.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/src/constants.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -50,7 +51,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: null, // タイトルを非表示にする
+      appBar: null,
+      backgroundColor: ThemeColours.bgBlueWhite,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -58,11 +60,13 @@ class _LoginPageState extends State<LoginPage> {
             InputField(
               label: locale.username,
               controller: usernameController,
+              prefixicon: Icons.person,
             ),
             InputField(
               label: locale.password,
               controller: passwordController,
               ispasswordField: true,
+              prefixicon: Icons.lock,
             ),
             ButtonSubmit(
               text: locale.login,

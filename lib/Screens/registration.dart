@@ -49,20 +49,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
             InputField(
               label: 'Username',
               controller: usernameController,
+              prefixicon: Icons.person,
             ),
             InputField(
               label: 'Email',
               controller: emailController,
+              prefixicon: Icons.person,
             ),
             InputField(
               label: 'Password',
               controller: password1Controller,
               ispasswordField: true,
+              prefixicon: Icons.person,
             ),
             InputField(
               label: 'Password Confirmation',
               controller: password2Controller,
               ispasswordField: true,
+              prefixicon: Icons.person,
             ),
             ButtonSubmit(
               text: 'Register',

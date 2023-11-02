@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nokosu2023/src/constants.dart';
 
 class InputField extends StatefulWidget {
   final String label;
@@ -6,11 +7,13 @@ class InputField extends StatefulWidget {
   final double boxWidth;
   final TextEditingController controller;
   final bool ispasswordField;
+  final IconData prefixicon;
 
   const InputField({
     Key? key,
     required this.label,
     required this.controller,
+    required this.prefixicon,
     this.boxWidth = 200,
     this.err = '',
     this.ispasswordField = false,
@@ -40,7 +43,8 @@ class InputFieldState extends State<InputField> {
             controller: widget.controller,
             obscureText: obscureText,
             decoration: InputDecoration(
-              labelText: widget.label,
+              hintText: widget.label,
+              prefixIcon: Icon(widget.prefixicon),
               suffixIcon: widget.ispasswordField
                   ? IconButton(
                       icon: Icon(
@@ -57,9 +61,7 @@ class InputFieldState extends State<InputField> {
           ),
           Text(
             widget.err,
-            style: const TextStyle(
-              color: Colors.red,
-            ),
+            style: const TextStyle(color: ThemeColours.txtRed),
           ),
         ],
       ),
