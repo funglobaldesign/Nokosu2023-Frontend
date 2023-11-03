@@ -38,7 +38,7 @@ class InputFieldState extends State<InputField> {
         setState(() {
           containerShadowDecoration.add(
             const BoxShadow(
-              color: ThemeColours.shadowDark,
+              color: ThemeColours.shadowInnerDark,
               spreadRadius: -5,
               offset: Offset(-2.5, -2.5),
               blurRadius: 5,
@@ -46,7 +46,7 @@ class InputFieldState extends State<InputField> {
           );
           containerShadowDecoration.add(
             const BoxShadow(
-              color: ThemeColours.shadowLight,
+              color: ThemeColours.shadowInnerLight,
               spreadRadius: -5,
               offset: Offset(2.5, 2.5),
               blurRadius: 5,
@@ -71,7 +71,7 @@ class InputFieldState extends State<InputField> {
           Container(
             decoration: BoxDecoration(
               color: ThemeColours.bgBlueWhite,
-              borderRadius: BorderRadius.circular(NumericConsts.borderRad),
+              borderRadius: BorderRadius.circular(50),
               border: Border.all(
                 width: 0,
                 color: Colors.transparent,
@@ -80,41 +80,32 @@ class InputFieldState extends State<InputField> {
                 BoxShadow(
                   color: ThemeColours.shadowLight,
                   offset: Offset(-5, -5),
-                  blurRadius: NumericConsts.blurRad,
+                  blurRadius: 3,
                 ),
                 BoxShadow(
                   color: ThemeColours.shadowDark,
                   offset: Offset(5, 5),
-                  blurRadius: NumericConsts.blurRad,
+                  blurRadius: 3,
                 ),
               ],
             ),
-            child: Container(
-              padding: const EdgeInsets.all(NumericConsts.blurRad),
-              decoration: BoxDecoration(
-                boxShadow: containerShadowDecoration,
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(NumericConsts.borderRad),
-                border: Border.all(
-                  width: 0,
-                  color: Colors.transparent,
-                ),
-              ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
               child: Focus(
                 focusNode: containerFocusNode,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: NumericConsts.paddingX,
+                    horizontal: 12,
                     vertical: 0,
                   ),
                   decoration: BoxDecoration(
-                    color: ThemeColours.bgBlueWhite,
-                    borderRadius:
-                        BorderRadius.circular(NumericConsts.borderRad),
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(50),
                     border: Border.all(
                       width: 0,
                       color: Colors.transparent,
                     ),
+                    boxShadow: containerShadowDecoration,
                   ),
                   child: TextFormField(
                     controller: widget.controller,
