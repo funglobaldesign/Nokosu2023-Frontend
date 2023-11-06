@@ -1,9 +1,14 @@
 {
     "@@locale": "zh",
 
-    "username": "用户名",
-    "password": "密码",
+    "email": "",
+    "forgotpw": "",
     "login": "登录",
     "newuser": "新用户？",
-    "registerhere": "在此注册"
+    "password": "密码",
+    "passwordconf": "",
+    "register": "",
+    "registerhere": "在此注册",
+    "resethere": "",
+    "username": "用户名"
 }

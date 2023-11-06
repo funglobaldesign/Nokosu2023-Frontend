@@ -1,9 +1,14 @@
 {
     "@@locale": "ja",
 
-    "username": "ユーザー名",
-    "password": "パスワード",
+    "email": "",
+    "forgotpw": "",
     "login": "ログイン",
     "newuser": "新しいユーザー？",
-    "registerhere": "ここに登録"
+    "password": "パスワード",
+    "passwordconf": "",
+    "register": "",
+    "registerhere": "ここに登録",
+    "resethere": "",
+    "username": "ユーザー名"
 }

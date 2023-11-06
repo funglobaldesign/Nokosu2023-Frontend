@@ -1,7 +1,12 @@
 {
-    "username": "Username",
-    "password": "Password",
+    "email": "Email",
+    "forgotpw": "Forgot Password?",
     "login": "Login",
     "newuser": "New User?",
-    "registerhere": "Register here"
+    "password": "Password",
+    "passwordconf": "Password Confirmation",
+    "register": "Register",
+    "registerhere": "Register here",
+    "resethere": "Reset here",
+    "username": "Username"
 }

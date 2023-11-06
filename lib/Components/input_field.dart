@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
+import 'package:nokosu2023/src/constants.dart';
 
 class InputField extends StatefulWidget {
   final String label;
   final String err;
   final double boxWidth;
+  final double boxHeight;
   final TextEditingController controller;
   final bool ispasswordField;
+  final IconData prefixicon;
 
   const InputField({
     Key? key,
     required this.label,
     required this.controller,
-    this.boxWidth = 200,
+    required this.prefixicon,
+    this.boxWidth = NumericConsts.defBoxWidth,
+    this.boxHeight = NumericConsts.defBoxHeight,
     this.err = '',
     this.ispasswordField = false,
   }) : super(key: key);
@@ -32,35 +38,58 @@ class InputFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: widget.boxWidth,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextFormField(
-            controller: widget.controller,
-            obscureText: obscureText,
-            decoration: InputDecoration(
-              labelText: widget.label,
-              suffixIcon: widget.ispasswordField
-                  ? IconButton(
-                      icon: Icon(
-                        obscureText ? Icons.visibility : Icons.visibility_off,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          obscureText = !obscureText;
-                        });
-                      },
-                    )
-                  : null,
+          SizedBox(
+            width: widget.boxWidth,
+            height: widget.boxHeight,
+            child: Neumo(
+              child: TextFormField(
+                controller: widget.controller,
+                obscureText: obscureText,
+                style: const TextStyle(color: ThemeColours.txtBlack),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: widget.label,
+                  hintStyle: const TextStyle(color: ThemeColours.txtGrey),
+                  prefixIcon: Icon(
+                    widget.prefixicon,
+                    color: ThemeColours.iconBlack,
+                  ),
+                  suffixIcon: widget.ispasswordField
+                      ? IconButton(
+                          icon: Icon(
+                            obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: ThemeColours.iconBlack,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              obscureText = !obscureText;
+                            });
+                          },
+                        )
+                      : null,
+                ),
+              ),
             ),
           ),
-          Text(
-            widget.err,
-            style: const TextStyle(
-              color: Colors.red,
+          SizedBox(
+            width: widget.boxWidth,
+            height: widget.boxHeight / 2,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                widget.err,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: ThemeColours.txtRed,
+                ),
+              ),
             ),
-          ),
+          )
         ],
       ),
     );
