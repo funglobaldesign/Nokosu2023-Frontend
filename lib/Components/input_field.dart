@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:nokosu2023/src/constants.dart';
 
 class InputField extends StatefulWidget {
@@ -26,7 +27,18 @@ class InputField extends StatefulWidget {
 class InputFieldState extends State<InputField> {
   late bool obscureText;
   final FocusNode containerFocusNode = FocusNode();
-  late List<BoxShadow> containerShadowDecoration = [];
+  late List<BoxShadow> containerShadowDecoration = [
+    const BoxShadow(
+      blurRadius: 6,
+      offset: Offset(-6, -6),
+      color: ThemeColours.shadowLight,
+    ),
+    const BoxShadow(
+      blurRadius: 6,
+      offset: Offset(6, 6),
+      color: ThemeColours.shadowDark,
+    ),
+  ];
 
   @override
   void initState() {
@@ -38,24 +50,21 @@ class InputFieldState extends State<InputField> {
         setState(() {
           containerShadowDecoration.add(
             const BoxShadow(
-              color: ThemeColours.shadowInnerDark,
-              spreadRadius: -5,
-              offset: Offset(-2.5, -2.5),
-              blurRadius: 5,
-            ),
+                blurRadius: 6,
+                offset: Offset(-6, -6),
+                color: ThemeColours.shadowLight,
+                inset: true),
           );
-          containerShadowDecoration.add(
-            const BoxShadow(
-              color: ThemeColours.shadowInnerLight,
-              spreadRadius: -5,
-              offset: Offset(2.5, 2.5),
+          containerShadowDecoration.add(const BoxShadow(
               blurRadius: 5,
-            ),
-          );
+              offset: Offset(5, 5),
+              color: ThemeColours.shadowDark,
+              inset: true));
         });
       } else {
         setState(() {
-          containerShadowDecoration = [];
+          containerShadowDecoration.removeLast();
+          containerShadowDecoration.removeLast();
         });
       }
     });
@@ -68,74 +77,51 @@ class InputFieldState extends State<InputField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: ThemeColours.bgBlueWhite,
-              borderRadius: BorderRadius.circular(50),
-              border: Border.all(
-                width: 0,
-                color: Colors.transparent,
+          Focus(
+            focusNode: containerFocusNode,
+            child: Container(
+              padding: const EdgeInsets.only(
+                top: 5,
+                bottom: 0,
+                left: 15,
+                right: 15,
               ),
-              boxShadow: const [
-                BoxShadow(
-                  color: ThemeColours.shadowLight,
-                  offset: Offset(-5, -5),
-                  blurRadius: 3,
+              decoration: BoxDecoration(
+                color: ThemeColours.bgBlueWhite,
+                borderRadius: BorderRadius.circular(50),
+                border: Border.all(
+                  width: 0,
+                  color: Colors.transparent,
                 ),
-                BoxShadow(
-                  color: ThemeColours.shadowDark,
-                  offset: Offset(5, 5),
-                  blurRadius: 3,
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Focus(
-                focusNode: containerFocusNode,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 0,
+                boxShadow: containerShadowDecoration,
+              ),
+              child: TextFormField(
+                controller: widget.controller,
+                obscureText: obscureText,
+                style: const TextStyle(color: ThemeColours.txtBlack),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: widget.label,
+                  hintStyle: const TextStyle(color: ThemeColours.txtGrey),
+                  prefixIcon: Icon(
+                    widget.prefixicon,
+                    color: ThemeColours.iconBlack,
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border.all(
-                      width: 0,
-                      color: Colors.transparent,
-                    ),
-                    boxShadow: containerShadowDecoration,
-                  ),
-                  child: TextFormField(
-                    controller: widget.controller,
-                    obscureText: obscureText,
-                    style: const TextStyle(color: ThemeColours.txtBlack),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: widget.label,
-                      hintStyle: const TextStyle(color: ThemeColours.txtGrey),
-                      prefixIcon: Icon(
-                        widget.prefixicon,
-                        color: ThemeColours.iconBlack,
-                      ),
-                      suffixIcon: widget.ispasswordField
-                          ? IconButton(
-                              icon: Icon(
-                                obscureText
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: ThemeColours.iconBlack,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  obscureText = !obscureText;
-                                });
-                              },
-                            )
-                          : null,
-                    ),
-                  ),
+                  suffixIcon: widget.ispasswordField
+                      ? IconButton(
+                          icon: Icon(
+                            obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: ThemeColours.iconBlack,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              obscureText = !obscureText;
+                            });
+                          },
+                        )
+                      : null,
                 ),
               ),
             ),

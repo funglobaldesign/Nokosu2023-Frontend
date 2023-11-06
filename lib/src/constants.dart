@@ -15,9 +15,7 @@ abstract class ThemeColours {
 
   // Shadow Colours
   static const Color shadowDark = Color(0x88555555);
-  static const Color shadowLight = Color(0x88FFFFFF);
-  static const Color shadowInnerDark = Color(0x33555555);
-  static const Color shadowInnerLight = Color(0x33FFFFFF);
+  static const Color shadowLight = Color(0xAAFFFFFF);
 }
 
 abstract class NumericConsts {}
