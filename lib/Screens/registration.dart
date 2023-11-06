@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nokosu2023/Components/button_link.dart';
+import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/Components/button_submit.dart';
 import 'package:nokosu2023/Components/input_field.dart';
-import 'package:nokosu2023/Components/popup_info.dart';
-import 'package:nokosu2023/Screens/login.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/src/constants.dart';
+import 'package:nokosu2023/src/staticFunctions.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -18,68 +19,85 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController password1Controller = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
 
-  void register() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return PopupInfo(
-          title: 'Registration Details',
-          info:
-              'Username is ${usernameController.text}\nEmail is ${emailController.text}\nPassword1 is ${password1Controller.text}\nPassword2 is ${password2Controller.text}',
-        );
-      },
-    );
-  }
+  late AppLocalizations locale;
 
-  void redirectLogin() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const LoginPage()),
-    );
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    locale = AppLocalizations.of(context)!;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            InputField(
-              label: 'Username',
-              controller: usernameController,
-              prefixicon: Icons.person,
-            ),
-            InputField(
-              label: 'Email',
-              controller: emailController,
-              prefixicon: Icons.person,
-            ),
-            InputField(
-              label: 'Password',
-              controller: password1Controller,
-              ispasswordField: true,
-              prefixicon: Icons.person,
-            ),
-            InputField(
-              label: 'Password Confirmation',
-              controller: password2Controller,
-              ispasswordField: true,
-              prefixicon: Icons.person,
-            ),
-            ButtonSubmit(
-              text: 'Register',
-              onPressed: register,
-            ),
-            ButtonLink(
-              textLabel: 'Already registered? ',
-              textLink: 'Login here',
-              onPressed: redirectLogin,
-            )
-          ],
+      backgroundColor: ThemeColours.bgBlueWhite,
+      body: Stack(children: [
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              InputField(
+                label: locale.username,
+                controller: usernameController,
+                prefixicon: Icons.person,
+              ),
+              InputField(
+                label: locale.email,
+                controller: emailController,
+                prefixicon: Icons.email,
+              ),
+              InputField(
+                label: locale.password,
+                controller: password1Controller,
+                ispasswordField: true,
+                prefixicon: Icons.lock,
+              ),
+              InputField(
+                label: locale.passwordconf,
+                controller: password2Controller,
+                ispasswordField: true,
+                prefixicon: Icons.lock_person,
+              ),
+              const SizedBox(
+                height: 45,
+              ),
+              ButtonSubmit(
+                text: locale.register,
+                onPressed: () {
+                  UtilityFunction.register(
+                      context,
+                      usernameController,
+                      emailController,
+                      password1Controller,
+                      password2Controller);
+                },
+              ),
+            ],
+          ),
         ),
-      ),
+        const Positioned(
+          top: 35,
+          left: 25,
+          width: 38,
+          height: 38,
+          child: Neumo(
+            child: SizedBox(),
+          ),
+        ),
+        Positioned(
+          top: 35,
+          left: 25,
+          width: 40,
+          height: 40,
+          child: IconButton(
+            icon: const Icon(Icons.arrow_circle_left_outlined),
+            onPressed: () {
+              RedirectFunctions.redirectLogin(context);
+            },
+          ),
+        )
+      ]),
     );
   }
 }

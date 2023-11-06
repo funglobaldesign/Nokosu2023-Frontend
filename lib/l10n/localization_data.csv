@@ -1,6 +1,11 @@
 ﻿key,en,ja,ko,zh
-username,Username,ユーザー名,사용자 이름,用户名
-password,Password,パスワード,비밀번호,密码
+email,Email,,,
+forgotpw,Forgot Password?,,,
 login,Login,ログイン,로그인,登录
 newuser,New User?,新しいユーザー？,신규 사용자이신가요?,新用户？
+password,Password,パスワード,비밀번호,密码
+passwordconf,Password Confirmation,,,
+register,Register,,,
 registerhere,Register here,ここに登録,여기에서 등록하세요,在此注册
+resethere,Reset here,,,
+username,Username,ユーザー名,사용자 이름,用户名
