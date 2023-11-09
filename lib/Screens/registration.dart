@@ -77,7 +77,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ButtonSubmit(
                 text: locale.register,
                 onPressed: () {
-                  UtilityFunction.register(
+                  UtilityFunctions.register(
                       context,
                       usernameController,
                       emailController,

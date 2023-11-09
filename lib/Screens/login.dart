@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
             ButtonSubmit(
               text: locale.login,
               onPressed: () {
-                UtilityFunction.login(
+                UtilityFunctions.login(
                   context,
                   usernameController,
                   passwordController,
