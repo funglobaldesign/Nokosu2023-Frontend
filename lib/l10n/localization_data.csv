@@ -9,3 +9,5 @@ register,Register,,,
 registerhere,Register here,ここに登録,여기에서 등록하세요,在此注册
 resethere,Reset here,,,
 username,Username,ユーザー名,사용자 이름,用户名
+firstname,First Name,,,
+lastname,Last Name,,,

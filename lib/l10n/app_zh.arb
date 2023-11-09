@@ -10,5 +10,7 @@
     "register": "",
     "registerhere": "在此注册",
     "resethere": "",
-    "username": "用户名"
+    "username": "用户名",
+    "firstname": "",
+    "lastname": ""
 }

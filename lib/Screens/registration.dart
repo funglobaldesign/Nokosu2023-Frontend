@@ -16,6 +16,8 @@ class RegistrationPage extends StatefulWidget {
 class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
   TextEditingController password1Controller = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
 
@@ -46,6 +48,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 label: locale.email,
                 controller: emailController,
                 prefixicon: Icons.email,
+              ),
+              InputField(
+                label: locale.firstname,
+                controller: firstNameController,
+                prefixicon: Icons.supervisor_account_outlined,
+              ),
+              InputField(
+                label: locale.lastname,
+                controller: lastNameController,
+                prefixicon: Icons.supervisor_account,
               ),
               InputField(
                 label: locale.password,

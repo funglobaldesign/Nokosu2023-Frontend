@@ -10,5 +10,7 @@
     "register": "",
     "registerhere": "ここに登録",
     "resethere": "",
-    "username": "ユーザー名"
+    "username": "ユーザー名",
+    "firstname": "",
+    "lastname": ""
 }
