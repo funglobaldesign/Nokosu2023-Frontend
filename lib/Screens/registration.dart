@@ -3,8 +3,8 @@ import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/Components/button_submit.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nokosu2023/src/constants.dart';
-import 'package:nokosu2023/src/staticFunctions.dart';
+import 'package:nokosu2023/utils/constants.dart';
+import 'package:nokosu2023/utils/staticFunctions.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);

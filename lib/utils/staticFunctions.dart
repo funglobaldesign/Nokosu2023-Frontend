@@ -26,7 +26,7 @@ abstract class RedirectFunctions {
   }
 }
 
-abstract class UtilityFunction {
+abstract class UtilityFunctions {
   static void login(
     context,
     usernameController,

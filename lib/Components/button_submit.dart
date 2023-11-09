@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
-import 'package:nokosu2023/src/constants.dart';
+import 'package:nokosu2023/utils/constants.dart';
 
 //Button for Login/Registration submit
 class ButtonSubmit extends StatefulWidget {
