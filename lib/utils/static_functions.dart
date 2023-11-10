@@ -46,10 +46,13 @@ abstract class UtilityFunctions {
   ) async {
     AppLocalizations locale = AppLocalizations.of(context)!;
     UserLogin data = UserLogin(
-        username: usernameController.text, password: passwordController.text);
+      username: usernameController.text,
+      password: passwordController.text,
+    );
     var prof = await apiLogin(data);
     if (prof is Profile) {
       formErrorController.text = "";
+      //Set profile state
       RedirectFunctions.redirectHome(context);
     } else if (prof == 1) {
       formErrorController.text = locale.erric;
@@ -62,18 +65,10 @@ abstract class UtilityFunctions {
     context,
     usernameController,
     emailController,
+    firstNameController,
+    lastNameController,
     password1Controller,
     password2Controller,
-  ) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return PopupInfo(
-          title: 'Registration Details',
-          info:
-              'Username is ${usernameController.text}\nEmail is ${emailController.text}\nPassword1 is ${password1Controller.text}\nPassword2 is ${password2Controller.text}',
-        );
-      },
-    );
-  }
+    formErrorController,
+  ) {}
 }

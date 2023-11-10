@@ -23,7 +23,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController password1Controller = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
-  TextEditingController formErrors = TextEditingController();
+  TextEditingController formErrorController = TextEditingController();
 
   final ScrollController _scrollController = ScrollController();
 
@@ -120,7 +120,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               const SizedBox(
                 height: 45,
               ),
-              ErrorField(err: formErrors.text),
+              ErrorField(err: formErrorController.text),
               ButtonSubmit(
                 text: locale.register,
                 onPressed: () {
@@ -131,17 +131,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       password1Controller.text.isNotEmpty &&
                       password2Controller.text.isNotEmpty) {
                     setState(() {
-                      formErrors.text = "";
+                      formErrorController.text = "";
                     });
                     UtilityFunctions.register(
                         context,
                         usernameController,
                         emailController,
+                        firstNameController,
+                        lastNameController,
                         password1Controller,
-                        password2Controller);
+                        password2Controller,
+                        formErrorController);
                   } else {
                     setState(() {
-                      formErrors.text = locale.allFieldsRequired;
+                      formErrorController.text = locale.allFieldsRequired;
                     });
                   }
                 },
