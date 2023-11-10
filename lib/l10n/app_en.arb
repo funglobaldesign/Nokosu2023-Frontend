@@ -10,5 +10,6 @@
     "resethere": "Reset here",
     "username": "Username",
     "firstname": "First Name",
-    "lastname": "Last Name"
+    "lastname": "Last Name",
+    "allFieldsRequired": "Please fill all the fields"
 }

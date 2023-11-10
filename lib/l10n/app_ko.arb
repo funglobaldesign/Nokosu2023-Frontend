@@ -12,5 +12,6 @@
     "resethere": "",
     "username": "사용자 이름",
     "firstname": "",
-    "lastname": ""
+    "lastname": "",
+    "allFieldsRequired": ""
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
+import 'package:nokosu2023/Components/SubComponents/error_field.dart';
 import 'package:nokosu2023/utils/constants.dart';
 
 class InputField extends StatefulWidget {
@@ -76,20 +77,7 @@ class InputFieldState extends State<InputField> {
               ),
             ),
           ),
-          SizedBox(
-            width: widget.boxWidth,
-            height: widget.boxHeight / 2,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(
-                widget.err,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: ThemeColours.txtRed,
-                ),
-              ),
-            ),
-          )
+          ErrorField(err: widget.err),
         ],
       ),
     );

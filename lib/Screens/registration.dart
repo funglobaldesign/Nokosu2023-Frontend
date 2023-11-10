@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nokosu2023/Components/SubComponents/error_field.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/Components/button_submit.dart';
 import 'package:nokosu2023/Components/input_field.dart';
@@ -20,6 +21,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController password1Controller = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
+  TextEditingController allFieldsRequired = TextEditingController();
 
   late AppLocalizations locale;
 
@@ -74,15 +76,30 @@ class _RegistrationPageState extends State<RegistrationPage> {
               const SizedBox(
                 height: 45,
               ),
+              ErrorField(err: allFieldsRequired.text),
               ButtonSubmit(
                 text: locale.register,
                 onPressed: () {
-                  UtilityFunctions.register(
-                      context,
-                      usernameController,
-                      emailController,
-                      password1Controller,
-                      password2Controller);
+                  if (usernameController.text.isNotEmpty &&
+                      emailController.text.isNotEmpty &&
+                      firstNameController.text.isNotEmpty &&
+                      lastNameController.text.isNotEmpty &&
+                      password1Controller.text.isNotEmpty &&
+                      password2Controller.text.isNotEmpty) {
+                    setState(() {
+                      allFieldsRequired.text = "";
+                    });
+                    UtilityFunctions.register(
+                        context,
+                        usernameController,
+                        emailController,
+                        password1Controller,
+                        password2Controller);
+                  } else {
+                    setState(() {
+                      allFieldsRequired.text = locale.allFieldsRequired;
+                    });
+                  }
                 },
               ),
             ],
