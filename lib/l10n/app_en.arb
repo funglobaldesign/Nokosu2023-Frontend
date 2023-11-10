@@ -12,6 +12,7 @@
     "firstname": "First Name",
     "lastname": "Last Name",
     "allFieldsRequired": "Please fill all the fields",
-    "errcrs": "Couldn't reach the server. Please try again later.",
-    "erric": "Invalid Credentials"
+    "errcrs": "Couldn't reach the server",
+    "erric": "Invalid credentials",
+    "errfix": "Fix the errors in the form"
 }

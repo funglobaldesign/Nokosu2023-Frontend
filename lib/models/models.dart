@@ -22,7 +22,6 @@ class UserLogin {
 
 @JsonSerializable()
 class UserReg {
-  int? id;
   String? username;
   String? email;
   String? first_name;
@@ -31,7 +30,6 @@ class UserReg {
   String? password2;
 
   UserReg({
-    this.id,
     this.username,
     this.email,
     this.first_name,
@@ -50,7 +48,6 @@ class UserReg {
 class FormErrResponse {
   String? message;
   String? code;
-
   FormErrResponse({
     this.message,
     this.code,
@@ -72,13 +69,18 @@ class UserRegResponse {
   FormErrResponse? password2;
 
   UserRegResponse({
-    this.username,
-    this.email,
-    this.first_name,
-    this.last_name,
-    this.password1,
-    this.password2,
-  });
+    FormErrResponse? username,
+    FormErrResponse? email,
+    FormErrResponse? first_name,
+    FormErrResponse? last_name,
+    FormErrResponse? password1,
+    FormErrResponse? password2,
+  })  : username = username ?? FormErrResponse(message: "", code: ""),
+        email = email ?? FormErrResponse(message: "", code: ""),
+        first_name = first_name ?? FormErrResponse(message: "", code: ""),
+        last_name = last_name ?? FormErrResponse(message: "", code: ""),
+        password1 = password1 ?? FormErrResponse(message: "", code: ""),
+        password2 = password2 ?? FormErrResponse(message: "", code: "");
 
   factory UserRegResponse.fromJson(Map<String, dynamic> json) =>
       _$UserRegResponseFromJson(json);

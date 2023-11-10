@@ -17,7 +17,6 @@ Map<String, dynamic> _$UserLoginToJson(UserLogin instance) => <String, dynamic>{
     };
 
 UserReg _$UserRegFromJson(Map<String, dynamic> json) => UserReg(
-      id: json['id'] as int?,
       username: json['username'] as String?,
       email: json['email'] as String?,
       first_name: json['first_name'] as String?,
@@ -27,7 +26,6 @@ UserReg _$UserRegFromJson(Map<String, dynamic> json) => UserReg(
     );
 
 Map<String, dynamic> _$UserRegToJson(UserReg instance) => <String, dynamic>{
-      'id': instance.id,
       'username': instance.username,
       'email': instance.email,
       'first_name': instance.first_name,
@@ -52,23 +50,27 @@ UserRegResponse _$UserRegResponseFromJson(Map<String, dynamic> json) =>
     UserRegResponse(
       username: json['username'] == null
           ? null
-          : FormErrResponse.fromJson(json['username'] as Map<String, dynamic>),
+          : FormErrResponse.fromJson(
+              json['username'][0] as Map<String, dynamic>),
       email: json['email'] == null
           ? null
-          : FormErrResponse.fromJson(json['email'] as Map<String, dynamic>),
+          : FormErrResponse.fromJson(json['email'][0] as Map<String, dynamic>),
       first_name: json['first_name'] == null
           ? null
           : FormErrResponse.fromJson(
-              json['first_name'] as Map<String, dynamic>),
+              json['first_name'][0] as Map<String, dynamic>),
       last_name: json['last_name'] == null
           ? null
-          : FormErrResponse.fromJson(json['last_name'] as Map<String, dynamic>),
+          : FormErrResponse.fromJson(
+              json['last_name'][0] as Map<String, dynamic>),
       password1: json['password1'] == null
           ? null
-          : FormErrResponse.fromJson(json['password1'] as Map<String, dynamic>),
+          : FormErrResponse.fromJson(
+              json['password1'][0] as Map<String, dynamic>),
       password2: json['password2'] == null
           ? null
-          : FormErrResponse.fromJson(json['password2'] as Map<String, dynamic>),
+          : FormErrResponse.fromJson(
+              json['password2'][0] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserRegResponseToJson(UserRegResponse instance) =>

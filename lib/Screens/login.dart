@@ -95,7 +95,17 @@ class _LoginPageState extends State<LoginPage> {
                         formErrorController,
                       );
                       Global.isLoading = false;
-                      setState(() {});
+                      setState(() {
+                        if (formErrorController.text == "1" ||
+                            formErrorController.text == locale.erric) {
+                          formErrorController.text = locale.erric;
+                        } else if (formErrorController.text == "2" ||
+                            formErrorController.text == locale.errcrs) {
+                          formErrorController.text = locale.errcrs;
+                        } else {
+                          formErrorController.text = "";
+                        }
+                      });
                     },
                   ),
                   const SizedBox(
