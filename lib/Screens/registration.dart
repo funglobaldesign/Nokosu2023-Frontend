@@ -3,10 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nokosu2023/Components/SubComponents/error_field.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/Components/button_submit.dart';
+import 'package:nokosu2023/Components/dropdown_l10n.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nokosu2023/utils/constants.dart';
-import 'package:nokosu2023/utils/staticFunctions.dart';
+import 'package:nokosu2023/utils/static_functions.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -145,6 +146,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   }
                 },
               ),
+              const SizedBox(
+                height: 25,
+              ),
+              const DropdownL10n()
             ],
           ),
         ),

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+abstract class APILinks {
+  static const String base =
+      "https://globaldesign2023backend.onrender.com/api/";
+}
+
 abstract class ThemeColours {
   // Background colours
   static const Color bgBlueWhite = Color(0xFFEBF3FF);

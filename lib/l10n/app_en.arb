@@ -11,5 +11,7 @@
     "username": "Username",
     "firstname": "First Name",
     "lastname": "Last Name",
-    "allFieldsRequired": "Please fill all the fields"
+    "allFieldsRequired": "Please fill all the fields",
+    "errcrs": "Couldn't reach the server. Please try again later.",
+    "erric": "Invalid Credentials"
 }
