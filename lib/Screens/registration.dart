@@ -21,7 +21,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController password1Controller = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
-  TextEditingController allFieldsRequired = TextEditingController();
+  TextEditingController formErrors = TextEditingController();
 
   late AppLocalizations locale;
 
@@ -76,7 +76,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               const SizedBox(
                 height: 45,
               ),
-              ErrorField(err: allFieldsRequired.text),
+              ErrorField(err: formErrors.text),
               ButtonSubmit(
                 text: locale.register,
                 onPressed: () {
@@ -87,7 +87,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       password1Controller.text.isNotEmpty &&
                       password2Controller.text.isNotEmpty) {
                     setState(() {
-                      allFieldsRequired.text = "";
+                      formErrors.text = "";
                     });
                     UtilityFunctions.register(
                         context,
@@ -97,7 +97,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         password2Controller);
                   } else {
                     setState(() {
-                      allFieldsRequired.text = locale.allFieldsRequired;
+                      formErrors.text = locale.allFieldsRequired;
                     });
                   }
                 },
