@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
-import 'package:nokosu2023/src/constants.dart';
+import 'package:nokosu2023/utils/constants.dart';
 
 class Neumo extends StatefulWidget {
   final Widget child;

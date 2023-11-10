@@ -10,5 +10,8 @@
     "register": "",
     "registerhere": "여기에서 등록하세요",
     "resethere": "",
-    "username": "사용자 이름"
+    "username": "사용자 이름",
+    "firstname": "",
+    "lastname": "",
+    "allFieldsRequired": ""
 }

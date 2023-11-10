@@ -4,8 +4,8 @@ import 'package:nokosu2023/Components/button_submit.dart';
 import 'package:nokosu2023/Components/dropdown_l10n.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nokosu2023/src/constants.dart';
-import 'package:nokosu2023/src/staticFunctions.dart';
+import 'package:nokosu2023/utils/constants.dart';
+import 'package:nokosu2023/utils/staticFunctions.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
             ButtonSubmit(
               text: locale.login,
               onPressed: () {
-                UtilityFunction.login(
+                UtilityFunctions.login(
                   context,
                   usernameController,
                   passwordController,

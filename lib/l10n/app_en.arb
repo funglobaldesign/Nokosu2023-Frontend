@@ -8,5 +8,8 @@
     "register": "Register",
     "registerhere": "Register here",
     "resethere": "Reset here",
-    "username": "Username"
+    "username": "Username",
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "allFieldsRequired": "Please fill all the fields"
 }

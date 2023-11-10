@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:nokosu2023/Components/SubComponents/error_field.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/Components/button_submit.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nokosu2023/src/constants.dart';
-import 'package:nokosu2023/src/staticFunctions.dart';
+import 'package:nokosu2023/utils/constants.dart';
+import 'package:nokosu2023/utils/staticFunctions.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -16,8 +17,11 @@ class RegistrationPage extends StatefulWidget {
 class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
   TextEditingController password1Controller = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
+  TextEditingController formErrors = TextEditingController();
 
   late AppLocalizations locale;
 
@@ -48,6 +52,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 prefixicon: Icons.email,
               ),
               InputField(
+                label: locale.firstname,
+                controller: firstNameController,
+                prefixicon: Icons.supervisor_account_outlined,
+              ),
+              InputField(
+                label: locale.lastname,
+                controller: lastNameController,
+                prefixicon: Icons.supervisor_account,
+              ),
+              InputField(
                 label: locale.password,
                 controller: password1Controller,
                 ispasswordField: true,
@@ -62,15 +76,30 @@ class _RegistrationPageState extends State<RegistrationPage> {
               const SizedBox(
                 height: 45,
               ),
+              ErrorField(err: formErrors.text),
               ButtonSubmit(
                 text: locale.register,
                 onPressed: () {
-                  UtilityFunction.register(
-                      context,
-                      usernameController,
-                      emailController,
-                      password1Controller,
-                      password2Controller);
+                  if (usernameController.text.isNotEmpty &&
+                      emailController.text.isNotEmpty &&
+                      firstNameController.text.isNotEmpty &&
+                      lastNameController.text.isNotEmpty &&
+                      password1Controller.text.isNotEmpty &&
+                      password2Controller.text.isNotEmpty) {
+                    setState(() {
+                      formErrors.text = "";
+                    });
+                    UtilityFunctions.register(
+                        context,
+                        usernameController,
+                        emailController,
+                        password1Controller,
+                        password2Controller);
+                  } else {
+                    setState(() {
+                      formErrors.text = locale.allFieldsRequired;
+                    });
+                  }
                 },
               ),
             ],
