@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/popup_info.dart';
+import 'package:nokosu2023/Screens/home.dart';
 import 'package:nokosu2023/Screens/login.dart';
 import 'package:nokosu2023/Screens/registration.dart';
 import 'package:nokosu2023/api/api.dart';
@@ -27,6 +28,13 @@ abstract class RedirectFunctions {
       MaterialPageRoute(builder: (context) => const LoginPage()),
     );
   }
+
+  static void redirectHome(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
+    );
+  }
 }
 
 abstract class UtilityFunctions {
@@ -42,7 +50,7 @@ abstract class UtilityFunctions {
     var prof = await apiLogin(data);
     if (prof is Profile) {
       formErrorController.text = "";
-      RedirectFunctions.redirectRegistration(context); //Home
+      RedirectFunctions.redirectHome(context);
     } else if (prof == 1) {
       formErrorController.text = locale.erric;
     } else {
