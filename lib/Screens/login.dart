@@ -6,6 +6,8 @@ import 'package:nokosu2023/Components/input_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/staticFunctions.dart';
+import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -36,6 +38,23 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(
+              width: 100,
+              height: 100,
+              child: Neumo(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    CustIcons.logo,
+                    width: 50,
+                    height: 50,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
             InputField(
               label: locale.username,
               controller: usernameController,

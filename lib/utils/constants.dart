@@ -16,9 +16,16 @@ abstract class ThemeColours {
   // Shadow Colours
   static const Color shadowDark = Color(0x88555555);
   static const Color shadowLight = Color(0xFFFFFFFF);
+
+  //Others
+  static const Color scrollBar = Color(0xAA777777);
 }
 
 abstract class NumericConsts {
   static const double defBoxWidth = 250;
   static const double defBoxHeight = 55;
+}
+
+abstract class CustIcons {
+  static const String logo = 'assets/icons/logo.svg';
 }
