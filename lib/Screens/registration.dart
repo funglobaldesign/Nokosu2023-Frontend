@@ -6,8 +6,12 @@ import 'package:nokosu2023/Components/button_submit.dart';
 import 'package:nokosu2023/Components/dropdown_l10n.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/Components/loading_overlay.dart';
+import 'package:nokosu2023/providers/form_err_res_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
+import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
+import 'package:provider/provider.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -23,7 +27,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController password1Controller = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
-  TextEditingController formErrors = TextEditingController();
+  TextEditingController formErrorController = TextEditingController();
 
   final ScrollController _scrollController = ScrollController();
 
@@ -37,6 +41,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final formErrProvider =
+        Provider.of<FormErrProvider>(context).userRegResponse;
     return Scaffold(
       appBar: null,
       backgroundColor: ThemeColours.bgBlueWhite,
@@ -83,33 +89,39 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             label: locale.username,
                             controller: usernameController,
                             prefixicon: Icons.person,
+                            err: formErrProvider.username!.message!,
                           ),
                           InputField(
                             label: locale.email,
                             controller: emailController,
                             prefixicon: Icons.email,
+                            err: formErrProvider.email!.message!,
                           ),
                           InputField(
                             label: locale.firstname,
                             controller: firstNameController,
                             prefixicon: Icons.supervisor_account_outlined,
+                            err: formErrProvider.first_name!.message!,
                           ),
                           InputField(
                             label: locale.lastname,
                             controller: lastNameController,
                             prefixicon: Icons.supervisor_account,
+                            err: formErrProvider.last_name!.message!,
                           ),
                           InputField(
                             label: locale.password,
                             controller: password1Controller,
                             ispasswordField: true,
                             prefixicon: Icons.lock,
+                            err: formErrProvider.password1!.message!,
                           ),
                           InputField(
                             label: locale.passwordconf,
                             controller: password2Controller,
                             ispasswordField: true,
                             prefixicon: Icons.lock_person,
+                            err: formErrProvider.password2!.message!,
                           ),
                         ],
                       ),
@@ -120,28 +132,40 @@ class _RegistrationPageState extends State<RegistrationPage> {
               const SizedBox(
                 height: 45,
               ),
-              ErrorField(err: formErrors.text),
+              ErrorField(err: formErrorController.text),
               ButtonSubmit(
                 text: locale.register,
-                onPressed: () {
+                onPressed: () async {
+                  setState(() {});
+                  Global.isLoading = true;
                   if (usernameController.text.isNotEmpty &&
                       emailController.text.isNotEmpty &&
                       firstNameController.text.isNotEmpty &&
                       lastNameController.text.isNotEmpty &&
                       password1Controller.text.isNotEmpty &&
                       password2Controller.text.isNotEmpty) {
-                    setState(() {
-                      formErrors.text = "";
-                    });
-                    UtilityFunctions.register(
+                    setState(() {});
+                    await UtilityFunctions.register(
                         context,
                         usernameController,
                         emailController,
+                        firstNameController,
+                        lastNameController,
                         password1Controller,
-                        password2Controller);
+                        password2Controller,
+                        formErrorController);
+                    Global.isLoading = false;
+                    setState(() {
+                      if (formErrorController.text == "2" ||
+                          formErrorController.text == locale.errcrs) {
+                        formErrorController.text = locale.errcrs;
+                      } else {
+                        formErrorController.text = "";
+                      }
+                    });
                   } else {
                     setState(() {
-                      formErrors.text = locale.allFieldsRequired;
+                      formErrorController.text = locale.allFieldsRequired;
                     });
                   }
                 },
@@ -153,6 +177,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             ],
           ),
         ),
+        if (Global.isLoading) const LoadingOverlay(),
         const Positioned(
           top: 35,
           left: 25,

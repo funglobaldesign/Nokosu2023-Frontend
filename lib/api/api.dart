@@ -16,17 +16,45 @@ Future<dynamic> apiLogin(UserLogin data) async {
     );
 
     if (response.statusCode == 200) {
-      TokenProvider.setToken(jsonDecode(response.body)['token']);
-      return Profile.fromJson(jsonDecode(response.body)['profile']);
+      var json = jsonDecode(response.body);
+      TokenProvider.setToken(json['token'], json['profile']['id']);
+      return Profile.fromJson(json['profile']);
     } else if (response.statusCode == 400) {
-      return 1;
+      return "1";
     } else {
-      return 2;
+      return "2";
     }
   } catch (e) {
     if (kDebugMode) {
-      print(e);
+      print("Exception : $e");
     }
-    return 2;
+    return "2";
+  }
+}
+
+Future<dynamic> apiRegister(UserReg data) async {
+  try {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${APILinks.base}users/register/'));
+    // request.files.add(await http.MultipartFile.fromPath('file', 'path/to/file'));
+    data.toJson().forEach((key, value) {
+      request.fields[key] = value.toString();
+    });
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      var json = jsonDecode(await response.stream.bytesToString());
+      TokenProvider.setToken(json['token'], json['profile']['id']);
+      return Profile.fromJson(json['profile']);
+    } else if (response.statusCode == 400) {
+      return UserRegResponse.fromJson(
+          jsonDecode(await response.stream.bytesToString()));
+    } else {
+      return "2";
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return "2";
   }
 }

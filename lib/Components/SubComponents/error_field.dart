@@ -10,7 +10,7 @@ class ErrorField extends StatefulWidget {
     Key? key,
     required this.err,
     this.boxWidth = NumericConsts.defBoxWidth,
-    this.boxHeight = NumericConsts.defBoxHeight / 2,
+    this.boxHeight = NumericConsts.defBoxHeight / 1.3,
   }) : super(key: key);
 
   @override

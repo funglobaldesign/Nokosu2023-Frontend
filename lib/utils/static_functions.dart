@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nokosu2023/Components/popup_info.dart';
+import 'package:nokosu2023/Screens/home.dart';
 import 'package:nokosu2023/Screens/login.dart';
 import 'package:nokosu2023/Screens/registration.dart';
 import 'package:nokosu2023/api/api.dart';
 import 'package:nokosu2023/models/models.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/providers/form_err_res_provider.dart';
+import 'package:provider/provider.dart';
 
 abstract class RedirectFunctions {
   static void redirectRegistration(context) {
@@ -27,6 +28,13 @@ abstract class RedirectFunctions {
       MaterialPageRoute(builder: (context) => const LoginPage()),
     );
   }
+
+  static void redirectHome(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
+    );
+  }
 }
 
 abstract class UtilityFunctions {
@@ -36,36 +44,48 @@ abstract class UtilityFunctions {
     passwordController,
     formErrorController,
   ) async {
-    AppLocalizations locale = AppLocalizations.of(context)!;
     UserLogin data = UserLogin(
-        username: usernameController.text, password: passwordController.text);
-    var prof = await apiLogin(data);
-    if (prof is Profile) {
+      username: usernameController.text,
+      password: passwordController.text,
+    );
+    var res = await apiLogin(data);
+    if (res is Profile) {
       formErrorController.text = "";
-      RedirectFunctions.redirectRegistration(context); //Home
-    } else if (prof == 1) {
-      formErrorController.text = locale.erric;
+      //Set profile state
+      RedirectFunctions.redirectHome(context);
     } else {
-      formErrorController.text = locale.errcrs;
+      formErrorController.text = res;
     }
   }
 
-  static void register(
+  static Future<void> register(
     context,
     usernameController,
     emailController,
+    firstNameController,
+    lastNameController,
     password1Controller,
     password2Controller,
-  ) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return PopupInfo(
-          title: 'Registration Details',
-          info:
-              'Username is ${usernameController.text}\nEmail is ${emailController.text}\nPassword1 is ${password1Controller.text}\nPassword2 is ${password2Controller.text}',
-        );
-      },
+    formErrorController,
+  ) async {
+    UserReg data = UserReg(
+      username: usernameController.text,
+      email: emailController.text,
+      first_name: firstNameController.text,
+      last_name: lastNameController.text,
+      password1: password1Controller.text,
+      password2: password2Controller.text,
     );
+    var res = await apiRegister(data);
+    if (res is Profile) {
+      formErrorController.text = "";
+      //Set profile state
+      RedirectFunctions.redirectHome(context);
+    } else if (res is UserRegResponse) {
+      Provider.of<FormErrProvider>(context, listen: false).updateModel(res);
+      formErrorController.text = "1";
+    } else {
+      formErrorController.text = res;
+    }
   }
 }
