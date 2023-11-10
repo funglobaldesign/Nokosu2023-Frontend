@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nokosu2023/Screens/login.dart';
 import 'package:nokosu2023/providers/locale_provider.dart';
+import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -16,6 +17,7 @@ class Nokosu extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => LocaleProvider(),
       builder: (context, state) {
+        TokenProvider.initToken();
         return MaterialApp(
           title: 'Nokosu',
           localizationsDelegates: AppLocalizations.localizationsDelegates,

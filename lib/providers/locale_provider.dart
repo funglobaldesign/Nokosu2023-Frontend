@@ -7,7 +7,6 @@ class LocaleProvider extends ChangeNotifier {
   static String localeKey = 'nokosulocale';
 
   LocaleProvider() {
-    _locale = const Locale('en');
     _loadDeviceLocale();
   }
 
@@ -19,7 +18,7 @@ class LocaleProvider extends ChangeNotifier {
 
   Future<void> _loadDeviceLocale() async {
     final prefs = await SharedPreferences.getInstance();
-    final localeString = prefs.getString(localeKey)!;
+    final localeString = prefs.getString(localeKey) ?? "en";
     setLocale(Locale(localeString));
   }
 

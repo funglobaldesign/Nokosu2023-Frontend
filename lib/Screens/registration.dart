@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nokosu2023/Components/SubComponents/error_field.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/Components/button_submit.dart';
+import 'package:nokosu2023/Components/dropdown_l10n.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nokosu2023/utils/constants.dart';
-import 'package:nokosu2023/utils/staticFunctions.dart';
+import 'package:nokosu2023/utils/static_functions.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -22,6 +24,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController password1Controller = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
   TextEditingController formErrors = TextEditingController();
+
+  final ScrollController _scrollController = ScrollController();
 
   late AppLocalizations locale;
 
@@ -41,37 +45,77 @@ class _RegistrationPageState extends State<RegistrationPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              InputField(
-                label: locale.username,
-                controller: usernameController,
-                prefixicon: Icons.person,
+              SizedBox(
+                width: 100,
+                height: 100,
+                child: Neumo(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: SvgPicture.asset(
+                      CustIcons.logo,
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                ),
               ),
-              InputField(
-                label: locale.email,
-                controller: emailController,
-                prefixicon: Icons.email,
+              const SizedBox(
+                height: 50,
               ),
-              InputField(
-                label: locale.firstname,
-                controller: firstNameController,
-                prefixicon: Icons.supervisor_account_outlined,
-              ),
-              InputField(
-                label: locale.lastname,
-                controller: lastNameController,
-                prefixicon: Icons.supervisor_account,
-              ),
-              InputField(
-                label: locale.password,
-                controller: password1Controller,
-                ispasswordField: true,
-                prefixicon: Icons.lock,
-              ),
-              InputField(
-                label: locale.passwordconf,
-                controller: password2Controller,
-                ispasswordField: true,
-                prefixicon: Icons.lock_person,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.5,
+                width: MediaQuery.of(context).size.width * 0.75,
+                child: RawScrollbar(
+                  controller: _scrollController,
+                  thumbColor: ThemeColours.scrollBar,
+                  radius: const Radius.circular(50),
+                  thickness: 8.5,
+                  thumbVisibility: true,
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.all(16.0),
+                    physics: const ClampingScrollPhysics(),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          InputField(
+                            label: locale.username,
+                            controller: usernameController,
+                            prefixicon: Icons.person,
+                          ),
+                          InputField(
+                            label: locale.email,
+                            controller: emailController,
+                            prefixicon: Icons.email,
+                          ),
+                          InputField(
+                            label: locale.firstname,
+                            controller: firstNameController,
+                            prefixicon: Icons.supervisor_account_outlined,
+                          ),
+                          InputField(
+                            label: locale.lastname,
+                            controller: lastNameController,
+                            prefixicon: Icons.supervisor_account,
+                          ),
+                          InputField(
+                            label: locale.password,
+                            controller: password1Controller,
+                            ispasswordField: true,
+                            prefixicon: Icons.lock,
+                          ),
+                          InputField(
+                            label: locale.passwordconf,
+                            controller: password2Controller,
+                            ispasswordField: true,
+                            prefixicon: Icons.lock_person,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 45,
@@ -102,21 +146,25 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   }
                 },
               ),
+              const SizedBox(
+                height: 25,
+              ),
+              const DropdownL10n()
             ],
           ),
         ),
         const Positioned(
           top: 35,
           left: 25,
-          width: 38,
-          height: 38,
+          width: 42,
+          height: 42,
           child: Neumo(
             child: SizedBox(),
           ),
         ),
         Positioned(
-          top: 35,
-          left: 25,
+          top: 37,
+          left: 27,
           width: 40,
           height: 40,
           child: IconButton(

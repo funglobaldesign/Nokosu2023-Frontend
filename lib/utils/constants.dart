@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+abstract class APILinks {
+  static const String base =
+      "https://globaldesign2023backend.onrender.com/api/";
+}
+
 abstract class ThemeColours {
   // Background colours
   static const Color bgBlueWhite = Color(0xFFEBF3FF);
@@ -16,9 +21,16 @@ abstract class ThemeColours {
   // Shadow Colours
   static const Color shadowDark = Color(0x88555555);
   static const Color shadowLight = Color(0xFFFFFFFF);
+
+  //Others
+  static const Color scrollBar = Color(0xAA777777);
 }
 
 abstract class NumericConsts {
   static const double defBoxWidth = 250;
   static const double defBoxHeight = 55;
+}
+
+abstract class CustIcons {
+  static const String logo = 'assets/icons/logo.svg';
 }

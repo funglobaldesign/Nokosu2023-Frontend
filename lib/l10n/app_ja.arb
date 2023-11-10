@@ -13,5 +13,7 @@
     "username": "ユーザー名",
     "firstname": "",
     "lastname": "",
-    "allFieldsRequired": ""
+    "allFieldsRequired": "",
+    "errcrs": "",
+    "erric": ""
 }

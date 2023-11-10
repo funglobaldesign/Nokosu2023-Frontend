@@ -12,3 +12,5 @@ username,Username,ユーザー名,사용자 이름,用户名
 firstname,First Name,,,
 lastname,Last Name,,,
 allFieldsRequired,Please fill all the fields,,,
+errcrs,Couldn't reach the server. Please try again later.,,,
+erric,Invalid Credentials,,,
