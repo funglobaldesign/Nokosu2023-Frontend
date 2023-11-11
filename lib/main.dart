@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nokosu2023/Screens/login.dart';
 import 'package:nokosu2023/providers/form_err_res_provider.dart';
 import 'package:nokosu2023/providers/locale_provider.dart';
+import 'package:nokosu2023/providers/profile_provider.dart';
 import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -19,9 +20,10 @@ class Nokosu extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => LocaleProvider()),
         ChangeNotifierProvider(create: (context) => FormErrProvider()),
+        ChangeNotifierProvider(create: (context) => TokenProvider()),
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
       ],
       builder: (context, state) {
-        TokenProvider.initToken();
         return MaterialApp(
           title: 'Nokosu',
           localizationsDelegates: AppLocalizations.localizationsDelegates,

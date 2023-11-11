@@ -7,6 +7,8 @@ import 'package:nokosu2023/Components/dropdown_l10n.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nokosu2023/Components/loading_overlay.dart';
+import 'package:nokosu2023/api/api.dart';
+import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/providers/form_err_res_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/global_vars.dart';
@@ -28,6 +30,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController password1Controller = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
   TextEditingController formErrorController = TextEditingController();
+  bool loginSuccess = false;
 
   final ScrollController _scrollController = ScrollController();
 
@@ -136,37 +139,44 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ButtonSubmit(
                 text: locale.register,
                 onPressed: () async {
-                  setState(() {});
-                  Global.isLoading = true;
-                  if (usernameController.text.isNotEmpty &&
-                      emailController.text.isNotEmpty &&
-                      firstNameController.text.isNotEmpty &&
-                      lastNameController.text.isNotEmpty &&
-                      password1Controller.text.isNotEmpty &&
-                      password2Controller.text.isNotEmpty) {
-                    setState(() {});
-                    await UtilityFunctions.register(
-                        context,
-                        usernameController,
-                        emailController,
-                        firstNameController,
-                        lastNameController,
-                        password1Controller,
-                        password2Controller,
-                        formErrorController);
-                    Global.isLoading = false;
-                    setState(() {
-                      if (formErrorController.text == "2" ||
-                          formErrorController.text == locale.errcrs) {
-                        formErrorController.text = locale.errcrs;
-                      } else {
-                        formErrorController.text = "";
-                      }
-                    });
+                  setState(() {
+                    Global.isLoading = true;
+                  });
+
+                  if (usernameController.text.isEmpty ||
+                      emailController.text.isEmpty ||
+                      firstNameController.text.isEmpty ||
+                      lastNameController.text.isEmpty ||
+                      password1Controller.text.isEmpty ||
+                      password2Controller.text.isEmpty) {
+                    formErrorController.text = locale.allFieldsRequired;
                   } else {
-                    setState(() {
-                      formErrorController.text = locale.allFieldsRequired;
-                    });
+                    UserReg data = UserReg(
+                      username: usernameController.text,
+                      email: emailController.text,
+                      first_name: firstNameController.text,
+                      last_name: lastNameController.text,
+                      password1: password1Controller.text,
+                      password2: password2Controller.text,
+                    );
+
+                    int err = await apiRegister(context, data);
+
+                    if (err == 1) {
+                      formErrorController.text = locale.errfix;
+                    } else if (err == 2) {
+                      formErrorController.text = locale.errcrs;
+                    } else {
+                      formErrorController.text = "";
+                      loginSuccess = true;
+                    }
+                  }
+                  Global.isLoading = false;
+                  setState(() {});
+
+                  if (loginSuccess) {
+                    // ignore: use_build_context_synchronously
+                    RedirectFunctions.redirectHome(context);
                   }
                 },
               ),
