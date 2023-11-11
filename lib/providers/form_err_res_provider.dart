@@ -6,7 +6,7 @@ class FormErrProvider with ChangeNotifier {
 
   UserRegResponse get userRegResponse => _userRegResponse;
 
-  void updateModel(UserRegResponse newModel) {
+  void setModel(UserRegResponse newModel) {
     _userRegResponse = newModel;
     notifyListeners();
   }

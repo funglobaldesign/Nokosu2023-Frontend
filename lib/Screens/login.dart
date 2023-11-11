@@ -6,6 +6,8 @@ import 'package:nokosu2023/Components/dropdown_l10n.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:nokosu2023/Components/loading_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/api/api.dart';
+import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
@@ -24,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController formErrorController = TextEditingController();
+  bool loginSuccess = false;
 
   late AppLocalizations locale;
 
@@ -86,26 +89,34 @@ class _LoginPageState extends State<LoginPage> {
                   ButtonSubmit(
                     text: locale.login,
                     onPressed: () async {
-                      setState(() {});
-                      Global.isLoading = true;
-                      await UtilityFunctions.login(
-                        context,
-                        usernameController,
-                        passwordController,
-                        formErrorController,
-                      );
-                      Global.isLoading = false;
                       setState(() {
-                        if (formErrorController.text == "1" ||
-                            formErrorController.text == locale.erric) {
-                          formErrorController.text = locale.erric;
-                        } else if (formErrorController.text == "2" ||
-                            formErrorController.text == locale.errcrs) {
-                          formErrorController.text = locale.errcrs;
-                        } else {
-                          formErrorController.text = "";
-                        }
+                        Global.isLoading = true;
                       });
+
+                      UserLogin data = UserLogin(
+                        username: usernameController.text,
+                        password: passwordController.text,
+                      );
+
+                      int err = await apiLogin(context, data);
+
+                      if (err == 1) {
+                        formErrorController.text = locale.erric;
+                      } else if (err == 2) {
+                        formErrorController.text = locale.errcrs;
+                      } else {
+                        formErrorController.text = "";
+                        loginSuccess = true;
+                      }
+
+                      setState(() {
+                        Global.isLoading = false;
+                      });
+
+                      if (loginSuccess) {
+                        // ignore: use_build_context_synchronously
+                        RedirectFunctions.redirectHome(context);
+                      }
                     },
                   ),
                   const SizedBox(
