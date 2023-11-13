@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:nokosu2023/utils/constants.dart';
 
 class ButtonLink extends StatefulWidget {
   final String textLabel;
@@ -24,12 +25,19 @@ class ButtonLinkState extends State<ButtonLink> {
         child: RichText(
       text: TextSpan(
         text: widget.textLabel,
+        style: const TextStyle(
+          color: ThemeColours.txtBlack,
+        ),
         children: <TextSpan>[
           const TextSpan(
             text: ' ',
           ),
           TextSpan(
               text: widget.textLink,
+              style: const TextStyle(
+                color: ThemeColours
+                    .txtBlack, // Change the color to your desired color
+              ),
               recognizer: TapGestureRecognizer()
                 ..onTap = widget.onPressed as GestureTapCallback?),
         ],
