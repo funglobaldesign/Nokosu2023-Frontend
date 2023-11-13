@@ -148,6 +148,8 @@ class Group {
   Map<String, dynamic> toJson() => _$GroupToJson(this);
 }
 
+// IMPORTANT : After running 'dart run build_runner build' change the mapping to array;s 0th position
+// eg : json['username'][0] as Map<String, dynamic>),
 @JsonSerializable()
 class Info {
   int? id;
