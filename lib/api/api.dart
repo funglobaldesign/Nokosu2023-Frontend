@@ -98,9 +98,31 @@ Future<int> apiLogout(context) async {
 }
 
 // Profile
-  // apiGetProfiles
+// apiGetProfiles : Not required atm
 
-  // apiGetProfile
+Future<int> apiGetProfile(context, int id) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+
+    final response = await http.get(Uri.parse('${APILinks.base}profiles/$id/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'Token $token',
+        });
+
+    if (response.statusCode == 200) {
+      return 0;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
+
 
   // apiUpdateProfile
 
