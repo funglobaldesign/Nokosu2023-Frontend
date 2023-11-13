@@ -21,13 +21,14 @@ Future<int> apiRegister(context, UserReg data) async {
   try {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${APILinks.base}users/register/'));
-    // request.files.add(await http.MultipartFile.fromPath('file', 'path/to/file'));
     data.toJson().forEach((key, value) {
       request.fields[key] = value.toString();
     });
     final response = await request.send();
     if (response.statusCode == 200) {
       _setProfile(context, jsonDecode(await response.stream.bytesToString()));
+      Provider.of<FormErrProvider>(context, listen: false)
+          .setModel(UserRegResponse());
       return 0;
     } else if (response.statusCode == 400) {
       UserRegResponse userres = UserRegResponse.fromJson(
@@ -123,8 +124,46 @@ Future<int> apiGetProfile(context, int id) async {
   }
 }
 
+Future<int> apiUpdateProfile(context, UserReg data, String file) async {
+  try {
+    int id = Provider.of<TokenProvider>(context, listen: false).id;
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    var request = http.MultipartRequest(
+        'PUT', Uri.parse('${APILinks.base}profiles/$id/'));
 
-  // apiUpdateProfile
+    data.toJson().forEach((key, value) {
+      if (key != 'password1' &&
+          key != 'password2' &&
+          value != null &&
+          value.isNotEmpty) {
+        request.fields[key] = value.toString();
+      }
+    });
+    request.headers['Authorization'] = 'Token $token';
+    request.files.add(await http.MultipartFile.fromPath('photo', file));
+
+    final response = await request.send();
+
+    if (response.statusCode == 200) {
+      _setProfile(context, jsonDecode(await response.stream.bytesToString()));
+      Provider.of<FormErrProvider>(context, listen: false)
+          .setModel(UserRegResponse());
+      return 0;
+    } else if (response.statusCode == 400) {
+      UserRegResponse userres = UserRegResponse.fromJson(
+          jsonDecode(await response.stream.bytesToString()));
+      Provider.of<FormErrProvider>(context, listen: false).setModel(userres);
+      return 1;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
 
   // apiDelProfile
   
