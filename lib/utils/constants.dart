@@ -34,3 +34,9 @@ abstract class NumericConsts {
 abstract class CustIcons {
   static const String logo = 'assets/icons/logo.svg';
 }
+
+abstract class DeviceMemory {
+  static const String locale = 'nokosulocale';
+  static const String authToken = 'authtoken';
+  static const String userID = 'userid';
+}
