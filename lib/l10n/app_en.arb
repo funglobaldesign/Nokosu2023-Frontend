@@ -14,5 +14,6 @@
     "allFieldsRequired": "Please fill all the fields",
     "errcrs": "Couldn't reach the server",
     "erric": "Invalid credentials",
-    "errfix": "Fix the errors in the form"
+    "errfix": "Fix the errors in the form",
+    "errunauth": "Unauthorized action"
 }

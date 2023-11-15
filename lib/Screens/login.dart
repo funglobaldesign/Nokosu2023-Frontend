@@ -100,9 +100,11 @@ class _LoginPageState extends State<LoginPage> {
 
                       int err = await apiLogin(context, data);
 
-                      if (err == 1) {
+                      if (err == Errors.badreq) {
                         formErrorController.text = locale.erric;
-                      } else if (err == 2) {
+                      } else if (err == Errors.unAuth) {
+                        formErrorController.text = locale.errunauth;
+                      } else if (err == Errors.unknown) {
                         formErrorController.text = locale.errcrs;
                       } else {
                         formErrorController.text = "";
