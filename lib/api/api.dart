@@ -112,6 +112,8 @@ Future<int> apiGetProfile(context, int id) async {
         });
 
     if (response.statusCode == 200) {
+      Provider.of<ProfileProvider>(context, listen: false)
+          .setModel(Profile.fromJson(jsonDecode(response.body)));
       return 0;
     } else {
       return 2;
