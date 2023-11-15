@@ -49,169 +49,180 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Scaffold(
       appBar: null,
       backgroundColor: ThemeColours.bgBlueWhite,
-      body: Stack(children: [
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                width: 100,
-                height: 100,
-                child: Neumo(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: SvgPicture.asset(
-                      CustIcons.logo,
-                      width: 50,
-                      height: 50,
-                    ),
-                  ),
+      body: SingleChildScrollView(
+        child: Stack(children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const SizedBox(
+                  height: 100,
                 ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.5,
-                width: MediaQuery.of(context).size.width * 0.75,
-                child: RawScrollbar(
-                  controller: _scrollController,
-                  thumbColor: ThemeColours.scrollBar,
-                  radius: const Radius.circular(50),
-                  thickness: 8.5,
-                  thumbVisibility: true,
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    padding: const EdgeInsets.all(16.0),
-                    physics: const ClampingScrollPhysics(),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          InputField(
-                            label: locale.username,
-                            controller: usernameController,
-                            prefixicon: Icons.person,
-                            err: formErrProvider.username!.message!,
-                          ),
-                          InputField(
-                            label: locale.email,
-                            controller: emailController,
-                            prefixicon: Icons.email,
-                            err: formErrProvider.email!.message!,
-                          ),
-                          InputField(
-                            label: locale.firstname,
-                            controller: firstNameController,
-                            prefixicon: Icons.supervisor_account_outlined,
-                            err: formErrProvider.first_name!.message!,
-                          ),
-                          InputField(
-                            label: locale.lastname,
-                            controller: lastNameController,
-                            prefixicon: Icons.supervisor_account,
-                            err: formErrProvider.last_name!.message!,
-                          ),
-                          InputField(
-                            label: locale.password,
-                            controller: password1Controller,
-                            ispasswordField: true,
-                            prefixicon: Icons.lock,
-                            err: formErrProvider.password1!.message!,
-                          ),
-                          InputField(
-                            label: locale.passwordconf,
-                            controller: password2Controller,
-                            ispasswordField: true,
-                            prefixicon: Icons.lock_person,
-                            err: formErrProvider.password2!.message!,
-                          ),
-                        ],
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Neumo(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: SvgPicture.asset(
+                        CustIcons.logo,
+                        width: 50,
+                        height: 50,
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 45,
-              ),
-              ErrorField(err: formErrorController.text),
-              ButtonSubmit(
-                text: locale.register,
-                onPressed: () async {
-                  setState(() {
-                    Global.isLoading = true;
-                  });
+                const SizedBox(
+                  height: 50,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: RawScrollbar(
+                    controller: _scrollController,
+                    thumbColor: ThemeColours.scrollBar,
+                    radius: const Radius.circular(50),
+                    thickness: 8.5,
+                    thumbVisibility: true,
+                    child: SingleChildScrollView(
+                      controller: _scrollController,
+                      padding: const EdgeInsets.all(16.0),
+                      physics: const ClampingScrollPhysics(),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            InputField(
+                              label: locale.username,
+                              controller: usernameController,
+                              prefixicon: Icons.person,
+                              err: formErrProvider.username!.message!,
+                            ),
+                            InputField(
+                              label: locale.email,
+                              controller: emailController,
+                              prefixicon: Icons.email,
+                              err: formErrProvider.email!.message!,
+                            ),
+                            InputField(
+                              label: locale.firstname,
+                              controller: firstNameController,
+                              prefixicon: Icons.supervisor_account_outlined,
+                              err: formErrProvider.first_name!.message!,
+                            ),
+                            InputField(
+                              label: locale.lastname,
+                              controller: lastNameController,
+                              prefixicon: Icons.supervisor_account,
+                              err: formErrProvider.last_name!.message!,
+                            ),
+                            InputField(
+                              label: locale.password,
+                              controller: password1Controller,
+                              ispasswordField: true,
+                              prefixicon: Icons.lock,
+                              err: formErrProvider.password1!.message!,
+                            ),
+                            InputField(
+                              label: locale.passwordconf,
+                              controller: password2Controller,
+                              ispasswordField: true,
+                              prefixicon: Icons.lock_person,
+                              err: formErrProvider.password2!.message!,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                ErrorField(err: formErrorController.text),
+                ButtonSubmit(
+                  text: locale.register,
+                  onPressed: () async {
+                    setState(() {
+                      Global.isLoading = true;
+                    });
 
-                  if (usernameController.text.isEmpty ||
-                      emailController.text.isEmpty ||
-                      firstNameController.text.isEmpty ||
-                      lastNameController.text.isEmpty ||
-                      password1Controller.text.isEmpty ||
-                      password2Controller.text.isEmpty) {
-                    formErrorController.text = locale.allFieldsRequired;
-                  } else {
-                    UserReg data = UserReg(
-                      username: usernameController.text,
-                      email: emailController.text,
-                      first_name: firstNameController.text,
-                      last_name: lastNameController.text,
-                      password1: password1Controller.text,
-                      password2: password2Controller.text,
-                    );
-
-                    int err = await apiRegister(context, data);
-
-                    if (err == Errors.badreq) {
-                      formErrorController.text = locale.errfix;
-                    } else if (err == Errors.unAuth) {
-                      formErrorController.text = locale.errunauth;
-                    } else if (err == Errors.unknown) {
-                      formErrorController.text = locale.errcrs;
+                    if (usernameController.text.isEmpty ||
+                        emailController.text.isEmpty ||
+                        firstNameController.text.isEmpty ||
+                        lastNameController.text.isEmpty ||
+                        password1Controller.text.isEmpty ||
+                        password2Controller.text.isEmpty) {
+                      formErrorController.text = locale.allFieldsRequired;
                     } else {
-                      formErrorController.text = "";
-                      loginSuccess = true;
-                    }
-                  }
-                  Global.isLoading = false;
-                  setState(() {});
+                      UserReg data = UserReg(
+                        username: usernameController.text,
+                        email: emailController.text,
+                        first_name: firstNameController.text,
+                        last_name: lastNameController.text,
+                        password1: password1Controller.text,
+                        password2: password2Controller.text,
+                      );
 
-                  if (loginSuccess) {
-                    // ignore: use_build_context_synchronously
-                    RedirectFunctions.redirectHome(context);
-                  }
-                },
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              const DropdownL10n()
-            ],
+                      int err = await apiRegister(context, data);
+
+                      if (err == Errors.badreq) {
+                        formErrorController.text = locale.errfix;
+                      } else if (err == Errors.unAuth) {
+                        formErrorController.text = locale.errunauth;
+                      } else if (err == Errors.unknown) {
+                        formErrorController.text = locale.errcrs;
+                      } else {
+                        formErrorController.text = "";
+                        loginSuccess = true;
+                      }
+                    }
+                    Global.isLoading = false;
+                    setState(() {});
+
+                    if (loginSuccess) {
+                      // ignore: use_build_context_synchronously
+                      RedirectFunctions.redirectHome(context);
+                    }
+                  },
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                const DropdownL10n(),
+                const SizedBox(
+                  height: 50,
+                ),
+              ],
+            ),
           ),
-        ),
-        if (Global.isLoading) const LoadingOverlay(),
-        const Positioned(
-          top: 35,
-          left: 25,
-          width: 42,
-          height: 42,
-          child: Neumo(
-            child: SizedBox(),
+          if (Global.isLoading) const LoadingOverlay(),
+          const Positioned(
+            top: 55,
+            left: 25,
+            width: 42,
+            height: 42,
+            child: Neumo(
+              child: SizedBox(),
+            ),
           ),
-        ),
-        Positioned(
-          top: 37,
-          left: 27,
-          width: 40,
-          height: 40,
-          child: IconButton(
-            icon: const Icon(Icons.arrow_circle_left_outlined),
-            onPressed: () {
-              RedirectFunctions.redirectLogin(context);
-            },
-          ),
-        )
-      ]),
+          Positioned(
+            top: 57,
+            left: 27,
+            width: 40,
+            height: 40,
+            child: IconButton(
+              icon: const Icon(Icons.arrow_circle_left_outlined),
+              onPressed: () {
+                RedirectFunctions.redirectLogin(context);
+              },
+            ),
+          )
+        ]),
+      ),
     );
   }
 }

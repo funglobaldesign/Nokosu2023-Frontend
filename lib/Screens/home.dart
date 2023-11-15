@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nokosu2023/utils/static_functions.dart';
+import 'package:nokosu2023/Components/camera.dart';
+import 'package:nokosu2023/utils/constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,10 +12,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: ElevatedButton(
-          onPressed: () => RedirectFunctions.redirectLogin(context),
-          child: Text('Login')),
+    return Scaffold(
+      appBar: null,
+      backgroundColor: ThemeColours.bgBlueWhite,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  Camera(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
