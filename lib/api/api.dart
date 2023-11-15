@@ -124,9 +124,8 @@ Future<int> apiGetProfile(context, int id) async {
   }
 }
 
-Future<int> apiUpdateProfile(context, UserReg data, String file) async {
+Future<int> apiUpdateProfile(context, UserReg data, String file, int id) async {
   try {
-    int id = Provider.of<TokenProvider>(context, listen: false).id;
     String token = Provider.of<TokenProvider>(context, listen: false).token;
     var request = http.MultipartRequest(
         'PUT', Uri.parse('${APILinks.base}profiles/$id/'));
@@ -165,8 +164,31 @@ Future<int> apiUpdateProfile(context, UserReg data, String file) async {
   }
 }
 
-  // apiDelProfile
-  
+Future<int> apiDelProfile(context, int id) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    var request = http.MultipartRequest(
+        'DELETE', Uri.parse('${APILinks.base}profiles/$id/'));
+
+    request.headers['Authorization'] = 'Token $token';
+
+    final response = await request.send();
+
+    if (response.statusCode == 200) {
+      return 0;
+    } else if (response.statusCode == 400) {
+      return 1;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
+ 
 
 // Group
   // apiGetGroups
