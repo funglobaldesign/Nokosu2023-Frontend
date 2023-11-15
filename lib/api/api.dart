@@ -146,7 +146,8 @@ Future<int> apiUpdateProfile(context, UserReg data, String file, int id) async {
     final response = await request.send();
 
     if (response.statusCode == 200) {
-      _setProfile(context, jsonDecode(await response.stream.bytesToString()));
+      Provider.of<ProfileProvider>(context, listen: false).setModel(
+          Profile.fromJson(jsonDecode(await response.stream.bytesToString())));
       Provider.of<FormErrProvider>(context, listen: false)
           .setModel(UserRegResponse());
       return 0;
