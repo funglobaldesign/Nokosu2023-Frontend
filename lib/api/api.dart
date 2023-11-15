@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/providers/form_err_res_provider.dart';
+import 'package:nokosu2023/providers/group_provider.dart';
+import 'package:nokosu2023/providers/info_provider.dart';
 import 'package:nokosu2023/providers/profile_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/providers/token_provider.dart';
@@ -35,6 +37,8 @@ Future<int> apiRegister(context, UserReg data) async {
           jsonDecode(await response.stream.bytesToString()));
       Provider.of<FormErrProvider>(context, listen: false).setModel(userres);
       return 1;
+    } else if (response.statusCode == 401) {
+      return 4;
     } else {
       return 2;
     }
@@ -61,6 +65,8 @@ Future<int> apiLogin(context, UserLogin data) async {
       return 0;
     } else if (response.statusCode == 400) {
       return 1;
+    } else if (response.statusCode == 401) {
+      return 4;
     } else {
       return 2;
     }
@@ -87,6 +93,8 @@ Future<int> apiLogout(context) async {
     if (response.statusCode == 200) {
       Provider.of<TokenProvider>(context, listen: false).setToken("", 0);
       return 0;
+    } else if (response.statusCode == 401) {
+      return 4;
     } else {
       return 2;
     }
@@ -100,7 +108,6 @@ Future<int> apiLogout(context) async {
 
 // Profile
 // apiGetProfiles : Not required atm
-
 Future<int> apiGetProfile(context, int id) async {
   try {
     String token = Provider.of<TokenProvider>(context, listen: false).token;
@@ -115,6 +122,8 @@ Future<int> apiGetProfile(context, int id) async {
       Provider.of<ProfileProvider>(context, listen: false)
           .setModel(Profile.fromJson(jsonDecode(response.body)));
       return 0;
+    } else if (response.statusCode == 401) {
+      return 4;
     } else {
       return 2;
     }
@@ -156,6 +165,8 @@ Future<int> apiUpdateProfile(context, UserReg data, String file, int id) async {
           jsonDecode(await response.stream.bytesToString()));
       Provider.of<FormErrProvider>(context, listen: false).setModel(userres);
       return 1;
+    } else if (response.statusCode == 401) {
+      return 4;
     } else {
       return 2;
     }
@@ -178,9 +189,12 @@ Future<int> apiDelProfile(context, int id) async {
     final response = await request.send();
 
     if (response.statusCode == 200) {
+      Provider.of<ProfileProvider>(context, listen: false).setModel(Profile());
       return 0;
     } else if (response.statusCode == 400) {
       return 1;
+    } else if (response.statusCode == 401) {
+      return 4;
     } else {
       return 2;
     }
@@ -191,31 +205,326 @@ Future<int> apiDelProfile(context, int id) async {
     return 2;
   }
 }
- 
 
 // Group
-  // apiGetGroups
+Future<int> apiGetGroups(context) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
 
-  // apiAddGroups
+    final response = await http
+        .get(Uri.parse('${APILinks.base}groups/'), headers: <String, String>{
+      'Content-Type': 'application/json',
+      'Authorization': 'Token $token',
+    });
 
-  // apiGetGroup
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      for (var each in json) {
+        Provider.of<GroupsProvider>(context, listen: false)
+            .addModel(Group.fromJson(each));
+      }
+      return 0;
+    } else if (response.statusCode == 401) {
+      return 4;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
 
-  // apiUpdateGroup
+Future<int> apiGetGroup(context, int id) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
 
-  // apiDelGroup
+    final response = await http.get(Uri.parse('${APILinks.base}groups/$id/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'Token $token',
+        });
+
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      for (var each in json) {
+        Provider.of<InfosProvider>(context, listen: false)
+            .addModel(Info.fromJson(each));
+      }
+      return 0;
+    } else if (response.statusCode == 401) {
+      return 4;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
+
+Future<int> apiAddgroup(context, String data) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    var request =
+        http.MultipartRequest('POST', Uri.parse('${APILinks.base}groups/'));
+
+    request.fields['name'] = data;
+    request.headers['Authorization'] = 'Token $token';
+
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      Group group =
+          Group.fromJson(jsonDecode(await response.stream.bytesToString()));
+      Provider.of<GroupsProvider>(context, listen: false).addModel(group);
+      return 0;
+    } else if (response.statusCode == 401) {
+      return 4;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
+
+Future<int> apiUpdateGroup(context, String data, int id) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    var request =
+        http.MultipartRequest('PUT', Uri.parse('${APILinks.base}groups/$id/'));
+
+    request.fields['name'] = data;
+    request.headers['Authorization'] = 'Token $token';
+
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      Group group =
+          Group.fromJson(jsonDecode(await response.stream.bytesToString()));
+      Provider.of<GroupsProvider>(context, listen: false).addModel(group);
+      return 0;
+    } else if (response.statusCode == 401) {
+      return 4;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
+
+Future<int> apiDelGroup(context, int id) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    var request = http.MultipartRequest(
+        'DELETE', Uri.parse('${APILinks.base}groups/$id/'));
+
+    request.headers['Authorization'] = 'Token $token';
+
+    final response = await request.send();
+
+    if (response.statusCode == 200) {
+      Provider.of<ProfileProvider>(context, listen: false).setModel(Profile());
+      return 0;
+    } else if (response.statusCode == 400) {
+      return 1;
+    } else if (response.statusCode == 401) {
+      return 4;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
 
 // Info
-  // apiGetInfos
+Future<int> apiGetInfos(context) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
 
-  // apiAddInfos
+    final response = await http
+        .get(Uri.parse('${APILinks.base}infos/'), headers: <String, String>{
+      'Content-Type': 'application/json',
+      'Authorization': 'Token $token',
+    });
 
-  // apiGetInfo
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      for (var each in json) {
+        Provider.of<InfosProvider>(context, listen: false)
+            .addModel(Info.fromJson(each));
+      }
+      return 0;
+    } else if (response.statusCode == 401) {
+      return 4;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
 
-  // apiUpdateInfo
+Future<int> apiGetInfo(context, int id) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
 
-  // apiDelInfo
+    final response = await http
+        .get(Uri.parse('${APILinks.base}infos/$id/'), headers: <String, String>{
+      'Content-Type': 'application/json',
+      'Authorization': 'Token $token',
+    });
+
+    if (response.statusCode == 200) {
+      Provider.of<InfoProvider>(context, listen: false)
+          .setModel(Info.fromJson(jsonDecode(response.body)));
+      return 0;
+    } else if (response.statusCode == 401) {
+      return 4;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
+
+Future<int> apiAddInfo(context, Info data, String file) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    var request =
+        http.MultipartRequest('POST', Uri.parse('${APILinks.base}infos/'));
+
+    data.toJson().forEach((key, value) {
+      if (value != null && value.isNotEmpty) {
+        request.fields[key] = value.toString();
+      }
+    });
+    request.files.add(await http.MultipartFile.fromPath('photo', file));
+    request.headers['Authorization'] = 'Token $token';
+
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      Provider.of<InfoProvider>(context, listen: false).setModel(
+          Info.fromJson(jsonDecode(await response.stream.bytesToString())));
+      return 0;
+    } else if (response.statusCode == 401) {
+      return 4;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
+
+Future<int> apiUpdateInfo(context, Info data, int id) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    var request =
+        http.MultipartRequest('PUT', Uri.parse('${APILinks.base}infos/$id/'));
+
+    data.toJson().forEach((key, value) {
+      if (value != null && value.isNotEmpty) {
+        request.fields[key] = value.toString();
+      }
+    });
+    request.headers['Authorization'] = 'Token $token';
+
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      Provider.of<InfoProvider>(context, listen: false).setModel(
+          Info.fromJson(jsonDecode(await response.stream.bytesToString())));
+      return 0;
+    } else if (response.statusCode == 401) {
+      return 4;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
+
+Future<int> apiDelInfo(context, int id) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    var request = http.MultipartRequest(
+        'DELETE', Uri.parse('${APILinks.base}infos/$id/'));
+
+    request.headers['Authorization'] = 'Token $token';
+
+    final response = await request.send();
+
+    if (response.statusCode == 200) {
+      Provider.of<InfoProvider>(context, listen: false).setModel(Info());
+      return 0;
+    } else if (response.statusCode == 400) {
+      return 1;
+    } else if (response.statusCode == 401) {
+      return 4;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
 
 // Email
-  // apiGetMail
+Future<int> apigetMail(context, String data) async {
+  try {
+    final response = await http.post(
+      Uri.parse('${APILinks.base}password_reset/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode('{"email": $data}'),
+    );
 
-  // apiUpdatePw
+    if (response.statusCode == 200) {
+      return 0;
+    } else if (response.statusCode == 400) {
+      return 1;
+    } else if (response.statusCode == 401) {
+      return 4;
+    } else {
+      return 2;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return 2;
+  }
+}
+// apiUpdatePw : Not required atm

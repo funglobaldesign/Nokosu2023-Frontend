@@ -162,9 +162,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                     int err = await apiRegister(context, data);
 
-                    if (err == 1) {
+                    if (err == Errors.badreq) {
                       formErrorController.text = locale.errfix;
-                    } else if (err == 2) {
+                    } else if (err == Errors.unAuth) {
+                      formErrorController.text = locale.errunauth;
+                    } else if (err == Errors.unknown) {
                       formErrorController.text = locale.errcrs;
                     } else {
                       formErrorController.text = "";

@@ -40,3 +40,10 @@ abstract class DeviceMemory {
   static const String authToken = 'authtoken';
   static const String userID = 'userid';
 }
+
+abstract class Errors {
+  static const int none = 0;
+  static const int badreq = 1;
+  static const int unAuth = 3;
+  static const int unknown = 2;
+}
