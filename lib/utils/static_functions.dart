@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nokosu2023/Screens/home.dart';
 import 'package:nokosu2023/Screens/login.dart';
 import 'package:nokosu2023/Screens/registration.dart';
+import 'package:nokosu2023/Screens/tutorial.dart';
 
 abstract class RedirectFunctions {
   static void redirectRegistration(context) {
@@ -29,6 +30,13 @@ abstract class RedirectFunctions {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const HomePage()),
+    );
+  }
+
+  static void redirectTutorial(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TutorialScreen()),
     );
   }
 }

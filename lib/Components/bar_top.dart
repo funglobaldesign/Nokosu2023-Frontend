@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class BottomBar extends StatefulWidget {
+class TopBar extends StatefulWidget {
   final Widget w1;
   final Widget w2;
   final Widget w3;
 
-  const BottomBar({
+  const TopBar({
     Key? key,
     required this.w1,
     required this.w2,
@@ -16,19 +16,24 @@ class BottomBar extends StatefulWidget {
   BarState createState() => BarState();
 }
 
-class BarState extends State<BottomBar> {
+class BarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 0,
+      top: 0,
       left: 0,
       right: 0,
       child: Container(
-        padding:
-            const EdgeInsets.only(top: 20, left: 20, bottom: 20, right: 20),
-        child: Column(
-          children: [
-            Row(
+        height: MediaQuery.of(context).size.height * 0.125,
+        padding: const EdgeInsets.only(
+          bottom: 10,
+          left: 20,
+          right: 20,
+        ),
+        child: ClipRect(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 widget.w1,
@@ -36,7 +41,7 @@ class BarState extends State<BottomBar> {
                 widget.w3,
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

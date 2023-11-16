@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/loading_overlay.dart';
+import 'package:nokosu2023/utils/constants.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class Camera extends StatefulWidget {
@@ -111,13 +112,14 @@ class CameraState extends State<Camera> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height * 0.7;
+    double height = MediaQuery.of(context).size.height * 0.725;
     if (_isCamAvailable) {
       return FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return SizedBox(
+            return Container(
+              color: ThemeColours.bgBlueWhite,
               width: width,
               height: height,
               child: GestureDetector(
