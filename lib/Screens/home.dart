@@ -1,6 +1,8 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:nokosu2023/Components/bottom_bar.dart';
 import 'package:nokosu2023/Components/camera.dart';
+import 'package:nokosu2023/Components/top_bar.dart';
 import 'package:nokosu2023/utils/constants.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,16 +20,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: null,
       backgroundColor: ThemeColours.bgBlueWhite,
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Center(
+      body: Stack(
+        children: [
+          TopBar(
+            w1: Icon(Icons.camera_alt),
+            w2: Icon(Icons.camera_alt),
+            w3: Icon(Icons.camera_alt),
+          ),
+          Center(
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const SizedBox(
-                    height: 100,
-                  ),
                   Camera(key: cameraKey),
                   FloatingActionButton(
                     onPressed: () async {
@@ -42,8 +46,13 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+          BottomBar(
+            w1: Icon(Icons.camera_alt),
+            w2: Icon(Icons.camera_alt),
+            w3: Icon(Icons.camera_alt),
+          ),
+        ],
       ),
     );
   }
