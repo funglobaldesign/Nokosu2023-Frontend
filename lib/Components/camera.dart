@@ -110,14 +110,16 @@ class CameraState extends State<Camera> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height * 0.7;
     if (_isCamAvailable) {
       return FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.height * 0.6,
+              width: width,
+              height: height,
               child: GestureDetector(
                 // onScaleStart: (details) async {
                 //   minZoom = await _controller.getMinZoomLevel();
@@ -146,12 +148,18 @@ class CameraState extends State<Camera> {
               ),
             );
           } else {
-            return const LoadingOverlay();
+            return LoadingOverlay(
+              width: width,
+              height: height,
+            );
           }
         },
       );
     } else {
-      return const LoadingOverlay();
+      return LoadingOverlay(
+        width: width,
+        height: height,
+      );
     }
   }
 }
