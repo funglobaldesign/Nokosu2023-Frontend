@@ -5,11 +5,10 @@ import 'package:nokosu2023/Components/loading_overlay.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class Camera extends StatefulWidget {
-  final GlobalKey<CameraState> cameraKey = GlobalKey();
   final double width;
   final double height;
 
-  Camera({
+  const Camera({
     Key? key,
     this.width = 0,
     this.height = 0,
@@ -23,9 +22,13 @@ class CameraState extends State<Camera> {
   late List<CameraDescription> cameras;
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+  final int _camIndex = 0;
   bool _isCamAvailable = false;
   int _isFlashOn = 0;
-  final int _camIndex = 0;
+  //double _scale = 1.0;
+  // double zoom = 1.0;
+  // late double minZoom;
+  // late double maxZoom;
 
   Future<void> initializeCamera(int indx) async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -85,10 +88,15 @@ class CameraState extends State<Camera> {
     }
   }
 
+  Future<XFile> takePic() async {
+    XFile image = await _controller.takePicture();
+    return image;
+  }
+
   @override
   void initState() {
     super.initState();
-    initializeCamera(_camIndex).then((_) {
+    initializeCamera(_camIndex).then((_) async {
       _isCamAvailable = true;
       setState(() {});
     });
@@ -107,7 +115,36 @@ class CameraState extends State<Camera> {
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return CameraPreview(_controller);
+            return SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: GestureDetector(
+                // onScaleStart: (details) async {
+                //   minZoom = await _controller.getMinZoomLevel();
+                //   maxZoom = await _controller.getMaxZoomLevel();
+                //   zoom = _scale;
+                // },
+                // onScaleUpdate: (details) {
+                //   _scale = (zoom * details.scale).clamp(minZoom, maxZoom);
+                // },
+                // onScaleEnd: (details) {
+                //   _controller.setZoomLevel(_scale);
+                // },
+                child: ClipRect(
+                  child: OverflowBox(
+                    alignment: Alignment.center,
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: SizedBox(
+                        width: 1,
+                        height: _controller.value.aspectRatio,
+                        child: CameraPreview(_controller),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
           } else {
             return const LoadingOverlay();
           }
