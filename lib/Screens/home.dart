@@ -97,6 +97,8 @@ class _HomePageState extends State<HomePage> {
 
                     if (cameraState != null) {
                       image = await cameraState.takePic();
+                      // ignore: use_build_context_synchronously
+                      RedirectFunctions.redirectPriview(context, image.path);
                     }
                   },
                   icon: const Icon(Icons.add_circle_outline_rounded),
@@ -109,13 +111,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
-// onPressed: () async {
-//                       final cameraState = cameraKey.currentState;
-                 
-//                       if (cameraState != null) {
-//                         int flashMode = await cameraState.toggleFlash();
-               
-//                       }
-//                     },
