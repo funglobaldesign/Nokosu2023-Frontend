@@ -21,5 +21,8 @@
     "cancel": "Cancel",
     "taptoviewim": "Tap to view the image",
     "home": "Home",
-    "groups": "Groups"
+    "groups": "Groups",
+    "topic": "Topic",
+    "desc": "Description",
+    "location": "Location"
 }

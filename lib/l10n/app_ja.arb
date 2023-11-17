@@ -23,5 +23,8 @@
     "cancel": "キャンサル",
     "taptoviewim": "",
     "home": "ホーム",
-    "groups": "グループ"
+    "groups": "グループ",
+    "topic": "",
+    "desc": "",
+    "location": ""
 }
