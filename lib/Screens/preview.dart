@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/utils/constants.dart';
@@ -89,7 +88,9 @@ class _PreviewPageState extends State<PreviewPage> {
                     child: Neumo(
                       child: IconButton(
                         color: Colors.green,
-                        onPressed: () {},
+                        onPressed: () {
+                          RedirectFunctions.redirectInfo(context, image);
+                        },
                         icon: const Icon(Icons.check),
                       ),
                     ),

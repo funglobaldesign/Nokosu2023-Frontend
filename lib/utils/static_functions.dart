@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Screens/home.dart';
+import 'package:nokosu2023/Screens/info.dart';
 import 'package:nokosu2023/Screens/login.dart';
 import 'package:nokosu2023/Screens/preview.dart';
 import 'package:nokosu2023/Screens/registration.dart';
@@ -47,6 +48,16 @@ abstract class RedirectFunctions {
       MaterialPageRoute(
           builder: (context) => PreviewPage(
                 imagePath: path,
+              )),
+    );
+  }
+
+  static void redirectInfo(context, Image file) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => InfoPage(
+                image: file,
               )),
     );
   }
