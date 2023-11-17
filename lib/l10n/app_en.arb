@@ -15,5 +15,11 @@
     "errcrs": "Couldn't reach the server",
     "erric": "Invalid credentials",
     "errfix": "Fix the errors in the form",
-    "errunauth": "Unauthorized action"
+    "errunauth": "Unauthorized action",
+    "ok": "OK",
+    "photodel": "This photo and information will be deleted",
+    "cancel": "Cancel",
+    "taptoviewim": "Tap to view the image",
+    "home": "Home",
+    "groups": "Groups"
 }

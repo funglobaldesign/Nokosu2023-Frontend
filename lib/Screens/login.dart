@@ -39,14 +39,18 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: null,
-        backgroundColor: ThemeColours.bgBlueWhite,
-        body: Stack(
+      appBar: null,
+      backgroundColor: ThemeColours.bgBlueWhite,
+      body: SingleChildScrollView(
+        child: Stack(
           children: [
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  const SizedBox(
+                    height: 100,
+                  ),
                   SizedBox(
                     width: 100,
                     height: 100,
@@ -83,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                   const SizedBox(
-                    height: 100,
+                    height: 50,
                   ),
                   ErrorField(err: formErrorController.text),
                   ButtonSubmit(
@@ -134,12 +138,17 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const DropdownL10n()
+                  const DropdownL10n(),
+                  const SizedBox(
+                    height: 50,
+                  ),
                 ],
               ),
             ),
             if (Global.isLoading) const LoadingOverlay(),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

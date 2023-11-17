@@ -11,10 +11,10 @@ class PopupInfo extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  ButtomSubmitState createState() => ButtomSubmitState();
+  PopupInfoState createState() => PopupInfoState();
 }
 
-class ButtomSubmitState extends State<PopupInfo> {
+class PopupInfoState extends State<PopupInfo> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

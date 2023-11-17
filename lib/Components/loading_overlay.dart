@@ -3,8 +3,13 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:nokosu2023/utils/constants.dart';
 
 class LoadingOverlay extends StatefulWidget {
+  final double width;
+  final double height;
+
   const LoadingOverlay({
     Key? key,
+    this.width = 0,
+    this.height = 0,
   }) : super(key: key);
 
   @override
@@ -26,11 +31,21 @@ class LoadingOverlayState extends State<LoadingOverlay> {
   ];
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    double width;
+    double height;
+    if (widget.width == 0) {
+      width = MediaQuery.of(context).size.width;
+    } else {
+      width = widget.width;
+    }
+    if (widget.width == 0) {
+      height = MediaQuery.of(context).size.height;
+    } else {
+      height = widget.height;
+    }
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.08),
+        color: Colors.black.withOpacity(0.1),
       ),
       height: height,
       width: width,

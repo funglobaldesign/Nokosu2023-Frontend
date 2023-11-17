@@ -35,8 +35,7 @@ class ButtonLinkState extends State<ButtonLink> {
           TextSpan(
               text: widget.textLink,
               style: const TextStyle(
-                color: ThemeColours
-                    .txtBlack, // Change the color to your desired color
+                color: ThemeColours.txtBlack,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = widget.onPressed as GestureTapCallback?),

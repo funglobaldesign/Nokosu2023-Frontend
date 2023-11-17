@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/Screens/home.dart';
 import 'package:nokosu2023/Screens/login.dart';
 import 'package:nokosu2023/providers/form_err_res_provider.dart';
 import 'package:nokosu2023/providers/group_provider.dart';
+import 'package:nokosu2023/providers/home_state.dart';
 import 'package:nokosu2023/providers/info_provider.dart';
 import 'package:nokosu2023/providers/locale_provider.dart';
 import 'package:nokosu2023/providers/profile_provider.dart';
@@ -28,6 +30,7 @@ class Nokosu extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => GroupsProvider()),
         ChangeNotifierProvider(create: (context) => InfoProvider()),
         ChangeNotifierProvider(create: (context) => InfosProvider()),
+        ChangeNotifierProvider(create: (context) => HomeStateProvider()),
       ],
       builder: (context, state) {
         return MaterialApp(
@@ -35,7 +38,7 @@ class Nokosu extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           locale: Provider.of<LocaleProvider>(context).locale,
-          home: const LoginPage(),
+          home: const HomePage(),
         );
       },
     );
