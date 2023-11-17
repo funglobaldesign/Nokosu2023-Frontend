@@ -1,15 +1,15 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PreviewPage extends StatefulWidget {
-  final String imagePath;
+  final Image image;
 
   const PreviewPage({
     Key? key,
-    required this.imagePath,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -17,22 +17,27 @@ class PreviewPage extends StatefulWidget {
 }
 
 class _PreviewPageState extends State<PreviewPage> {
-  late Image image;
+  late AppLocalizations locale;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    locale = AppLocalizations.of(context)!;
+  }
 
   @override
   Widget build(BuildContext context) {
-    image = Image.file(File(widget.imagePath));
     return Scaffold(
       appBar: null,
       backgroundColor: ThemeColours.bgBlueWhite,
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.11),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.085),
             Container(
               padding: const EdgeInsets.all(7),
               height: MediaQuery.of(context).size.height * 0.65,
-              width: MediaQuery.of(context).size.width * 0.9,
+              width: MediaQuery.of(context).size.width * 0.95,
               decoration: BoxDecoration(
                 color: ThemeColours.bgBlueWhite,
                 borderRadius: BorderRadius.circular(10),
@@ -60,7 +65,7 @@ class _PreviewPageState extends State<PreviewPage> {
                     fit: BoxFit.fitWidth,
                     child: SizedBox(
                       width: 1,
-                      child: image,
+                      child: widget.image,
                     ),
                   ),
                 ),
@@ -79,7 +84,31 @@ class _PreviewPageState extends State<PreviewPage> {
                           child: IconButton(
                               color: Colors.red,
                               onPressed: () {
-                                RedirectFunctions.redirectHome(context);
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      content: Text(locale.photodel),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text(locale.cancel),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+
+                                            RedirectFunctions.redirectHome(
+                                                context);
+                                          },
+                                          child: Text(locale.ok),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
                               icon: const Icon(Icons.close)))),
                   SizedBox(
@@ -89,7 +118,7 @@ class _PreviewPageState extends State<PreviewPage> {
                       child: IconButton(
                         color: Colors.green,
                         onPressed: () {
-                          RedirectFunctions.redirectInfo(context, image);
+                          Navigator.of(context).pop();
                         },
                         icon: const Icon(Icons.check),
                       ),

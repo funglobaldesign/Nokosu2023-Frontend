@@ -1,10 +1,12 @@
-import 'package:camera/camera.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:nokosu2023/Components/bar_bottom.dart';
 import 'package:nokosu2023/Components/camera.dart';
 import 'package:nokosu2023/Components/bar_top.dart';
+import 'package:nokosu2023/Components/loading_overlay.dart';
 import 'package:nokosu2023/utils/constants.dart';
+import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,8 +18,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<CameraState> cameraKey = GlobalKey();
+  final picker = ImagePicker();
   late XFile image;
   int flashMode = 0;
+  int nextFlashMode = 1;
+
+  @override
+  void initState() {
+    Global.isLoading = false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,36 +47,48 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             w2: IconButton(
-              icon: Icon(flashMode == 0
-                  ? Icons.flash_off
-                  : flashMode == 1
-                      ? Icons.flash_auto
-                      : Icons.flash_on),
+              icon: Icon(flashMode == 1
+                  ? Icons.flash_auto
+                  : flashMode == 2
+                      ? Icons.flash_on
+                      : Icons.flash_off),
               onPressed: () async {
                 final cameraState = cameraKey.currentState;
 
                 if (cameraState != null) {
-                  flashMode = await cameraState.toggleFlash();
+                  flashMode = await cameraState.setFlash(nextFlashMode);
+                  nextFlashMode = flashMode == 0
+                      ? 1
+                      : flashMode == 1
+                          ? 2
+                          : 0;
                   setState(() {});
                 }
               },
             ),
             w3: IconButton(
-              icon: Icon(Icons.person_outline),
+              icon: const Icon(Icons.person_outline),
               onPressed: () {},
             ),
           ),
           BottomBar(
             w1: IconButton(
-              icon: Icon(Icons.photo_library_outlined),
-              onPressed: () {},
+              icon: const Icon(Icons.photo_library_outlined),
+              onPressed: () async {
+                image = (await picker.pickImage(source: ImageSource.gallery))!;
+                // ignore: use_build_context_synchronously
+                RedirectFunctions.redirectInfo(
+                    context, Image.file(File(image.path)));
+              },
             ),
             w2: IconButton(
               icon: Icon(Icons.camera_alt),
-              onPressed: () {},
+              onPressed: () {
+                RedirectFunctions.redirectHome(context);
+              },
             ),
             w3: IconButton(
-              icon: Icon(Icons.supervisor_account_outlined),
+              icon: const Icon(Icons.supervisor_account_outlined),
               onPressed: () {},
             ),
           ),
@@ -93,19 +116,31 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: IconButton(
                   onPressed: () async {
-                    final cameraState = cameraKey.currentState;
+                    setState(() {
+                      Global.isLoading = true;
+                    });
 
+                    final cameraState = cameraKey.currentState;
                     if (cameraState != null) {
+                      flashMode = await cameraState.setFlash(0);
+                      nextFlashMode = 1;
                       image = await cameraState.takePic();
+
                       // ignore: use_build_context_synchronously
-                      RedirectFunctions.redirectPriview(context, image.path);
+                      RedirectFunctions.redirectInfo(
+                          context, Image.file(File(image.path)));
                     }
+
+                    setState(() {
+                      Global.isLoading = false;
+                    });
                   },
                   icon: const Icon(Icons.add_circle_outline_rounded),
                 ),
               ),
             ),
           ),
+          if (Global.isLoading) const LoadingOverlay(),
         ],
       ),
     );

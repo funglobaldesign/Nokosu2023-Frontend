@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nokosu2023/Screens/home.dart';
 import 'package:nokosu2023/Screens/info.dart';
 import 'package:nokosu2023/Screens/login.dart';
-import 'package:nokosu2023/Screens/preview.dart';
 import 'package:nokosu2023/Screens/registration.dart';
 import 'package:nokosu2023/Screens/tutorial.dart';
 
@@ -39,16 +38,6 @@ abstract class RedirectFunctions {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TutorialScreen()),
-    );
-  }
-
-  static void redirectPriview(context, String path) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => PreviewPage(
-                imagePath: path,
-              )),
     );
   }
 

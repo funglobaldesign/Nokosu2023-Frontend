@@ -25,7 +25,6 @@ class CameraState extends State<Camera> {
   late Future<void> _initializeControllerFuture;
   final int _camIndex = 0;
   bool _isCamAvailable = false;
-  int _isFlashOn = 0;
   //double _scale = 1.0;
   // double zoom = 1.0;
   // late double minZoom;
@@ -60,25 +59,16 @@ class CameraState extends State<Camera> {
     _initializeControllerFuture = _controller.initialize();
   }
 
-  Future<int> toggleFlash() async {
+  Future<int> setFlash(int flashMode) async {
     try {
-      if (_isFlashOn == 0) {
+      if (flashMode == 1) {
         await _controller.setFlashMode(FlashMode.auto);
-        setState(() {
-          _isFlashOn = 1;
-        });
         return 1;
-      } else if (_isFlashOn == 1) {
+      } else if (flashMode == 2) {
         await _controller.setFlashMode(FlashMode.torch);
-        setState(() {
-          _isFlashOn = 2;
-        });
         return 2;
       } else {
         await _controller.setFlashMode(FlashMode.off);
-        setState(() {
-          _isFlashOn = 0;
-        });
         return 0;
       }
     } catch (e) {
