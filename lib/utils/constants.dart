@@ -17,6 +17,7 @@ abstract class ThemeColours {
 
   // Icon Colours
   static const Color iconBlack = Color(0xFF000000);
+  static const Color iconblue = Color(0xFF7AA8FF);
 
   // Shadow Colours
   static const Color shadowDark = Color(0x88555555);

@@ -5,9 +5,12 @@ import 'package:nokosu2023/Components/bar_bottom.dart';
 import 'package:nokosu2023/Components/camera.dart';
 import 'package:nokosu2023/Components/bar_top.dart';
 import 'package:nokosu2023/Components/loading_overlay.dart';
+import 'package:nokosu2023/providers/home_state.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,13 +21,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<CameraState> cameraKey = GlobalKey();
-  final picker = ImagePicker();
   late XFile image;
+
   int flashMode = 0;
   int nextFlashMode = 1;
 
+  late AppLocalizations locale;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    locale = AppLocalizations.of(context)!;
+  }
+
   @override
   void initState() {
+    Provider.of<HomeStateProvider>(context, listen: false).setState(0);
     Global.isLoading = false;
     super.initState();
   }
@@ -40,13 +52,8 @@ class _HomePageState extends State<HomePage> {
               top: MediaQuery.of(context).size.height * 0.125,
               child: Camera(key: cameraKey)),
           TopBar(
-            w1: IconButton(
-              icon: Icon(Icons.bookmarks_outlined),
-              onPressed: () {
-                RedirectFunctions.redirectTutorial(context);
-              },
-            ),
-            w2: IconButton(
+            camkey: cameraKey,
+            middleIcon: IconButton(
               icon: Icon(flashMode == 1
                   ? Icons.flash_auto
                   : flashMode == 2
@@ -66,32 +73,9 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
-            w3: IconButton(
-              icon: const Icon(Icons.person_outline),
-              onPressed: () {},
-            ),
           ),
-          BottomBar(
-            w1: IconButton(
-              icon: const Icon(Icons.photo_library_outlined),
-              onPressed: () async {
-                image = (await picker.pickImage(source: ImageSource.gallery))!;
-                // ignore: use_build_context_synchronously
-                RedirectFunctions.redirectInfo(
-                    context, Image.file(File(image.path)));
-              },
-            ),
-            w2: IconButton(
-              icon: Icon(Icons.camera_alt),
-              onPressed: () {
-                RedirectFunctions.redirectHome(context);
-              },
-            ),
-            w3: IconButton(
-              icon: const Icon(Icons.supervisor_account_outlined),
-              onPressed: () {},
-            ),
-          ),
+          const BottomBar(),
+          //Capture button
           Positioned(
             bottom: MediaQuery.of(context).size.height * 0.15 - 40,
             left: MediaQuery.of(context).size.width / 2 - 40,
@@ -122,10 +106,11 @@ class _HomePageState extends State<HomePage> {
 
                     final cameraState = cameraKey.currentState;
                     if (cameraState != null) {
-                      flashMode = await cameraState.setFlash(0);
-                      nextFlashMode = 1;
                       image = await cameraState.takePic();
 
+                      await cameraState.setFlash(0);
+                      flashMode = 0;
+                      nextFlashMode = 1;
                       // ignore: use_build_context_synchronously
                       RedirectFunctions.redirectInfo(
                           context, Image.file(File(image.path)));

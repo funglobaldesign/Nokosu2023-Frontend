@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:nokosu2023/Components/camera.dart';
+import 'package:nokosu2023/utils/static_functions.dart';
 
 class TopBar extends StatefulWidget {
-  final Widget w1;
-  final Widget w2;
-  final Widget w3;
+  final GlobalKey<CameraState> camkey;
+  final Widget middleIcon;
 
   const TopBar({
     Key? key,
-    required this.w1,
-    required this.w2,
-    required this.w3,
+    required this.camkey,
+    required this.middleIcon,
   }) : super(key: key);
 
   @override
-  BarState createState() => BarState();
+  TopBarState createState() => TopBarState();
 }
 
-class BarState extends State<TopBar> {
+class TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -36,9 +36,17 @@ class BarState extends State<TopBar> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                widget.w1,
-                widget.w2,
-                widget.w3,
+                IconButton(
+                  icon: Icon(Icons.bookmarks_outlined),
+                  onPressed: () {
+                    RedirectFunctions.redirectTutorial(context);
+                  },
+                ),
+                widget.middleIcon,
+                IconButton(
+                  icon: const Icon(Icons.person_outline),
+                  onPressed: () {},
+                ),
               ],
             ),
           ),
