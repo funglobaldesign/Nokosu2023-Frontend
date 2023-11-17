@@ -22,8 +22,8 @@ class FolderScreenState extends State<FolderScreen> {
           Positioned(
               top: MediaQuery.of(context).size.height * 0.125,
               child: Container(
-                color: Colors.amber,
-              )),
+                  //child: ,
+                  )),
           TopBar(camkey: GlobalKey(), middleIcon: SizedBox()),
           const BottomBar(),
           if (Global.isLoading) const LoadingOverlay(),
