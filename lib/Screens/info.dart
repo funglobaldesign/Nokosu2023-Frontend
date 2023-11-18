@@ -126,7 +126,7 @@ class _InfoPageState extends State<InfoPage> {
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.09),
+                  const SizedBox(height: 30),
                   GestureDetector(
                     onTap: () {
                       showDialog(
@@ -139,7 +139,10 @@ class _InfoPageState extends State<InfoPage> {
                       children: [
                         Container(
                           padding: const EdgeInsets.all(7),
-                          height: MediaQuery.of(context).size.height * 0.3,
+                          height: MediaQuery.of(context).orientation ==
+                                  Orientation.portrait
+                              ? MediaQuery.of(context).size.height * 0.3
+                              : MediaQuery.of(context).size.width * 0.6,
                           width: MediaQuery.of(context).size.width * 0.4,
                           decoration: BoxDecoration(
                             color: ThemeColours.bgBlueWhite,
