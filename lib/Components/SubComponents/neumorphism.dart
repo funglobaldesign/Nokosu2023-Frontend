@@ -5,13 +5,15 @@ import 'package:nokosu2023/utils/constants.dart';
 class Neumo extends StatefulWidget {
   final Widget child;
   final double border;
-  final onlyBlackShaodw;
+  final bool onlyBlackShaodw;
+  final Color color;
 
   const Neumo({
     Key? key,
     required this.child,
     this.border = 100,
     this.onlyBlackShaodw = false,
+    this.color = ThemeColours.bgBlueWhite,
   }) : super(key: key);
 
   @override
@@ -76,7 +78,7 @@ class NeumoState extends State<Neumo> {
             right: 15,
           ),
           decoration: BoxDecoration(
-            color: ThemeColours.bgBlueWhite,
+            color: widget.color,
             borderRadius: BorderRadius.circular(widget.border),
             border: Border.all(
               width: 0,

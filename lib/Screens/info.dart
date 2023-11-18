@@ -28,15 +28,14 @@ class _InfoPageState extends State<InfoPage> {
   TextEditingController locationController = TextEditingController();
   TextEditingController groupController = TextEditingController();
   TextEditingController groupNameController = TextEditingController();
-  TextEditingController formErrorController = TextEditingController();
-
-  late AppLocalizations locale;
-  late Position position;
-  bool _isLocationAvailable = false;
-
   double longitude = 0;
   double latitude = 0;
   String address = "-";
+
+  TextEditingController formErrorController = TextEditingController();
+  late AppLocalizations locale;
+  late Position position;
+  bool _isLocationAvailable = false;
 
   Future<int> getCurrentPosition() async {
     try {
@@ -127,7 +126,7 @@ class _InfoPageState extends State<InfoPage> {
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.09),
                   GestureDetector(
                     onTap: () {
                       showDialog(
@@ -230,19 +229,28 @@ class _InfoPageState extends State<InfoPage> {
                   ),
                   if (_isLocationAvailable)
                     Text('${locale.address} : $address'),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 30),
                   ErrorField(err: formErrorController.text),
                   ButtonSubmit(
                     text: locale.next,
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) => const Categories(),
-                      );
+                      if (topicController.text.isEmpty ||
+                          descController.text.isEmpty ||
+                          locationController.text.isEmpty ||
+                          groupController.text.isEmpty) {
+                        formErrorController.text = locale.allFieldsRequired;
+                      } else {
+                        formErrorController.text = '';
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => const Categories(),
+                        );
+                      }
+                      setState(() {});
                     },
                     border: 10,
                   ),
-                  const SizedBox(height: 30)
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.06),
                 ],
               ),
             ),

@@ -30,5 +30,15 @@
     "group": "",
     "unnamed": "",
     "address": "",
-    "next": ""
+    "next": "",
+    "positive": "",
+    "negative": "",
+    "cult": "",
+    "nocult": "",
+    "emo": "",
+    "noemo": "",
+    "phys": "",
+    "nophys": "",
+    "selcats": "",
+    "done": ""
 }

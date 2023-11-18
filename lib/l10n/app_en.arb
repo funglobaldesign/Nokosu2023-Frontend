@@ -28,5 +28,15 @@
     "group": "Group",
     "unnamed": "Unnamed",
     "address": "Address",
-    "next": "Next"
+    "next": "Next",
+    "positive": "Positive",
+    "negative": "Negative",
+    "cult": "Cultural",
+    "nocult": "Not-Cultural",
+    "emo": "Emotional",
+    "noemo": "Not-Emotional",
+    "phys": "Physical",
+    "nophys": "Not-Physical",
+    "selcats": "Select Appropriate Categories",
+    "done": "Done"
 }

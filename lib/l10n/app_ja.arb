@@ -30,5 +30,15 @@
     "group": "グループ",
     "unnamed": "",
     "address": "",
-    "next": "次へ"
+    "next": "次へ",
+    "positive": "",
+    "negative": "",
+    "cult": "",
+    "nocult": "",
+    "emo": "",
+    "noemo": "",
+    "phys": "",
+    "nophys": "",
+    "selcats": "",
+    "done": "終了"
 }
