@@ -26,5 +26,7 @@
     "groups": "グループ",
     "topic": "",
     "desc": "",
-    "location": ""
+    "location": "",
+    "group": "グループ",
+    "unnamed": ""
 }

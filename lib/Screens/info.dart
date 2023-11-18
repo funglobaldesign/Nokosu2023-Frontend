@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nokosu2023/Components/info_input_field.dart';
+import 'package:nokosu2023/Components/button_submit.dart';
+import 'package:nokosu2023/Components/groups_select.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:nokosu2023/Components/preview.dart';
 import 'package:nokosu2023/utils/constants.dart';
@@ -20,6 +21,8 @@ class _InfoPageState extends State<InfoPage> {
   TextEditingController topicController = TextEditingController();
   TextEditingController descController = TextEditingController();
   TextEditingController locationController = TextEditingController();
+  TextEditingController groupController = TextEditingController();
+  TextEditingController groupNameController = TextEditingController();
 
   TextEditingController formErrorController = TextEditingController();
 
@@ -32,7 +35,7 @@ class _InfoPageState extends State<InfoPage> {
   }
 
   Future<bool?> _showConfirmationDialog(BuildContext context) async {
-    bool? b = await showDialog<bool>(
+    bool? show = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -54,7 +57,7 @@ class _InfoPageState extends State<InfoPage> {
         );
       },
     );
-    return b;
+    return show;
   }
 
   @override
@@ -136,20 +139,52 @@ class _InfoPageState extends State<InfoPage> {
                       ],
                     ),
                   ),
-                  InfoInputField(
+                  const SizedBox(height: 10),
+                  InputField(
                     label: locale.topic,
                     controller: topicController,
                     prefixicon: Icons.topic_outlined,
+                    border: 10,
+                    isErr: false,
                   ),
-                  InfoInputField(
+                  InputField(
                     label: locale.desc,
                     controller: descController,
                     prefixicon: Icons.carpenter_outlined,
+                    border: 10,
+                    isErr: false,
                   ),
-                  InfoInputField(
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => GroupsSelect(
+                          groupController: groupController,
+                          groupNameController: groupNameController,
+                        ),
+                      );
+                    },
+                    child: InputField(
+                      label: locale.group,
+                      controller: groupNameController,
+                      prefixicon: Icons.supervisor_account_outlined,
+                      border: 10,
+                      isErr: false,
+                      isEnabled: false,
+                    ),
+                  ),
+                  InputField(
                     label: locale.location,
                     controller: locationController,
                     prefixicon: Icons.add_location_alt_outlined,
+                    border: 10,
+                    isErr: false,
+                  ),
+                  const SizedBox(height: 50),
+                  ButtonSubmit(
+                    text: 'text',
+                    onPressed: () {},
+                    border: 10,
                   ),
                   const SizedBox(height: 20)
                 ],

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/utils/constants.dart';
 
-//Button for Login/Registration submit
 class ButtonSubmit extends StatefulWidget {
   final String text;
   final Function onPressed;
   final double boxWidth;
   final double boxHeight;
+  final double border;
 
   const ButtonSubmit({
     Key? key,
@@ -15,6 +15,7 @@ class ButtonSubmit extends StatefulWidget {
     required this.onPressed,
     this.boxWidth = NumericConsts.defBoxWidth,
     this.boxHeight = NumericConsts.defBoxHeight,
+    this.border = 100,
   }) : super(key: key);
 
   @override
@@ -28,6 +29,7 @@ class ButtomSubmitState extends State<ButtonSubmit> {
       width: widget.boxWidth,
       height: widget.boxHeight,
       child: Neumo(
+        border: widget.border,
         child: InkWell(
           child: Align(
             alignment: Alignment.center,

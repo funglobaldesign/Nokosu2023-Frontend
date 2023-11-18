@@ -5,11 +5,13 @@ import 'package:nokosu2023/utils/constants.dart';
 class Neumo extends StatefulWidget {
   final Widget child;
   final double border;
+  final onlyBlackShaodw;
 
   const Neumo({
     Key? key,
     required this.child,
     this.border = 100,
+    this.onlyBlackShaodw = false,
   }) : super(key: key);
 
   @override
@@ -19,10 +21,12 @@ class Neumo extends StatefulWidget {
 class NeumoState extends State<Neumo> {
   final FocusNode containerFocusNode = FocusNode();
   late List<BoxShadow> containerShadowDecoration = [
-    const BoxShadow(
+    BoxShadow(
       blurRadius: 6,
-      offset: Offset(-6, -6),
-      color: ThemeColours.shadowLight,
+      offset: const Offset(-6, -6),
+      color: widget.onlyBlackShaodw
+          ? ThemeColours.shadowDark
+          : ThemeColours.shadowLight,
     ),
     const BoxShadow(
       blurRadius: 6,

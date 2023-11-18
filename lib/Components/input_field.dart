@@ -5,12 +5,15 @@ import 'package:nokosu2023/utils/constants.dart';
 
 class InputField extends StatefulWidget {
   final String label;
+  final bool isEnabled;
+  final bool isErr;
   final String err;
   final double boxWidth;
   final double boxHeight;
   final TextEditingController controller;
   final bool ispasswordField;
   final IconData prefixicon;
+  final double border;
 
   const InputField({
     Key? key,
@@ -21,6 +24,9 @@ class InputField extends StatefulWidget {
     this.boxHeight = NumericConsts.defBoxHeight,
     this.err = '',
     this.ispasswordField = false,
+    this.border = 100,
+    this.isErr = true,
+    this.isEnabled = true,
   }) : super(key: key);
 
   @override
@@ -46,11 +52,13 @@ class InputFieldState extends State<InputField> {
             width: widget.boxWidth,
             height: widget.boxHeight,
             child: Neumo(
+              border: widget.border,
               child: TextFormField(
                 controller: widget.controller,
                 obscureText: obscureText,
                 style: const TextStyle(color: ThemeColours.txtBlack),
                 decoration: InputDecoration(
+                  enabled: widget.isEnabled,
                   border: InputBorder.none,
                   hintText: widget.label,
                   hintStyle: const TextStyle(color: ThemeColours.txtGrey),
@@ -77,7 +85,11 @@ class InputFieldState extends State<InputField> {
               ),
             ),
           ),
-          ErrorField(err: widget.err),
+          if (widget.isErr) ErrorField(err: widget.err),
+          if (!widget.isErr)
+            const SizedBox(
+              height: 20,
+            )
         ],
       ),
     );
