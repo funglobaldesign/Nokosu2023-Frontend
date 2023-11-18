@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -23,6 +25,17 @@ class GroupFolder extends StatefulWidget {
 class _GroupState extends State<GroupFolder> {
   late AppLocalizations locale;
 
+  // Modify not to use this when using user uploaded folder images
+  Color getRandomSoftColor() {
+    Random random = Random();
+    return Color.fromRGBO(
+      random.nextInt(256), // Red
+      random.nextInt(256), // Green
+      random.nextInt(256), // Blue
+      0.5, // Opacity (1.0 means fully opaque)
+    );
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -45,10 +58,16 @@ class _GroupState extends State<GroupFolder> {
             border: 10,
             child: Column(
               children: [
-                Image.asset(Imgs.folder),
+                ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    getRandomSoftColor(),
+                    BlendMode.srcIn,
+                  ),
+                  child: Image.asset(Imgs.folder),
+                ),
                 Text(
                   widget.group.name ?? locale.unnamed,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: ThemeColours.txtBlack,
                     fontSize: 12,
                     fontWeight: FontWeight.w100,

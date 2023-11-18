@@ -1,10 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:nokosu2023/Components/SubComponents/error_field.dart';
 import 'package:nokosu2023/Components/button_submit.dart';
+import 'package:nokosu2023/Components/categories.dart';
 import 'package:nokosu2023/Components/groups_select.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:nokosu2023/Components/preview.dart';
 import 'package:nokosu2023/utils/constants.dart';
+import 'package:geolocator/geolocator.dart';
 
 class InfoPage extends StatefulWidget {
   final Image image;
@@ -23,10 +28,53 @@ class _InfoPageState extends State<InfoPage> {
   TextEditingController locationController = TextEditingController();
   TextEditingController groupController = TextEditingController();
   TextEditingController groupNameController = TextEditingController();
-
   TextEditingController formErrorController = TextEditingController();
 
   late AppLocalizations locale;
+  late Position position;
+  bool _isLocationAvailable = false;
+
+  double longitude = 0;
+  double latitude = 0;
+  String address = "-";
+
+  Future<int> getCurrentPosition() async {
+    try {
+      position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      longitude = position.longitude;
+      latitude = position.latitude;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+    return 0;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentPosition().then((_) async {
+      _isLocationAvailable = true;
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(latitude, longitude);
+
+      String tempAddress = placemarks[0].country ?? '';
+      tempAddress +=
+          placemarks[0].locality != null && placemarks[0].locality!.isNotEmpty
+              ? ', ${placemarks[0].locality}'
+              : '';
+      tempAddress += placemarks[0].subLocality != null &&
+              placemarks[0].subLocality!.isNotEmpty
+          ? ', ${placemarks[0].subLocality}'
+          : '';
+
+      if (tempAddress.isNotEmpty) address = tempAddress;
+
+      setState(() {});
+    });
+  }
 
   @override
   void didChangeDependencies() {
@@ -174,19 +222,27 @@ class _InfoPageState extends State<InfoPage> {
                     ),
                   ),
                   InputField(
-                    label: locale.location,
+                    label: locale.locname,
                     controller: locationController,
                     prefixicon: Icons.add_location_alt_outlined,
                     border: 10,
                     isErr: false,
                   ),
+                  if (_isLocationAvailable)
+                    Text('${locale.address} : $address'),
                   const SizedBox(height: 50),
+                  ErrorField(err: formErrorController.text),
                   ButtonSubmit(
-                    text: 'text',
-                    onPressed: () {},
+                    text: locale.next,
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => const Categories(),
+                      );
+                    },
                     border: 10,
                   ),
-                  const SizedBox(height: 20)
+                  const SizedBox(height: 30)
                 ],
               ),
             ),

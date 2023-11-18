@@ -24,7 +24,9 @@
     "groups": "Groups",
     "topic": "Topic",
     "desc": "Description",
-    "location": "Location",
+    "locname": "Location Name",
     "group": "Group",
-    "unnamed": "Unnamed"
+    "unnamed": "Unnamed",
+    "address": "Address",
+    "next": "Next"
 }
