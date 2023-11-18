@@ -37,7 +37,7 @@ class TopBarState extends State<TopBar> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  icon: Icon(Icons.bookmarks_outlined),
+                  icon: const Icon(Icons.bookmarks_outlined),
                   onPressed: () {
                     RedirectFunctions.redirectTutorial(context);
                   },

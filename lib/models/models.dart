@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'models.g.dart';
@@ -58,6 +59,9 @@ class FormErrResponse {
 
   Map<String, dynamic> toJson() => _$FormErrResponseToJson(this);
 }
+
+// IMPORTANT : After running 'dart run build_runner build' change the mapping to array's 0th position in _$UserRegResponseFromJson
+// eg : json['username'][0] as Map<String, dynamic>),
 
 @JsonSerializable()
 class UserRegResponse {
@@ -140,16 +144,15 @@ class Group {
   String? name;
   int? createdBy;
   DateTime? created;
+  String? logo;
 
-  Group({this.id, this.name, this.createdBy, this.created});
+  Group({this.id, this.name, this.createdBy, this.created, this.logo});
 
   factory Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
 
   Map<String, dynamic> toJson() => _$GroupToJson(this);
 }
 
-// IMPORTANT : After running 'dart run build_runner build' change the mapping to array's 0th position
-// eg : json['username'][0] as Map<String, dynamic>),
 @JsonSerializable()
 class Info {
   int? id;

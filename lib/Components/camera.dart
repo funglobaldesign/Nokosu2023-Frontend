@@ -89,6 +89,7 @@ class CameraState extends State<Camera> {
     super.initState();
     initializeCamera(_camIndex).then((_) async {
       _isCamAvailable = true;
+      await setFlash(0);
       setState(() {});
     });
   }
