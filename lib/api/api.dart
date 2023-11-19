@@ -209,7 +209,8 @@ Future<int> apiDelProfile(context, int id) async {
 // Group
 Future<int> apiGetGroups(context) async {
   try {
-    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    String token =
+        '485a1399a2b10defac7b964a41e7c62633edeff7'; //  Provider.of<TokenProvider>(context, listen: false).token;
 
     final response = await http
         .get(Uri.parse('${APILinks.base}groups/'), headers: <String, String>{
@@ -270,7 +271,8 @@ Future<int> apiGetGroup(context, int id) async {
 
 Future<int> apiAddgroup(context, String data) async {
   try {
-    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    String token =
+        '485a1399a2b10defac7b964a41e7c62633edeff7'; // Provider.of<TokenProvider>(context, listen: false).token;
     var request =
         http.MultipartRequest('POST', Uri.parse('${APILinks.base}groups/'));
 
@@ -414,7 +416,8 @@ Future<int> apiGetInfo(context, int id) async {
 
 Future<int> apiAddInfo(context, Info data, String file) async {
   try {
-    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    String token =
+        '485a1399a2b10defac7b964a41e7c62633edeff7'; //  Provider.of<TokenProvider>(context, listen: false).token;
     var request =
         http.MultipartRequest('POST', Uri.parse('${APILinks.base}infos/'));
 

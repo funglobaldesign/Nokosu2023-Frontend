@@ -60,6 +60,7 @@ class _GroupFormState extends State<GroupFormAdd> {
                             });
                             // ignore: use_build_context_synchronously
                             Navigator.of(context).pop();
+                            setState(() {});
                           }
                         }),
                   ],

@@ -10,14 +10,14 @@ class GroupFolder extends StatefulWidget {
   final Group group;
   final TextEditingController groupController;
   final TextEditingController groupNameController;
-  final bool large;
+  final bool folderView;
 
   const GroupFolder({
     Key? key,
     required this.group,
     required this.groupController,
     required this.groupNameController,
-    this.large = false,
+    this.folderView = false,
   }) : super(key: key);
 
   @override
@@ -49,17 +49,22 @@ class _GroupState extends State<GroupFolder> {
     return Center(
       child: GestureDetector(
         onTap: () {
-          widget.groupController.text = widget.group.id.toString();
-          widget.groupNameController.text = widget.group.name!;
-          Navigator.of(context).pop();
+          if (widget.folderView) {
+            print('open folderrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+          } else {
+            widget.groupController.text = widget.group.id.toString();
+            widget.groupNameController.text = widget.group.name!;
+            Navigator.of(context).pop();
+          }
         },
         child: SizedBox(
-          height: widget.large ? 120 : 80,
-          width: widget.large ? 120 : 80,
+          height: widget.folderView ? 120 : 80,
+          width: widget.folderView ? 120 : 80,
           child: Neumo(
             border: 10,
             child: Column(
               children: [
+                if (widget.folderView) const SizedBox(height: 10),
                 ColorFiltered(
                   colorFilter: ColorFilter.mode(
                     getRandomSoftColor(),
