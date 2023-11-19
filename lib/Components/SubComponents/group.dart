@@ -72,6 +72,7 @@ class _GroupState extends State<GroupFolder> {
                     fontSize: 12,
                     fontWeight: FontWeight.w100,
                     decoration: TextDecoration.none,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 )
               ],

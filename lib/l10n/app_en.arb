@@ -38,5 +38,6 @@
     "phys": "Physical",
     "nophys": "Not-Physical",
     "selcats": "Select Appropriate Categories",
-    "done": "Done"
+    "done": "Done",
+    "submit": "Submit"
 }

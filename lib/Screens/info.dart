@@ -37,7 +37,7 @@ class _InfoPageState extends State<InfoPage> {
   late Position position;
   bool _isLocationAvailable = false;
 
-  Future<int> getCurrentPosition() async {
+  Future<void> getCurrentPosition() async {
     try {
       position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
@@ -48,7 +48,6 @@ class _InfoPageState extends State<InfoPage> {
         print(e);
       }
     }
-    return 0;
   }
 
   @override

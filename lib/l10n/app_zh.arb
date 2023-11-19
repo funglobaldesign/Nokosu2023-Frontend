@@ -40,5 +40,6 @@
     "phys": "",
     "nophys": "",
     "selcats": "",
-    "done": ""
+    "done": "",
+    "submit": ""
 }
