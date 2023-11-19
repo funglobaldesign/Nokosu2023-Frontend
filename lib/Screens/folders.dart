@@ -90,7 +90,12 @@ class FolderScreenState extends State<FolderScreen> {
                     : const LoadingOverlay(),
               ),
             ),
-            TopBar(camkey: GlobalKey(), middleIcon: const SizedBox()),
+            TopBar(
+              camkey: GlobalKey(),
+              middleIcon: const SizedBox(),
+              rightmiddleIcon: const SizedBox(),
+              leftmiddleIcon: const SizedBox(),
+            ),
             const BottomBar(),
             if (Global.isLoading) const LoadingOverlay(),
           ],

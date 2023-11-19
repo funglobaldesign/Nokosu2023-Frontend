@@ -184,24 +184,33 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
               ),
             ),
             TopBar(
-                camkey: GlobalKey(),
-                middleIcon: IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: () async {
-                    await showDialog(
-                        context: context,
-                        builder: (BuildContext context) => GroupFormAdd(
-                              isUpdate: true,
-                              gid: widget.group.id!,
-                            ));
-                    setState(() {
-                      widget.group.name =
-                          Provider.of<GroupProvider>(context, listen: false)
-                              .model
-                              .name;
-                    });
-                  },
-                )),
+              camkey: GlobalKey(),
+              rightmiddleIcon: IconButton(
+                icon: const Icon(Icons.edit),
+                onPressed: () async {
+                  await showDialog(
+                      context: context,
+                      builder: (BuildContext context) => GroupFormAdd(
+                            isUpdate: true,
+                            gid: widget.group.id!,
+                          ));
+                  setState(() {
+                    widget.group.name =
+                        Provider.of<GroupProvider>(context, listen: false)
+                            .model
+                            .name;
+                  });
+                },
+              ),
+              middleIcon: IconButton(
+                icon: const Icon(Icons.download_sharp),
+                onPressed: () async {},
+              ),
+              leftmiddleIcon: IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () async {},
+              ),
+            ),
             const BottomBar(),
             if (Global.isLoading) const LoadingOverlay(),
           ],

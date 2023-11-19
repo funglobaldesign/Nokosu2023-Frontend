@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nokosu2023/Components/bar_bottom.dart';
 import 'package:nokosu2023/Components/camera.dart';
@@ -83,6 +84,8 @@ class _HomePageState extends State<HomePage> {
                   }
                 },
               ),
+              rightmiddleIcon: const SizedBox(),
+              leftmiddleIcon: const SizedBox(),
             ),
             const BottomBar(),
             //Capture button
@@ -129,11 +132,12 @@ class _HomePageState extends State<HomePage> {
                         Global.isLoading = false;
                       });
                     },
-                    icon: const Icon(Icons.add_circle_outline_rounded),
+                    icon: SvgPicture.asset(CustIcons.capture),
                   ),
                 ),
               ),
             ),
+
             if (Global.isLoading) const LoadingOverlay(),
           ],
         ),

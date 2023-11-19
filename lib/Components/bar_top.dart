@@ -8,11 +8,15 @@ import 'package:provider/provider.dart';
 class TopBar extends StatefulWidget {
   final GlobalKey<CameraState> camkey;
   final Widget middleIcon;
+  final Widget leftmiddleIcon;
+  final Widget rightmiddleIcon;
 
   const TopBar({
     Key? key,
     required this.camkey,
     required this.middleIcon,
+    required this.leftmiddleIcon,
+    required this.rightmiddleIcon,
   }) : super(key: key);
 
   @override
@@ -53,7 +57,9 @@ class TopBarState extends State<TopBar> {
                     RedirectFunctions.redirectTutorial(context);
                   },
                 ),
+                widget.leftmiddleIcon,
                 widget.middleIcon,
+                widget.rightmiddleIcon,
                 IconButton(
                   icon: const Icon(Icons.person_outline),
                   onPressed: () {},

@@ -272,7 +272,6 @@ Future<int> apiAddgroup(context, String data) async {
   try {
     String token = Provider.of<TokenProvider>(context, listen: false).token;
 
-    //   '485a1399a2b10defac7b964a41e7c62633edeff7';
     var request =
         http.MultipartRequest('POST', Uri.parse('${APILinks.base}groups/'));
 
