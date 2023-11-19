@@ -30,6 +30,8 @@ class ErrorFieldState extends State<ErrorField> {
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: ThemeColours.txtRed,
+            fontSize: 10,
+            decoration: TextDecoration.none,
           ),
         ),
       ),

@@ -218,6 +218,7 @@ Future<int> apiGetGroups(context) async {
     });
 
     if (response.statusCode == 200) {
+      Provider.of<GroupsProvider>(context, listen: false).setModels([]);
       var json = jsonDecode(response.body);
       for (var each in json) {
         Provider.of<GroupsProvider>(context, listen: false)
@@ -277,6 +278,7 @@ Future<int> apiAddgroup(context, String data) async {
     request.headers['Authorization'] = 'Token $token';
 
     final response = await request.send();
+
     if (response.statusCode == 200) {
       Group group =
           Group.fromJson(jsonDecode(await response.stream.bytesToString()));
@@ -363,6 +365,7 @@ Future<int> apiGetInfos(context) async {
     });
 
     if (response.statusCode == 200) {
+      Provider.of<InfosProvider>(context, listen: false).setModels([]);
       var json = jsonDecode(response.body);
       for (var each in json) {
         Provider.of<InfosProvider>(context, listen: false)
@@ -416,7 +419,7 @@ Future<int> apiAddInfo(context, Info data, String file) async {
         http.MultipartRequest('POST', Uri.parse('${APILinks.base}infos/'));
 
     data.toJson().forEach((key, value) {
-      if (value != null && value.isNotEmpty) {
+      if (value != null) {
         request.fields[key] = value.toString();
       }
     });

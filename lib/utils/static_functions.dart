@@ -42,12 +42,12 @@ abstract class RedirectFunctions {
     );
   }
 
-  static void redirectInfo(context, Image file) {
+  static void redirectInfo(context, String path) {
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => InfoPage(
-                image: file,
+                image: path,
               )),
     );
   }

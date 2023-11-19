@@ -40,7 +40,7 @@ class BarState extends State<BottomBar> {
           alignment: Alignment.center,
           children: [
             Positioned(
-              left: 20,
+              left: 30,
               bottom: 20,
               child: IconButton(
                 icon: const Icon(Icons.photo_library_outlined),
@@ -48,8 +48,7 @@ class BarState extends State<BottomBar> {
                   XFile image =
                       (await picker.pickImage(source: ImageSource.gallery))!;
                   // ignore: use_build_context_synchronously
-                  RedirectFunctions.redirectInfo(
-                      context, Image.file(File(image.path)));
+                  RedirectFunctions.redirectInfo(context, image.path);
                 },
               ),
             ),
@@ -72,7 +71,7 @@ class BarState extends State<BottomBar> {
               ),
             ),
             Positioned(
-              right: 20,
+              right: 30,
               bottom: 20,
               child: IconButton(
                 color: homeState == 1
@@ -92,7 +91,7 @@ class BarState extends State<BottomBar> {
             ),
             if (homeState == 1)
               Positioned(
-                  right: 20,
+                  right: 30,
                   bottom: 10,
                   child: Text(
                     locale.groups,

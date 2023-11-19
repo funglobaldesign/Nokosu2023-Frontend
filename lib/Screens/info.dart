@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,11 +10,12 @@ import 'package:nokosu2023/Components/categories.dart';
 import 'package:nokosu2023/Components/groups_select.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:nokosu2023/Components/preview.dart';
+import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:geolocator/geolocator.dart';
 
 class InfoPage extends StatefulWidget {
-  final Image image;
+  final String image;
 
   const InfoPage({
     Key? key,
@@ -37,7 +40,7 @@ class _InfoPageState extends State<InfoPage> {
   late Position position;
   bool _isLocationAvailable = false;
 
-  Future<int> getCurrentPosition() async {
+  Future<void> getCurrentPosition() async {
     try {
       position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
@@ -48,7 +51,6 @@ class _InfoPageState extends State<InfoPage> {
         print(e);
       }
     }
-    return 0;
   }
 
   @override
@@ -126,20 +128,23 @@ class _InfoPageState extends State<InfoPage> {
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.09),
+                  const SizedBox(height: 30),
                   GestureDetector(
                     onTap: () {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) =>
-                            PreviewPage(image: widget.image),
+                            PreviewPage(image: Image.file(File(widget.image))),
                       );
                     },
                     child: Column(
                       children: [
                         Container(
                           padding: const EdgeInsets.all(7),
-                          height: MediaQuery.of(context).size.height * 0.3,
+                          height: MediaQuery.of(context).orientation ==
+                                  Orientation.portrait
+                              ? MediaQuery.of(context).size.height * 0.3
+                              : MediaQuery.of(context).size.width * 0.6,
                           width: MediaQuery.of(context).size.width * 0.4,
                           decoration: BoxDecoration(
                             color: ThemeColours.bgBlueWhite,
@@ -168,7 +173,7 @@ class _InfoPageState extends State<InfoPage> {
                                 fit: BoxFit.fitWidth,
                                 child: SizedBox(
                                   width: 1,
-                                  child: widget.image,
+                                  child: Image.file(File(widget.image)),
                                 ),
                               ),
                             ),
@@ -243,7 +248,18 @@ class _InfoPageState extends State<InfoPage> {
                         formErrorController.text = '';
                         showDialog(
                           context: context,
-                          builder: (BuildContext context) => const Categories(),
+                          builder: (BuildContext context) => Categories(
+                            info: Info(
+                              topic: topicController.text,
+                              description: descController.text,
+                              group: int.parse(groupController.text),
+                              location: locationController.text,
+                              longitude: longitude,
+                              latitude: latitude,
+                              address: address,
+                            ),
+                            imagePath: widget.image,
+                          ),
                         );
                       }
                       setState(() {});
