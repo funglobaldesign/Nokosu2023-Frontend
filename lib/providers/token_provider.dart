@@ -9,7 +9,7 @@ class TokenProvider extends ChangeNotifier {
   int get id => _id;
 
   TokenProvider() {
-    _loadDeviceToken();
+    loadDeviceToken();
   }
 
   Future<void> setToken(String token, int id) async {
@@ -17,7 +17,7 @@ class TokenProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _loadDeviceToken() async {
+  Future<void> loadDeviceToken() async {
     final prefs = await SharedPreferences.getInstance();
     _token = prefs.getString(DeviceMemory.authToken) ?? "";
     _id = prefs.getInt(DeviceMemory.userID) ?? 0;

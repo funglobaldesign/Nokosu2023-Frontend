@@ -10,6 +10,7 @@ import 'package:nokosu2023/providers/group_provider.dart';
 import 'package:nokosu2023/providers/home_state.dart';
 import 'package:nokosu2023/providers/info_provider.dart';
 import 'package:nokosu2023/providers/profile_provider.dart';
+import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
@@ -72,6 +73,7 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int currentId = Provider.of<TokenProvider>(context, listen: false).id;
     // groupWidgets = groups
     //     .map((group) => GroupFolder(
     //           group: group,
@@ -99,8 +101,18 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
                 child: infosReady
                     ? Column(
                         children: [
-                          SizedBox(
-                            height: 40,
+                          Container(
+                            height: 55,
+                            decoration: BoxDecoration(
+                                color: ThemeColours.bgBlueWhite,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 6),
+                                    color: ThemeColours.shadowDark
+                                        .withOpacity(0.5),
+                                  ),
+                                ]),
                             width: MediaQuery.of(context).size.width,
                             child: Stack(
                               children: [
@@ -185,31 +197,35 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
             ),
             TopBar(
               camkey: GlobalKey(),
-              rightmiddleIcon: IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed: () async {
-                  await showDialog(
-                      context: context,
-                      builder: (BuildContext context) => GroupFormAdd(
-                            isUpdate: true,
-                            gid: widget.group.id!,
-                          ));
-                  setState(() {
-                    widget.group.name =
-                        Provider.of<GroupProvider>(context, listen: false)
-                            .model
-                            .name;
-                  });
-                },
-              ),
+              rightmiddleIcon: currentId == widget.group.createdBy
+                  ? IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () async {
+                        await showDialog(
+                            context: context,
+                            builder: (BuildContext context) => GroupFormAdd(
+                                  isUpdate: true,
+                                  gid: widget.group.id!,
+                                ));
+                        setState(() {
+                          widget.group.name =
+                              Provider.of<GroupProvider>(context, listen: false)
+                                  .model
+                                  .name;
+                        });
+                      },
+                    )
+                  : const SizedBox(),
               middleIcon: IconButton(
                 icon: const Icon(Icons.download_sharp),
                 onPressed: () async {},
               ),
-              leftmiddleIcon: IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: () async {},
-              ),
+              leftmiddleIcon: currentId == widget.group.createdBy
+                  ? IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () async {},
+                    )
+                  : const SizedBox(),
             ),
             const BottomBar(),
             if (Global.isLoading) const LoadingOverlay(),
