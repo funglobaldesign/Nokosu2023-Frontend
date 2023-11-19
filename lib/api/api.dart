@@ -419,7 +419,7 @@ Future<int> apiAddInfo(context, Info data, String file) async {
         http.MultipartRequest('POST', Uri.parse('${APILinks.base}infos/'));
 
     data.toJson().forEach((key, value) {
-      if (value != null && value.isNotEmpty) {
+      if (value != null) {
         request.fields[key] = value.toString();
       }
     });

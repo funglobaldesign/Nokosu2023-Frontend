@@ -10,12 +10,14 @@ class GroupFolder extends StatefulWidget {
   final Group group;
   final TextEditingController groupController;
   final TextEditingController groupNameController;
+  final bool large;
 
   const GroupFolder({
     Key? key,
     required this.group,
     required this.groupController,
     required this.groupNameController,
+    this.large = false,
   }) : super(key: key);
 
   @override
@@ -52,8 +54,8 @@ class _GroupState extends State<GroupFolder> {
           Navigator.of(context).pop();
         },
         child: SizedBox(
-          height: 80,
-          width: 80,
+          height: widget.large ? 120 : 80,
+          width: widget.large ? 120 : 80,
           child: Neumo(
             border: 10,
             child: Column(

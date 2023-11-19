@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,11 +10,12 @@ import 'package:nokosu2023/Components/categories.dart';
 import 'package:nokosu2023/Components/groups_select.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:nokosu2023/Components/preview.dart';
+import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:geolocator/geolocator.dart';
 
 class InfoPage extends StatefulWidget {
-  final Image image;
+  final String image;
 
   const InfoPage({
     Key? key,
@@ -131,7 +134,7 @@ class _InfoPageState extends State<InfoPage> {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) =>
-                            PreviewPage(image: widget.image),
+                            PreviewPage(image: Image.file(File(widget.image))),
                       );
                     },
                     child: Column(
@@ -170,7 +173,7 @@ class _InfoPageState extends State<InfoPage> {
                                 fit: BoxFit.fitWidth,
                                 child: SizedBox(
                                   width: 1,
-                                  child: widget.image,
+                                  child: Image.file(File(widget.image)),
                                 ),
                               ),
                             ),
@@ -245,7 +248,18 @@ class _InfoPageState extends State<InfoPage> {
                         formErrorController.text = '';
                         showDialog(
                           context: context,
-                          builder: (BuildContext context) => const Categories(),
+                          builder: (BuildContext context) => Categories(
+                            info: Info(
+                              topic: topicController.text,
+                              description: descController.text,
+                              group: int.parse(groupController.text),
+                              location: locationController.text,
+                              longitude: longitude,
+                              latitude: latitude,
+                              address: address,
+                            ),
+                            imagePath: widget.image,
+                          ),
                         );
                       }
                       setState(() {});
