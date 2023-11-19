@@ -5,6 +5,7 @@ import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/utils/constants.dart';
+import 'package:nokosu2023/utils/static_functions.dart';
 
 class GroupFolder extends StatefulWidget {
   final Group group;
@@ -50,7 +51,7 @@ class _GroupState extends State<GroupFolder> {
       child: GestureDetector(
         onTap: () {
           if (widget.folderView) {
-            print('open folderrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+            RedirectFunctions.redirectInfoFolders(context, widget.group);
           } else {
             widget.groupController.text = widget.group.id.toString();
             widget.groupNameController.text = widget.group.name!;

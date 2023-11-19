@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/camera.dart';
+import 'package:nokosu2023/providers/home_state.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
+import 'package:nokosu2023/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 class TopBar extends StatefulWidget {
   final GlobalKey<CameraState> camkey;
@@ -26,10 +29,18 @@ class TopBarState extends State<TopBar> {
       child: Container(
         height: MediaQuery.of(context).size.height * 0.125,
         padding: const EdgeInsets.only(
-          bottom: 10,
+          bottom: 5,
           left: 20,
           right: 20,
         ),
+        decoration: BoxDecoration(color: ThemeColours.bgBlueWhite, boxShadow: [
+          if (Provider.of<HomeStateProvider>(context, listen: false).state != 0)
+            BoxShadow(
+              blurRadius: 10,
+              offset: const Offset(0, 6),
+              color: ThemeColours.shadowDark.withOpacity(0.5),
+            ),
+        ]),
         child: ClipRect(
           child: Align(
             alignment: Alignment.bottomCenter,

@@ -55,7 +55,7 @@ class FolderScreenState extends State<FolderScreen> {
       onWillPop: () async {
         Provider.of<HomeStateProvider>(context, listen: false).setState(0);
         RedirectFunctions.redirectHome(context);
-        return false;
+        return true;
       },
       child: Scaffold(
         appBar: null,
@@ -63,22 +63,33 @@ class FolderScreenState extends State<FolderScreen> {
         body: Stack(
           children: [
             Positioned(
-                top: MediaQuery.of(context).size.height * 0.125,
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.725,
-                  child: groupsReady
-                      ? GridView.count(
-                          padding: const EdgeInsets.all(20),
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          crossAxisCount: 3,
-                          children: [
-                              ...groupWidgets,
-                              const GroupAddFolder(folderView: true)
-                            ])
-                      : const LoadingOverlay(),
-                )),
+              top: MediaQuery.of(context).size.height * 0.125,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.725,
+                child: groupsReady
+                    ? Column(
+                        children: [
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Expanded(
+                            child: GridView.count(
+                              padding: const EdgeInsets.all(20),
+                              crossAxisSpacing: 15,
+                              mainAxisSpacing: 15,
+                              crossAxisCount: 3,
+                              children: [
+                                ...groupWidgets,
+                                const GroupAddFolder(folderView: true)
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : const LoadingOverlay(),
+              ),
+            ),
             TopBar(camkey: GlobalKey(), middleIcon: const SizedBox()),
             const BottomBar(),
             if (Global.isLoading) const LoadingOverlay(),

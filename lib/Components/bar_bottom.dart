@@ -34,7 +34,15 @@ class BarState extends State<BottomBar> {
       bottom: 0,
       left: 0,
       right: 0,
-      child: SizedBox(
+      child: Container(
+        decoration: BoxDecoration(color: ThemeColours.bgBlueWhite, boxShadow: [
+          if (Provider.of<HomeStateProvider>(context, listen: false).state != 0)
+            const BoxShadow(
+              blurRadius: 10,
+              offset: Offset(0, -6),
+              color: ThemeColours.shadowLight,
+            ),
+        ]),
         height: MediaQuery.of(context).size.height * 0.15,
         child: Stack(
           alignment: Alignment.center,
