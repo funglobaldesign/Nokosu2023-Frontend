@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/group_add_form.dart';
@@ -37,8 +39,8 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
   late AppLocalizations locale;
 
   Future<void> getInfos() async {
-    //await apiGetGroups(context);
     await apiGetProfile(context, widget.group.createdBy!);
+    await apiGetGroup(context, widget.group.id!);
   }
 
   @override

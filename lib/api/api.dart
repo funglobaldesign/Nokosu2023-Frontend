@@ -249,6 +249,7 @@ Future<int> apiGetGroup(context, int id) async {
         });
 
     if (response.statusCode == 200) {
+      Provider.of<InfosProvider>(context, listen: false).setModels([]);
       var json = jsonDecode(response.body);
       for (var each in json) {
         Provider.of<InfosProvider>(context, listen: false)
