@@ -115,8 +115,7 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
                                 padding: const EdgeInsets.only(top: 7),
                                 child: IconButton(
                                     onPressed: () {
-                                      RedirectFunctions.redirectFolders(
-                                          context);
+                                      Navigator.pop(context);
                                     },
                                     icon: const Icon(Icons.arrow_back)),
                               ),
