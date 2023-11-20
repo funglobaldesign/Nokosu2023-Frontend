@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nokosu2023/Components/SubComponents/group.dart';
 import 'package:nokosu2023/Components/SubComponents/group_add.dart';
 import 'package:nokosu2023/Components/bar_bottom.dart';
@@ -43,6 +44,7 @@ class FolderScreenState extends State<FolderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     groupWidgets = groups
         .map((group) => GroupFolder(
               group: group,
@@ -63,10 +65,10 @@ class FolderScreenState extends State<FolderScreen> {
         body: Stack(
           children: [
             Positioned(
-              top: MediaQuery.of(context).size.height * 0.125,
+              top: MediaQuery.of(context).size.height * 0.1,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.725,
+                height: MediaQuery.of(context).size.height * 0.75,
                 child: groupsReady
                     ? Column(
                         children: [

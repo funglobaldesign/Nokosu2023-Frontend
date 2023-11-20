@@ -48,7 +48,7 @@ class BarState extends State<BottomBar> {
           children: [
             Positioned(
               left: 30,
-              bottom: 20,
+              bottom: 30,
               child: IconButton(
                 icon: const Icon(Icons.photo_library_outlined),
                 onPressed: () async {
@@ -60,7 +60,7 @@ class BarState extends State<BottomBar> {
               ),
             ),
             Positioned(
-              bottom: 20,
+              bottom: 30,
               child: IconButton(
                 color: homeState == 0
                     ? ThemeColours.iconblue
@@ -79,7 +79,7 @@ class BarState extends State<BottomBar> {
             ),
             Positioned(
               right: 30,
-              bottom: 20,
+              bottom: 30,
               child: IconButton(
                 color: homeState == 1
                     ? ThemeColours.iconblue
@@ -99,7 +99,7 @@ class BarState extends State<BottomBar> {
             if (homeState == 1)
               Positioned(
                   right: 30,
-                  bottom: 10,
+                  bottom: 20,
                   child: Text(
                     locale.groups,
                     style: const TextStyle(
@@ -110,7 +110,7 @@ class BarState extends State<BottomBar> {
                   )),
             if (homeState == 0)
               Positioned(
-                  bottom: 10,
+                  bottom: 20,
                   child: Text(
                     locale.home,
                     style: const TextStyle(

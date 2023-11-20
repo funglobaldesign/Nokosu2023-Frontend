@@ -31,7 +31,7 @@ class TopBarState extends State<TopBar> {
       left: 0,
       right: 0,
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.125,
+        height: MediaQuery.of(context).size.height * 0.1,
         padding: const EdgeInsets.only(
           bottom: 5,
           left: 20,

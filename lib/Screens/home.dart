@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nokosu2023/Components/bar_bottom.dart';
@@ -43,6 +44,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return WillPopScope(
       onWillPop: () async {
         return false;
@@ -53,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         body: Stack(
           children: [
             Positioned(
-                top: MediaQuery.of(context).size.height * 0.125,
+                top: MediaQuery.of(context).size.height * 0.1,
                 child: Camera(key: cameraKey)),
             TopBar(
               camkey: cameraKey,
