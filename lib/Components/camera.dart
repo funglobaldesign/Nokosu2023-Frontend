@@ -103,7 +103,7 @@ class CameraState extends State<Camera> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height * 0.725;
+    double height = MediaQuery.of(context).size.height * 0.75;
     if (_isCamAvailable) {
       return FutureBuilder<void>(
         future: _initializeControllerFuture,
@@ -129,7 +129,7 @@ class CameraState extends State<Camera> {
                   child: OverflowBox(
                     alignment: Alignment.center,
                     child: FittedBox(
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.fitHeight,
                       child: SizedBox(
                         width: 1,
                         height: _controller.value.aspectRatio,

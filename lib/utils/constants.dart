@@ -48,6 +48,7 @@ abstract class CustIcons {
   static const String nocult = 'assets/icons/nocultural.svg';
   static const String positive = 'assets/icons/positive.svg';
   static const String negative = 'assets/icons/negative.svg';
+  static const String capture = 'assets/icons/capture.svg';
 }
 
 abstract class Imgs {
@@ -63,6 +64,6 @@ abstract class DeviceMemory {
 abstract class Errors {
   static const int none = 0;
   static const int badreq = 1;
-  static const int unAuth = 3;
-  static const int unknown = 2;
+  static const int unAuth = 2;
+  static const int unknown = 3;
 }

@@ -4,8 +4,11 @@ import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GroupAddFolder extends StatefulWidget {
+  final bool folderView;
+
   const GroupAddFolder({
     Key? key,
+    this.folderView = false,
   }) : super(key: key);
 
   @override
@@ -30,10 +33,10 @@ class _GroupAddState extends State<GroupAddFolder> {
               context: context,
               builder: (BuildContext context) => const GroupFormAdd());
         },
-        child: const SizedBox(
-          height: 80,
-          width: 80,
-          child: Neumo(border: 10, child: Icon(Icons.add)),
+        child: SizedBox(
+          height: widget.folderView ? 120 : 80,
+          width: widget.folderView ? 120 : 80,
+          child: const Neumo(border: 10, child: Icon(Icons.add)),
         ),
       ),
     );

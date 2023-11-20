@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:nokosu2023/Screens/folders.dart';
 import 'package:nokosu2023/Screens/home.dart';
 import 'package:nokosu2023/Screens/info.dart';
+import 'package:nokosu2023/Screens/infos_folder.dart';
 import 'package:nokosu2023/Screens/login.dart';
 import 'package:nokosu2023/Screens/registration.dart';
 import 'package:nokosu2023/Screens/tutorial.dart';
+import 'package:nokosu2023/models/models.dart';
 
 abstract class RedirectFunctions {
   static void redirectRegistration(context) {
@@ -56,6 +58,13 @@ abstract class RedirectFunctions {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const FolderScreen()),
+    );
+  }
+
+  static void redirectInfoFolders(context, Group group) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => InfoFolderScreen(group: group)),
     );
   }
 }

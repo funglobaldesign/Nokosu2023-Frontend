@@ -1,5 +1,6 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nokosu2023/Components/bar_bottom.dart';
 import 'package:nokosu2023/Components/camera.dart';
@@ -11,7 +12,6 @@ import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         body: Stack(
           children: [
             Positioned(
-                top: MediaQuery.of(context).size.height * 0.125,
+                top: MediaQuery.of(context).size.height * 0.1,
                 child: Camera(key: cameraKey)),
             TopBar(
               camkey: cameraKey,
@@ -79,6 +79,8 @@ class _HomePageState extends State<HomePage> {
                   }
                 },
               ),
+              rightmiddleIcon: const SizedBox(),
+              leftmiddleIcon: const SizedBox(),
             ),
             const BottomBar(),
             //Capture button
@@ -125,11 +127,12 @@ class _HomePageState extends State<HomePage> {
                         Global.isLoading = false;
                       });
                     },
-                    icon: const Icon(Icons.add_circle_outline_rounded),
+                    icon: SvgPicture.asset(CustIcons.capture),
                   ),
                 ),
               ),
             ),
+
             if (Global.isLoading) const LoadingOverlay(),
           ],
         ),

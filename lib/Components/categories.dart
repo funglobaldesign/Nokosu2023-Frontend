@@ -145,11 +145,13 @@ class CategoriesState extends State<Categories> {
                             widget.info.emotion = emotional;
                             int err = await apiAddInfo(
                                 context, widget.info, widget.imagePath);
-                            if (err != 0) errorController.text = locale.errcrs;
+                            if (err != Errors.none) {
+                              errorController.text = locale.errcrs;
+                            }
                             setState(() {
                               isLoading = false;
                             });
-                            if (err == 0) {
+                            if (err == Errors.none) {
                               errorController.text = '';
                               // ignore: use_build_context_synchronously
                               RedirectFunctions.redirectHome(context);

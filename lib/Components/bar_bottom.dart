@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nokosu2023/providers/home_state.dart';
@@ -34,14 +33,22 @@ class BarState extends State<BottomBar> {
       bottom: 0,
       left: 0,
       right: 0,
-      child: SizedBox(
+      child: Container(
+        decoration: BoxDecoration(color: ThemeColours.bgBlueWhite, boxShadow: [
+          if (Provider.of<HomeStateProvider>(context, listen: false).state != 0)
+            const BoxShadow(
+              blurRadius: 10,
+              offset: Offset(0, -6),
+              color: ThemeColours.shadowLight,
+            ),
+        ]),
         height: MediaQuery.of(context).size.height * 0.15,
         child: Stack(
           alignment: Alignment.center,
           children: [
             Positioned(
               left: 30,
-              bottom: 20,
+              bottom: 30,
               child: IconButton(
                 icon: const Icon(Icons.photo_library_outlined),
                 onPressed: () async {
@@ -53,7 +60,7 @@ class BarState extends State<BottomBar> {
               ),
             ),
             Positioned(
-              bottom: 20,
+              bottom: 30,
               child: IconButton(
                 color: homeState == 0
                     ? ThemeColours.iconblue
@@ -72,7 +79,7 @@ class BarState extends State<BottomBar> {
             ),
             Positioned(
               right: 30,
-              bottom: 20,
+              bottom: 30,
               child: IconButton(
                 color: homeState == 1
                     ? ThemeColours.iconblue
@@ -92,7 +99,7 @@ class BarState extends State<BottomBar> {
             if (homeState == 1)
               Positioned(
                   right: 30,
-                  bottom: 10,
+                  bottom: 20,
                   child: Text(
                     locale.groups,
                     style: const TextStyle(
@@ -103,7 +110,7 @@ class BarState extends State<BottomBar> {
                   )),
             if (homeState == 0)
               Positioned(
-                  bottom: 10,
+                  bottom: 20,
                   child: Text(
                     locale.home,
                     style: const TextStyle(
