@@ -46,8 +46,7 @@ class _InfoPrevState extends State<InfoPrevFolder> {
                 const SizedBox(height: 10),
                 SizedBox(
                   child: FutureBuilder(
-                      future: http.get(Uri.parse(
-                          widget.info.url!)), // Replace with your image URL
+                      future: http.get(Uri.parse(widget.info.url!)),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.hasError) {

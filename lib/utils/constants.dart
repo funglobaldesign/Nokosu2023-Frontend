@@ -25,8 +25,8 @@ abstract class ThemeColours {
   static const Color shadowLight = Color(0xFFFFFFFF);
 
   // Flip Button
-  static const Color no = Color(0xFF91BDFF);
-  static const Color yes = Color(0xFFFF9191);
+  static const Color negative = Color(0xFF91BDFF);
+  static const Color positive = Color(0xFFFF9191);
 
   //Others
   static const Color scrollBar = Color(0xAA777777);

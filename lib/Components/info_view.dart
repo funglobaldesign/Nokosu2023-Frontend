@@ -2,27 +2,19 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:nokosu2023/Components/SubComponents/group_add_form.dart';
-import 'package:nokosu2023/Components/SubComponents/info_single.dart';
-import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
-import 'package:nokosu2023/Components/bar_bottom.dart';
+import 'package:nokosu2023/Components/SubComponents/info_render.dart';
 import 'package:nokosu2023/Components/bar_top.dart';
-import 'package:nokosu2023/Components/info_preview.dart';
 import 'package:nokosu2023/Components/loading_overlay.dart';
 import 'package:nokosu2023/api/api.dart';
 import 'package:http/http.dart' as http;
 import 'package:nokosu2023/models/models.dart';
-import 'package:nokosu2023/providers/group_provider.dart';
 import 'package:nokosu2023/providers/home_state.dart';
-import 'package:nokosu2023/providers/info_provider.dart';
 import 'package:nokosu2023/providers/profile_provider.dart';
 import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/global_vars.dart';
-import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
 
 class InfoView extends StatefulWidget {
   final Info info;
@@ -127,21 +119,15 @@ class _InfoViewState extends State<InfoView> {
                     : const SizedBox(),
               ),
               Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(15),
                 height: height,
                 width: width,
                 child: infosReady
-                    ? Neumo(
-                        onlyBlackShaodw: true,
-                        border: 10,
-                        child: Container(
-                          height: 200,
-                          width: 200,
-                          child: InfoSingle(
-                              info: widget.info,
-                              creator: creatroName,
-                              pfp: creatorpfp),
-                        ),
+                    ? SizedBox(
+                        child: InfoSingle(
+                            info: widget.info,
+                            creator: creatroName,
+                            pfp: creatorpfp),
                       )
                     : const LoadingOverlay(),
               ),
