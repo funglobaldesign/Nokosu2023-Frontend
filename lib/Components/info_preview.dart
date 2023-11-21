@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:nokosu2023/utils/static_functions.dart';
 
 class InfoPrevFolder extends StatefulWidget {
   final Info info;
@@ -33,7 +34,7 @@ class _InfoPrevState extends State<InfoPrevFolder> {
     return Center(
       child: GestureDetector(
         onTap: () {
-          print('View Info BIIIIIIIIG');
+          RedirectFunctions.redirectInfoView(context, widget.info);
         },
         child: SizedBox(
           height: 185,
@@ -56,11 +57,15 @@ class _InfoPrevState extends State<InfoPrevFolder> {
                             return const Icon(Icons.error);
                           } else {
                             return SizedBox(
-                                height: 120,
-                                width: 90,
+                              height: 120,
+                              width: 90,
+                              child: ClipRect(
                                 child: Image.memory(
-                                    snapshot.data?.bodyBytes as Uint8List,
-                                    fit: BoxFit.cover));
+                                  snapshot.data?.bodyBytes as Uint8List,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
                           }
                         } else {
                           return const CircularProgressIndicator();

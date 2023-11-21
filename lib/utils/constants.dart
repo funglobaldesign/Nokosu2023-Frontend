@@ -53,6 +53,7 @@ abstract class CustIcons {
 
 abstract class Imgs {
   static const String folder = 'assets/imgs/folder.png';
+  static const String pfp = 'assets/imgs/pfp.png';
 }
 
 abstract class DeviceMemory {

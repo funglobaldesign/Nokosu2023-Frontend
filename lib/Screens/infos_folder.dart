@@ -16,7 +16,6 @@ import 'package:nokosu2023/providers/profile_provider.dart';
 import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/global_vars.dart';
-import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
@@ -208,12 +207,16 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
                 : const SizedBox(),
             middleIcon: IconButton(
               icon: const Icon(Icons.download_sharp),
-              onPressed: () async {},
+              onPressed: () {
+                print('download info folder');
+              },
             ),
             leftmiddleIcon: currentId == widget.group.createdBy
                 ? IconButton(
                     icon: const Icon(Icons.delete),
-                    onPressed: () async {},
+                    onPressed: () {
+                      print('delete info folder');
+                    },
                   )
                 : const SizedBox(),
           ),

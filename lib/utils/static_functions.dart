@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nokosu2023/Components/info_view.dart';
 import 'package:nokosu2023/Screens/folders.dart';
 import 'package:nokosu2023/Screens/home.dart';
 import 'package:nokosu2023/Screens/info.dart';
@@ -65,6 +66,13 @@ abstract class RedirectFunctions {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => InfoFolderScreen(group: group)),
+    );
+  }
+
+  static void redirectInfoView(context, Info info) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => InfoView(info: info)),
     );
   }
 }

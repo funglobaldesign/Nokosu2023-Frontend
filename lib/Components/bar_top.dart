@@ -10,6 +10,7 @@ class TopBar extends StatefulWidget {
   final Widget middleIcon;
   final Widget leftmiddleIcon;
   final Widget rightmiddleIcon;
+  final bool backButton;
 
   const TopBar({
     Key? key,
@@ -17,6 +18,7 @@ class TopBar extends StatefulWidget {
     required this.middleIcon,
     required this.leftmiddleIcon,
     required this.rightmiddleIcon,
+    this.backButton = false,
   }) : super(key: key);
 
   @override
@@ -51,19 +53,28 @@ class TopBarState extends State<TopBar> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                  icon: const Icon(Icons.bookmarks_outlined),
-                  onPressed: () {
-                    RedirectFunctions.redirectTutorial(context);
-                  },
-                ),
+                widget.backButton
+                    ? IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    : IconButton(
+                        icon: const Icon(Icons.bookmarks_outlined),
+                        onPressed: () {
+                          RedirectFunctions.redirectTutorial(context);
+                        },
+                      ),
                 widget.leftmiddleIcon,
                 widget.middleIcon,
                 widget.rightmiddleIcon,
-                IconButton(
-                  icon: const Icon(Icons.person_outline),
-                  onPressed: () {},
-                ),
+                widget.backButton
+                    ? const SizedBox()
+                    : IconButton(
+                        icon: const Icon(Icons.person_outline),
+                        onPressed: () {},
+                      ),
               ],
             ),
           ),
