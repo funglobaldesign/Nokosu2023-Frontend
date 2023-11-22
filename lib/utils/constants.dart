@@ -49,6 +49,18 @@ abstract class CustIcons {
   static const String positive = 'assets/icons/positive.svg';
   static const String negative = 'assets/icons/negative.svg';
   static const String capture = 'assets/icons/capture.svg';
+  static const String cultural = 'assets/icons/cultural.svg';
+   static const String emotional = 'assets/icons/emotional.svg';
+  static const String album = 'assets/icons/album.svg';
+  static const String camera = 'assets/icons/camera.svg';
+  static const String topic = 'assets/icons/comment.svg';
+  static const String folder = 'assets/icons/folder.svg';
+  static const String group = 'assets/icons/group.svg';
+  static const String profile = 'assets/icons/icon.svg';
+  static const String location = 'assets/icons/location.svg';
+  static const String mail = 'assets/icons/mail.svg';
+  static const String password = 'assets/icons/password.svg';
+  static const String desc = 'assets/icons/pen.svg';
 }
 
 abstract class Imgs {
