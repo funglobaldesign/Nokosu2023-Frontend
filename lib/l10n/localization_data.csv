@@ -1,44 +1,44 @@
 ﻿key,en,ja,ko,zh
-address,Address,,,
-allFieldsRequired,Please fill all the fields,,,
-cancel,Cancel,キャンサル,,
-createdby,Created By,,,
-cult,Cultural,,,
-desc,Description,,,
-done,Done,終了,,
-email,Email,,,
-emo,Emotional,,,
-errcrs,Couldn't reach the server,,,
-errfix,Fix the errors in the form,,,
-erric,Invalid credentials,,,
-errunauth,Unauthorized action,,,
-firstname,First Name,,,
-forgotpw,Forgot Password?,,,
-group,Group,グループ,,
-groups,Groups,グループ,,
-home,Home,ホーム,,
-lastname,Last Name,,,
-locname,Location Name,,,
+address,Address,所在地,주소,地址
+allFieldsRequired,Please fill all the fields,すべての欄にご記入ください。,모든 입력란을 작성해 주세요.,请填写所有栏目
+cancel,Cancel,キャンセル,취소,取消
+createdby,Created By,作成者,만든 사람,创建者
+cult,Cultural,文化的,문화적 요인,文化
+desc,Description,説明,설명,说明
+done,Done,終了,완료,已完成
+email,Email,電子メール,이메일,电子邮件
+emo,Emotional,感情的,감성적 요인,情绪化的
+errcrs,Couldn't reach the server,サーバーにアクセスできませんでした,서버에 연결할 수 없습니다.,无法连接服务器
+errfix,Fix the errors in the form,フォームのエラーを修正する,양식의 오류 수정,修正表格中的错误
+erric,Invalid credentials,無効な認証情報,잘못된 자격 증명,证件无效
+errunauth,Unauthorized action,不正行為,무단 조치,未经授权的行动
+firstname,First Name,名前,이름,姓
+forgotpw,Forgot Password?,パスワードをお忘れですか？,비밀번호를 잊으셨나요?,忘记密码？
+group,Group,グループ,그룹,组别
+groups,Groups,グループ,그룹,组别
+home,Home,ホーム,홈,首页
+lastname,Last Name,名字,성,名
+locname,Location Name,場所名,위치 이름,地点名称
 login,Login,ログイン,로그인,登录
-negative,Negative,,,
+negative,Negative,否定的,부정적,阴性
 newuser,New User?,新しいユーザー？,신규 사용자이신가요?,新用户？
-next,Next,次へ,,
-nocult,Not-Cultural,,,
-noemo,Not-Emotional,,,
-nophys,Not-Physical,,,
-ok,OK,確認,,
+next,Next,次へ,다음,下一页
+nocult,Not-Cultural,非文化的,문화적 요인과 상관없는,非文化
+noemo,Not-Emotional,感情的ではない,감성적 요인과 상관없는,非情感
+nophys,Not-Physical,非物理的,물리적요인과 상관없는,非物理
+ok,OK,確認,확인,确认
 password,Password,パスワード,비밀번호,密码
-passwordconf,Password Confirmation,,,
-photodel,This photo and information will be deleted,,,
-phys,Physical,,,
-positive,Positive,,,
-register,Register,,,
+passwordconf,Password Confirmation,パスワードの確認,비밀번호 확인,密码确认
+photodel,This photo and information will be deleted,この写真と情報は削除されます,이 사진 및 정보는 삭제됩니다.,该照片和信息将被删除
+phys,Physical,物理的,물리적 요인,物理的
+positive,Positive,肯定的,긍정적,积极的
+register,Register,登録,등록,注册
 registerhere,Register here,ここに登録,여기에서 등록하세요,在此注册
-resethere,Reset here,,,
-selcats,Select Appropriate Categories,,,
-submit,Submit,,,
-taptoviewim,Tap to view the image,,,
-topic,Topic,,,
-unnamed,Unnamed,,,
+resethere,Reset here,ここでリセット,여기에서 재설정,在此重置
+selcats,Select Appropriate Categories,適切なカテゴリーを選択する,적절한 카테고리 선택,选择适当的类别
+submit,Submit,投稿する,투고하기,提交
+taptoviewim,Tap to view the image,タップして画像を表示,이미지를 보려면 탭하세요.,轻点查看图像
+topic,Topic,トピック,주제,主题
+unnamed,Unnamed,無名,이름 없음,未命名
 username,Username,ユーザー名,사용자 이름,用户名
-exists,Already Exists,,,
+exists,Already Exists,すでに存在する,이미 존재함,已存在

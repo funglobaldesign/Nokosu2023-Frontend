@@ -11,7 +11,7 @@ class TopBar extends StatefulWidget {
   final Widget middleIcon;
   final Widget leftmiddleIcon;
   final Widget rightmiddleIcon;
-  final bool backButton;
+  final bool backLocBtn;
   final List<double> location;
 
   const TopBar({
@@ -21,7 +21,7 @@ class TopBar extends StatefulWidget {
     required this.leftmiddleIcon,
     required this.rightmiddleIcon,
     this.location = const [],
-    this.backButton = false,
+    this.backLocBtn = false,
   }) : super(key: key);
 
   @override
@@ -64,7 +64,7 @@ class TopBarState extends State<TopBar> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                widget.backButton
+                widget.backLocBtn
                     ? IconButton(
                         icon: const Icon(Icons.arrow_back),
                         onPressed: () {
@@ -80,7 +80,7 @@ class TopBarState extends State<TopBar> {
                 widget.leftmiddleIcon,
                 widget.middleIcon,
                 widget.rightmiddleIcon,
-                widget.backButton
+                widget.backLocBtn
                     ? IconButton(
                         icon: const Icon(Icons.add_location_alt_outlined),
                         onPressed: () {

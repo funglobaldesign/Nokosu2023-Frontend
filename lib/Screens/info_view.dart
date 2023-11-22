@@ -1,8 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/info_render.dart';
@@ -19,7 +17,6 @@ import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class InfoView extends StatefulWidget {
   final Info info;
@@ -120,7 +117,7 @@ class _InfoViewState extends State<InfoView> {
             children: [
               TopBar(
                 location: [widget.info.latitude!, widget.info.longitude!],
-                backButton: true,
+                backLocBtn: true,
                 camkey: GlobalKey(),
                 rightmiddleIcon: currentId == widget.info.createdBy
                     ? IconButton(
