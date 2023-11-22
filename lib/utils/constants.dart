@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 abstract class APILinks {
   static const String base = //"http://127.0.0.1:8000/api/";
       "https://globaldesign2023backend.onrender.com/api/";
+
+  static const String maps = 'https://www.google.com/maps/search/?api=1&query=';
 }
 
 abstract class ThemeColours {
@@ -25,8 +27,8 @@ abstract class ThemeColours {
   static const Color shadowLight = Color(0xFFFFFFFF);
 
   // Flip Button
-  static const Color no = Color(0xFF91BDFF);
-  static const Color yes = Color(0xFFFF9191);
+  static const Color negative = Color(0xFF91BDFF);
+  static const Color positive = Color(0xFFFF9191);
 
   //Others
   static const Color scrollBar = Color(0xAA777777);
@@ -53,6 +55,7 @@ abstract class CustIcons {
 
 abstract class Imgs {
   static const String folder = 'assets/imgs/folder.png';
+  static const String pfp = 'assets/imgs/pfp.png';
 }
 
 abstract class DeviceMemory {

@@ -34,7 +34,7 @@ class ButtonFlipState extends State<ButtonFlip> {
       child: GestureDetector(
         child: Container(
           decoration: BoxDecoration(
-              color: isYes ? ThemeColours.yes : ThemeColours.no,
+              color: isYes ? ThemeColours.positive : ThemeColours.negative,
               borderRadius: BorderRadius.circular(50),
               border: Border.all(
                 width: 0,

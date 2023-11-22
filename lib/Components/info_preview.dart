@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:nokosu2023/utils/static_functions.dart';
 
 class InfoPrevFolder extends StatefulWidget {
   final Info info;
@@ -21,6 +22,7 @@ class InfoPrevFolder extends StatefulWidget {
 
 class _InfoPrevState extends State<InfoPrevFolder> {
   late AppLocalizations locale;
+  bool isImageOk = false;
 
   @override
   void didChangeDependencies() {
@@ -30,10 +32,14 @@ class _InfoPrevState extends State<InfoPrevFolder> {
 
   @override
   Widget build(BuildContext context) {
+    late Image infoImage;
+
     return Center(
       child: GestureDetector(
         onTap: () {
-          print('View Info BIIIIIIIIG');
+          if (isImageOk) {
+            RedirectFunctions.redirectInfoView(context, widget.info, infoImage);
+          }
         },
         child: SizedBox(
           height: 185,
@@ -45,8 +51,7 @@ class _InfoPrevState extends State<InfoPrevFolder> {
                 const SizedBox(height: 10),
                 SizedBox(
                   child: FutureBuilder(
-                      future: http.get(Uri.parse(
-                          widget.info.url!)), // Replace with your image URL
+                      future: http.get(Uri.parse(widget.info.url!)),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.hasError) {
@@ -55,12 +60,20 @@ class _InfoPrevState extends State<InfoPrevFolder> {
                             }
                             return const Icon(Icons.error);
                           } else {
+                            infoImage = Image.memory(
+                                snapshot.data?.bodyBytes as Uint8List,
+                                fit: BoxFit.cover);
+                            isImageOk = true;
                             return SizedBox(
-                                height: 120,
-                                width: 90,
+                              height: 120,
+                              width: 90,
+                              child: ClipRect(
                                 child: Image.memory(
-                                    snapshot.data?.bodyBytes as Uint8List,
-                                    fit: BoxFit.cover));
+                                  snapshot.data?.bodyBytes as Uint8List,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
                           }
                         } else {
                           return const CircularProgressIndicator();

@@ -217,7 +217,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             child: IconButton(
               icon: const Icon(Icons.arrow_circle_left_outlined),
               onPressed: () {
-                RedirectFunctions.redirectLogin(context);
+                Navigator.pop(context);
               },
             ),
           )
