@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 abstract class APILinks {
   static const String base = //"http://127.0.0.1:8000/api/";
       "https://globaldesign2023backend.onrender.com/api/";
+
+  static const String maps = 'https://www.google.com/maps/search/?api=1&query=';
 }
 
 abstract class ThemeColours {

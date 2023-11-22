@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/providers/home_state.dart';
@@ -8,6 +9,7 @@ import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
 class InfoSingle extends StatefulWidget {
@@ -29,7 +31,14 @@ class InfoSingle extends StatefulWidget {
 class _InfoSinglePageState extends State<InfoSingle> {
   late AppLocalizations locale;
 
-  @override
+  Future<void> _openMaps(double latitude, double longitude) async {
+    String mapsUrl = '${APILinks.maps}$latitude,$longitude';
+
+    if (await canLaunchUrl(Uri.parse(mapsUrl))) {
+      await launchUrl(Uri.parse(mapsUrl));
+    }
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -112,9 +121,49 @@ class _InfoSinglePageState extends State<InfoSingle> {
                 ),
               ),
               Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
                 height: 50,
                 width: fixedwidth,
-                color: Colors.red,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          height: 30,
+                          width: 30,
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              color: ThemeColours.negative,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5))),
+                          child: SvgPicture.asset(CustIcons.phys),
+                        )
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _openMaps(
+                            widget.info.latitude!, widget.info.longitude!);
+                      },
+                      child: Row(
+                        children: [
+                          const Icon(Icons.add_location_alt_outlined),
+                          Column(
+                            children: [
+                              Text(widget.info.address!,
+                                  style: const TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w200)),
+                              Text(widget.info.location!),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Container(
                 height: 180,
