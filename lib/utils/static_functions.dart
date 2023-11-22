@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nokosu2023/Components/info_view.dart';
+import 'package:nokosu2023/Screens/info_view.dart';
 import 'package:nokosu2023/Screens/folders.dart';
 import 'package:nokosu2023/Screens/home.dart';
 import 'package:nokosu2023/Screens/info.dart';

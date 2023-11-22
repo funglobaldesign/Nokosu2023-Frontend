@@ -48,7 +48,10 @@ class _InfoViewState extends State<InfoView> {
         final response = await http.get(Uri.parse(pfp));
         if (response.statusCode == 200) {
           final imageData = response.bodyBytes;
-          creatorpfp = Image.memory(imageData);
+          creatorpfp = Image.memory(
+            imageData,
+            fit: BoxFit.cover,
+          );
         }
       }
     } catch (e) {

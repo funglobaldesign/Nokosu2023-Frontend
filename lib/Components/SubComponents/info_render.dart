@@ -1,14 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/models/models.dart';
-import 'package:nokosu2023/providers/home_state.dart';
 import 'package:nokosu2023/utils/constants.dart';
-import 'package:nokosu2023/utils/global_vars.dart';
-import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
@@ -55,6 +51,8 @@ class _InfoSinglePageState extends State<InfoSingle> {
       backgroundColor: ThemeColours.bgBlueWhite,
       body: Center(
         child: Container(
+          height: fixedheight,
+          width: fixedwidth,
           decoration: BoxDecoration(
               color: ThemeColours.bgBlueWhite,
               borderRadius: BorderRadius.circular(10),
@@ -73,8 +71,6 @@ class _InfoSinglePageState extends State<InfoSingle> {
                   color: ThemeColours.shadowDark,
                 ),
               ]),
-          height: fixedheight,
-          width: fixedwidth,
           child: Column(
             children: [
               FutureBuilder(
@@ -122,7 +118,7 @@ class _InfoSinglePageState extends State<InfoSingle> {
               ),
               Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                 height: 50,
                 width: fixedwidth,
                 child: Row(
@@ -133,12 +129,54 @@ class _InfoSinglePageState extends State<InfoSingle> {
                         Container(
                           height: 30,
                           width: 30,
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                              color: ThemeColours.negative,
+                              color: widget.info.emotion!
+                                  ? ThemeColours.positive
+                                  : ThemeColours.negative,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(5))),
-                          child: SvgPicture.asset(CustIcons.phys),
+                                  const BorderRadius.all(Radius.circular(5))),
+                          child: SvgPicture.asset(
+                              widget.info.emotion!
+                                  ? CustIcons.emo
+                                  : CustIcons.noemo,
+                              colorFilter: const ColorFilter.mode(
+                                  Colors.white, BlendMode.srcIn)),
+                        ),
+                        Container(
+                          height: 30,
+                          width: 30,
+                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              color: widget.info.physical!
+                                  ? ThemeColours.positive
+                                  : ThemeColours.negative,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(5))),
+                          child: SvgPicture.asset(
+                              widget.info.physical!
+                                  ? CustIcons.phys
+                                  : CustIcons.phys,
+                              colorFilter: const ColorFilter.mode(
+                                  Colors.white, BlendMode.srcIn)),
+                        ),
+                        Container(
+                          height: 30,
+                          width: 30,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              color: widget.info.cultural!
+                                  ? ThemeColours.positive
+                                  : ThemeColours.negative,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(5))),
+                          child: SvgPicture.asset(
+                              widget.info.cultural!
+                                  ? CustIcons.cult
+                                  : CustIcons.cult,
+                              colorFilter: const ColorFilter.mode(
+                                  Colors.white, BlendMode.srcIn)),
                         )
                       ],
                     ),
@@ -166,9 +204,86 @@ class _InfoSinglePageState extends State<InfoSingle> {
                 ),
               ),
               Container(
-                height: 180,
+                height: 150,
                 width: fixedwidth,
-                color: Colors.black,
+                padding: const EdgeInsets.all(14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.info.topic!,
+                      style: const TextStyle(
+                        color: ThemeColours.txtBlack,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        decoration: TextDecoration.none,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        widget.info.description!,
+                        style: const TextStyle(
+                          color: ThemeColours.txtBlack,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w300,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 30,
+                width: fixedwidth,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      DateFormat('EEEE, MMMM d, y h:mm a')
+                          .format(widget.info.created!),
+                      style: const TextStyle(
+                        color: ThemeColours.txtBlack,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w100,
+                        decoration: TextDecoration.none,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 20.0,
+                          height: 20.0,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 0.6,
+                            ),
+                          ),
+                          child: ClipOval(
+                            child: widget.pfp,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          widget.creator,
+                          style: const TextStyle(
+                            color: ThemeColours.txtBlack,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w200,
+                            decoration: TextDecoration.none,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
