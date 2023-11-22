@@ -22,6 +22,7 @@ class InfoPrevFolder extends StatefulWidget {
 
 class _InfoPrevState extends State<InfoPrevFolder> {
   late AppLocalizations locale;
+  bool isImageOk = false;
 
   @override
   void didChangeDependencies() {
@@ -31,10 +32,14 @@ class _InfoPrevState extends State<InfoPrevFolder> {
 
   @override
   Widget build(BuildContext context) {
+    late Image infoImage;
+
     return Center(
       child: GestureDetector(
         onTap: () {
-          RedirectFunctions.redirectInfoView(context, widget.info);
+          if (isImageOk) {
+            RedirectFunctions.redirectInfoView(context, widget.info, infoImage);
+          }
         },
         child: SizedBox(
           height: 185,
@@ -55,6 +60,10 @@ class _InfoPrevState extends State<InfoPrevFolder> {
                             }
                             return const Icon(Icons.error);
                           } else {
+                            infoImage = Image.memory(
+                                snapshot.data?.bodyBytes as Uint8List,
+                                fit: BoxFit.cover);
+                            isImageOk = true;
                             return SizedBox(
                               height: 120,
                               width: 90,

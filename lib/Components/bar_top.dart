@@ -4,6 +4,7 @@ import 'package:nokosu2023/providers/home_state.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TopBar extends StatefulWidget {
   final GlobalKey<CameraState> camkey;
@@ -11,6 +12,7 @@ class TopBar extends StatefulWidget {
   final Widget leftmiddleIcon;
   final Widget rightmiddleIcon;
   final bool backButton;
+  final List<double> location;
 
   const TopBar({
     Key? key,
@@ -18,6 +20,7 @@ class TopBar extends StatefulWidget {
     required this.middleIcon,
     required this.leftmiddleIcon,
     required this.rightmiddleIcon,
+    this.location = const [],
     this.backButton = false,
   }) : super(key: key);
 
@@ -26,6 +29,14 @@ class TopBar extends StatefulWidget {
 }
 
 class TopBarState extends State<TopBar> {
+  Future<void> _openMaps(double latitude, double longitude) async {
+    String mapsUrl = '${APILinks.maps}$latitude,$longitude';
+
+    if (await canLaunchUrl(Uri.parse(mapsUrl))) {
+      await launchUrl(Uri.parse(mapsUrl));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -70,7 +81,12 @@ class TopBarState extends State<TopBar> {
                 widget.middleIcon,
                 widget.rightmiddleIcon,
                 widget.backButton
-                    ? const SizedBox()
+                    ? IconButton(
+                        icon: const Icon(Icons.add_location_alt_outlined),
+                        onPressed: () {
+                          _openMaps(widget.location[0], widget.location[1]);
+                        },
+                      )
                     : IconButton(
                         icon: const Icon(Icons.person_outline),
                         onPressed: () {},

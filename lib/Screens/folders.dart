@@ -30,6 +30,8 @@ class FolderScreenState extends State<FolderScreen> {
     await apiGetGroups(context);
   }
 
+  Future<void> _emp() async {}
+
   @override
   void initState() {
     Provider.of<HomeStateProvider>(context, listen: false).setState(1);

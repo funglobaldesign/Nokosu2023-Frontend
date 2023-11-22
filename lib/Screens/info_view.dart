@@ -1,5 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/info_render.dart';
@@ -15,13 +18,17 @@ import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InfoView extends StatefulWidget {
   final Info info;
+  final Image image;
 
   const InfoView({
     Key? key,
     required this.info,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -34,10 +41,13 @@ class _InfoViewState extends State<InfoView> {
   bool infosReady = false;
   String creatroName = '';
   Image creatorpfp = Image.asset(Imgs.pfp);
+  late Uint8List infoRenderedImageData;
+  ScreenshotController screenshotController = ScreenshotController();
 
-  Future<void> getProfile() async {
+  Future<void> getData() async {
     try {
       await apiGetProfile(context, widget.info.createdBy!);
+
       creatroName = Provider.of<ProfileProvider>(context, listen: false)
           .profile
           .user!
@@ -65,10 +75,23 @@ class _InfoViewState extends State<InfoView> {
   void initState() {
     Provider.of<HomeStateProvider>(context, listen: false).setState(1);
     Global.isLoading = false;
-    getProfile().then((_) async {
-      infosReady = true;
-
-      setState(() {});
+    getData().then((_) async {
+      try {
+        screenshotController
+            .captureFromWidget(
+          InfoRender.getRenderer(
+              widget.info, creatroName, creatorpfp, widget.image),
+        )
+            .then((capturedImage) {
+          infoRenderedImageData = capturedImage;
+          infosReady = true;
+          setState(() {});
+        });
+      } catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
+      }
     });
     super.initState();
   }
@@ -96,6 +119,7 @@ class _InfoViewState extends State<InfoView> {
           child: Column(
             children: [
               TopBar(
+                location: [widget.info.latitude!, widget.info.longitude!],
                 backButton: true,
                 camkey: GlobalKey(),
                 rightmiddleIcon: currentId == widget.info.createdBy
@@ -126,11 +150,32 @@ class _InfoViewState extends State<InfoView> {
                 height: height,
                 width: width,
                 child: infosReady
-                    ? SizedBox(
-                        child: InfoSingle(
-                            info: widget.info,
-                            creator: creatroName,
-                            pfp: creatorpfp),
+                    ? IntrinsicHeight(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                width: 0,
+                                color: Colors.transparent,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 8,
+                                    offset: const Offset(-3, -3),
+                                    color: ThemeColours.shadowDark
+                                        .withOpacity(0.1)),
+                                BoxShadow(
+                                  blurRadius: 8,
+                                  offset: const Offset(3, 3),
+                                  color:
+                                      ThemeColours.shadowDark.withOpacity(0.1),
+                                ),
+                              ]),
+                          child: Image.memory(
+                            infoRenderedImageData,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
                       )
                     : const LoadingOverlay(),
               ),

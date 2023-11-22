@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   int nextFlashMode = 1;
 
   late AppLocalizations locale;
+  Future<void> _emp() async {}
 
   @override
   void didChangeDependencies() {

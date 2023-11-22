@@ -69,10 +69,11 @@ abstract class RedirectFunctions {
     );
   }
 
-  static void redirectInfoView(context, Info info) {
+  static void redirectInfoView(context, Info info, Image image) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => InfoView(info: info)),
+      MaterialPageRoute(
+          builder: (context) => InfoView(info: info, image: image)),
     );
   }
 }
