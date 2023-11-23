@@ -43,5 +43,7 @@
     "topic": "トピック",
     "unnamed": "無名",
     "username": "ユーザー名",
-    "exists": "すでに存在する"
+    "exists": "すでに存在する",
+    "savedimage": "",
+    "errnosave": ""
 }

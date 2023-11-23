@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:nokosu2023/Screens/info_view.dart';
 import 'package:nokosu2023/Screens/folders.dart';
 import 'package:nokosu2023/Screens/home.dart';
@@ -8,6 +12,8 @@ import 'package:nokosu2023/Screens/login.dart';
 import 'package:nokosu2023/Screens/registration.dart';
 import 'package:nokosu2023/Screens/tutorial.dart';
 import 'package:nokosu2023/models/models.dart';
+import 'package:gallery_saver_plus/gallery_saver.dart';
+import 'package:path_provider/path_provider.dart';
 
 abstract class RedirectFunctions {
   static void redirectRegistration(context) {
@@ -75,5 +81,26 @@ abstract class RedirectFunctions {
       MaterialPageRoute(
           builder: (context) => InfoView(info: info, image: image)),
     );
+  }
+}
+
+abstract class Gallery {
+  static Future<int> saveImage(Uint8List imageData, String folderName) async {
+    try {
+      Directory dir = await getTemporaryDirectory();
+      String fileName =
+          '${DateFormat('yyyyMMddHHmmssSSS').format(DateTime.now())}.jpg';
+      String filePath = '${dir.path}/$fileName';
+      File imageFile = File(filePath);
+      await imageFile.writeAsBytes(imageData);
+
+      await GallerySaver.saveImage(filePath, albumName: folderName);
+      return 0;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      return 1;
+    }
   }
 }

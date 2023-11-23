@@ -43,5 +43,7 @@
     "topic": "主题",
     "unnamed": "未命名",
     "username": "用户名",
-    "exists": "已存在"
+    "exists": "已存在",
+    "savedimage": "",
+    "errnosave": ""
 }

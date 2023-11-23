@@ -43,5 +43,7 @@
     "topic": "주제",
     "unnamed": "이름 없음",
     "username": "사용자 이름",
-    "exists": "이미 존재함"
+    "exists": "이미 존재함",
+    "savedimage": "",
+    "errnosave": ""
 }

@@ -42,3 +42,5 @@ topic,Topic,トピック,주제,主题
 unnamed,Unnamed,無名,이름 없음,未命名
 username,Username,ユーザー名,사용자 이름,用户名
 exists,Already Exists,すでに存在する,이미 존재함,已存在
+savedimage,Saved to the gallery,,,
+errnosave,Couldn't save,,,

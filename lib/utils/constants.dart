@@ -58,10 +58,11 @@ abstract class Imgs {
   static const String pfp = 'assets/imgs/pfp.png';
 }
 
-abstract class DeviceMemory {
+abstract class DeviseMemory {
   static const String locale = 'nokosulocale';
   static const String authToken = 'authtoken';
   static const String userID = 'userid';
+  static const String foldername = 'Nokosu';
 }
 
 abstract class Errors {
