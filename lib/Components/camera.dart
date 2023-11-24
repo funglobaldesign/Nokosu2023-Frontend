@@ -33,13 +33,13 @@ class CameraState extends State<Camera> {
   Future<void> initializeCamera(int indx) async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    while (!await Permission.camera.request().isGranted) {
-      await Permission.location.request();
+    if (!await Permission.storage.request().isGranted) {
+      await Permission.storage.request();
     }
-    while (!await Permission.location.request().isGranted) {
-      await Permission.location.request();
+    if (!await Permission.camera.request().isGranted) {
+      await Permission.camera.request();
     }
-    while (!await Permission.storage.request().isGranted) {
+    if (!await Permission.location.request().isGranted) {
       await Permission.location.request();
     }
 
@@ -113,32 +113,32 @@ class CameraState extends State<Camera> {
               color: ThemeColours.bgBlueWhite,
               width: width,
               height: height,
-              child: GestureDetector(
-                // onScaleStart: (details) async {
-                //   minZoom = await _controller.getMinZoomLevel();
-                //   maxZoom = await _controller.getMaxZoomLevel();
-                //   zoom = _scale;
-                // },
-                // onScaleUpdate: (details) {
-                //   _scale = (zoom * details.scale).clamp(minZoom, maxZoom);
-                // },
-                // onScaleEnd: (details) {
-                //   _controller.setZoomLevel(_scale);
-                // },
-                child: ClipRect(
-                  child: OverflowBox(
-                    alignment: Alignment.center,
-                    child: FittedBox(
-                      fit: BoxFit.fitHeight,
-                      child: SizedBox(
-                        width: 1,
-                        height: _controller.value.aspectRatio,
-                        child: CameraPreview(_controller),
-                      ),
+              //  child: GestureDetector(
+              // onScaleStart: (details) async {
+              //   minZoom = await _controller.getMinZoomLevel();
+              //   maxZoom = await _controller.getMaxZoomLevel();
+              //   zoom = _scale;
+              // },
+              // onScaleUpdate: (details) {
+              //   _scale = (zoom * details.scale).clamp(minZoom, maxZoom);
+              // },
+              // onScaleEnd: (details) {
+              //   _controller.setZoomLevel(_scale);
+              // },
+              child: ClipRect(
+                child: OverflowBox(
+                  alignment: Alignment.center,
+                  child: FittedBox(
+                    fit: BoxFit.fitHeight,
+                    child: SizedBox(
+                      width: 1,
+                      height: _controller.value.aspectRatio,
+                      child: CameraPreview(_controller),
                     ),
                   ),
                 ),
               ),
+              //   ),
             );
           } else {
             return LoadingOverlay(

@@ -5,6 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/Screens/home.dart';
 import 'package:nokosu2023/Screens/login.dart';
+import 'package:nokosu2023/api/api.dart';
+import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/providers/form_err_res_provider.dart';
 import 'package:nokosu2023/providers/group_provider.dart';
 import 'package:nokosu2023/providers/home_state.dart';
@@ -16,15 +18,19 @@ import 'package:nokosu2023/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const Nokosu());
+  runApp(Nokosu());
 }
 
 class Nokosu extends StatelessWidget {
-  const Nokosu({Key? key}) : super(key: key);
+  Nokosu({Key? key}) : super(key: key);
+
+  final Profile confProfile = Profile();
 
   Future<void> fetchData() async {
-    await TokenProvider().loadDeviceToken();
-    await Future.delayed(const Duration(milliseconds: 1500));
+    TokenProvider tkp = TokenProvider();
+    int id = await tkp.loadDeviceIdOnly();
+    String token = await tkp.loadDeviceTokenOnly();
+    confProfile.id = await confirmToken(token, id);
   }
 
   @override
@@ -49,7 +55,6 @@ class Nokosu extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => HomeStateProvider()),
       ],
       builder: (context, state) {
-        int id = Provider.of<TokenProvider>(context, listen: false).id;
         return MaterialApp(
             title: 'Nokosu',
             localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -59,7 +64,11 @@ class Nokosu extends StatelessWidget {
                 future: fetchData(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    return id == 0 ? const LoginPage() : const HomePage();
+                    Provider.of<TokenProvider>(context, listen: false)
+                        .loadDeviceToken();
+                    return confProfile.id == 0
+                        ? const LoginPage()
+                        : const HomePage();
                   } else {
                     return const CustomSplashScreen();
                   }

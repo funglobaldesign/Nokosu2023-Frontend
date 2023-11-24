@@ -7,6 +7,7 @@ import 'package:nokosu2023/Components/camera.dart';
 import 'package:nokosu2023/Components/bar_top.dart';
 import 'package:nokosu2023/Components/loading_overlay.dart';
 import 'package:nokosu2023/providers/home_state.dart';
+import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
