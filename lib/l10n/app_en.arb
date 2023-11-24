@@ -48,5 +48,6 @@
     "deleteconf": "Are you sure to delete ",
     "yes": "Yes",
     "no": "No",
-    "errcrs": "Something went wrong"
+    "errcrs": "Something went wrong",
+    "logout": "Logout"
 }
