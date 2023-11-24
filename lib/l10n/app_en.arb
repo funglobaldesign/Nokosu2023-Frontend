@@ -42,6 +42,7 @@
     "unnamed": "Unnamed",
     "username": "Username",
     "exists": "Already Exists",
-    "savedimage": "Saved image to the device",
-    "errnosave": "Couldn't save the image"
+    "savedimage": "Saved to the gallery",
+    "errnosave": "Couldn't save",
+    "saving": "Saving"
 }

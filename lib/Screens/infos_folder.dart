@@ -215,7 +215,8 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
                 if (infosReady) {
                   Overlay.of(context).insert(overlayEntry);
                   String msg = '';
-                  int e = await Gallery.saveFolder(infos);
+                  int e = await Gallery.saveFolder(
+                      context, infos, widget.group.name!, locale);
                   if (e == 0) {
                     msg = locale.savedimage;
                   } else {

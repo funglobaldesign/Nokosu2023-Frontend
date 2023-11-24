@@ -45,5 +45,6 @@
     "username": "ユーザー名",
     "exists": "すでに存在する",
     "savedimage": "",
-    "errnosave": ""
+    "errnosave": "",
+    "saving": ""
 }
