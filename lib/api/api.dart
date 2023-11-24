@@ -343,7 +343,6 @@ Future<int> apiDelGroup(context, int id) async {
     final response = await request.send();
 
     if (response.statusCode == 200) {
-      Provider.of<ProfileProvider>(context, listen: false).setModel(Profile());
       return Errors.none;
     } else if (response.statusCode == 400) {
       return Errors.badreq;

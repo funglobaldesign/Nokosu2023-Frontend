@@ -11,6 +11,7 @@ import 'package:nokosu2023/Screens/home.dart';
 import 'package:nokosu2023/Screens/info.dart';
 import 'package:nokosu2023/Screens/infos_folder.dart';
 import 'package:nokosu2023/Screens/login.dart';
+import 'package:nokosu2023/Screens/profile.dart';
 import 'package:nokosu2023/Screens/registration.dart';
 import 'package:nokosu2023/Screens/tutorial.dart';
 import 'package:nokosu2023/api/api.dart';
@@ -25,6 +26,13 @@ import 'package:screenshot/screenshot.dart';
 import 'package:http/http.dart' as http;
 
 abstract class RedirectFunctions {
+  static void redirectprofile(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ProfilePage()),
+    );
+  }
+
   static void redirectRegistration(context) {
     Navigator.push(
       context,

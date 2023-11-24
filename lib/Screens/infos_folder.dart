@@ -16,7 +16,6 @@ import 'package:nokosu2023/providers/info_provider.dart';
 import 'package:nokosu2023/providers/profile_provider.dart';
 import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
-import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -197,12 +196,18 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
                                 isUpdate: true,
                                 gid: widget.group.id!,
                               ));
-                      setState(() {
-                        widget.group.name =
-                            Provider.of<GroupProvider>(context, listen: false)
-                                .model
-                                .name;
-                      });
+
+                      if (Provider.of<GroupProvider>(context, listen: false)
+                              .model
+                              .name !=
+                          null) {
+                        setState(() {
+                          widget.group.name =
+                              Provider.of<GroupProvider>(context, listen: false)
+                                  .model
+                                  .name;
+                        });
+                      }
                     },
                   )
                 : const SizedBox(),
@@ -238,8 +243,55 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
             leftmiddleIcon: currentId == widget.group.createdBy
                 ? IconButton(
                     icon: const Icon(Icons.delete),
-                    onPressed: () {
-                      print('delete info folder');
+                    onPressed: () async {
+                      if (infosReady) {
+                        await showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              content: Text(locale.deleteconf),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(locale.no),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    Navigator.of(context).pop();
+                                    OverlayEntry overlayEntry = OverlayEntry(
+                                        builder: (context) =>
+                                            const LoadingOverlay());
+                                    Overlay.of(context).insert(overlayEntry);
+
+                                    String msg = '';
+                                    int e = await apiDelGroup(
+                                        context, widget.group.id!);
+                                    if (e == Errors.none) {
+                                      msg = locale.deleted;
+                                    } else {
+                                      msg = locale.errcrs;
+                                    }
+                                    Fluttertoast.showToast(
+                                      msg: msg,
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: ThemeColours.bgWhite,
+                                      textColor: ThemeColours.txtGrey,
+                                      fontSize: 16.0,
+                                    );
+                                    overlayEntry.remove();
+                                  },
+                                  child: Text(locale.yes),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        RedirectFunctions.redirectFolders(context);
+                      }
                     },
                   )
                 : const SizedBox(),

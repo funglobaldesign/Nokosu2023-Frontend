@@ -11,7 +11,6 @@ import 'package:nokosu2023/api/api.dart';
 import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/providers/form_err_res_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
-import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:provider/provider.dart';
 
@@ -59,16 +58,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   height: 100,
                 ),
                 SizedBox(
-                  width: 100,
-                  height: 100,
+                  width: 120,
+                  height: 120,
                   child: Neumo(
                     child: Align(
                       alignment: Alignment.center,
-                      child: SvgPicture.asset(
-                        CustIcons.logo,
-                        width: 50,
-                        height: 50,
-                      ),
+                      child: SvgPicture.asset(CustIcons.logo),
                     ),
                   ),
                 ),
@@ -181,8 +176,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         loginSuccess = true;
                       }
                     }
-                    overlayEntry.remove();
 
+                    overlayEntry.remove();
+                    setState(() {});
                     if (loginSuccess) {
                       // ignore: use_build_context_synchronously
                       RedirectFunctions.redirectHome(context);

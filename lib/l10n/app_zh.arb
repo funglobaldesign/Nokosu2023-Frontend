@@ -10,7 +10,6 @@
     "done": "已完成",
     "email": "电子邮件",
     "emo": "情绪化的",
-    "errcrs": "无法连接服务器",
     "errfix": "修正表格中的错误",
     "erric": "证件无效",
     "errunauth": "未经授权的行动",
@@ -46,5 +45,11 @@
     "exists": "已存在",
     "savedimage": "",
     "errnosave": "",
-    "saving": ""
+    "saving": "",
+    "deleted": "",
+    "deleteconf": "",
+    "yes": "",
+    "no": "",
+    "errcrs": "",
+    "logout": ""
 }

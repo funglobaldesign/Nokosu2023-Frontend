@@ -9,7 +9,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nokosu2023/api/api.dart';
 import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/utils/constants.dart';
-import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -52,16 +51,12 @@ class _LoginPageState extends State<LoginPage> {
                     height: 100,
                   ),
                   SizedBox(
-                    width: 100,
-                    height: 100,
+                    width: 120,
+                    height: 120,
                     child: Neumo(
                       child: Align(
                         alignment: Alignment.center,
-                        child: SvgPicture.asset(
-                          CustIcons.logo,
-                          width: 50,
-                          height: 50,
-                        ),
+                        child: SvgPicture.asset(CustIcons.logo),
                       ),
                     ),
                   ),
@@ -115,8 +110,10 @@ class _LoginPageState extends State<LoginPage> {
                         formErrorController.text = "";
                         loginSuccess = true;
                       }
+                      setState(() {});
 
                       overlayEntry.remove();
+                      setState(() {});
 
                       if (loginSuccess) {
                         // ignore: use_build_context_synchronously
