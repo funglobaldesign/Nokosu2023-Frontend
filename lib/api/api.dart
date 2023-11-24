@@ -18,6 +18,25 @@ void _setProfile(context, json) {
       .setModel(Profile.fromJson(json['profile']));
 }
 
+Future<int> confirmToken(String token, int did) async {
+  final response = await http.get(Uri.parse('${APILinks.base}profiles/$did/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $token',
+      });
+
+  int id = 0;
+
+  if (response.statusCode == 200) {
+    Profile prof = Profile.fromJson(jsonDecode(response.body));
+    if (prof.id != null) {
+      id = Profile.fromJson(jsonDecode(response.body)).id!;
+    }
+  }
+
+  return id;
+}
+
 // User
 Future<int> apiRegister(context, UserReg data) async {
   try {
