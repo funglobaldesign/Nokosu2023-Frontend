@@ -10,7 +10,6 @@
     "done": "終了",
     "email": "電子メール",
     "emo": "感情的",
-    "errcrs": "サーバーにアクセスできませんでした",
     "errfix": "フォームのエラーを修正する",
     "erric": "無効な認証情報",
     "errunauth": "不正行為",
@@ -46,5 +45,10 @@
     "exists": "すでに存在する",
     "savedimage": "",
     "errnosave": "",
-    "saving": ""
+    "saving": "",
+    "deleted": "",
+    "deleteconf": "",
+    "yes": "",
+    "no": "",
+    "errcrs": ""
 }

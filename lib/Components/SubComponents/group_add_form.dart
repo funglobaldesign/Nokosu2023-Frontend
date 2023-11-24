@@ -40,6 +40,7 @@ class _GroupFormState extends State<GroupFormAdd> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<GroupProvider>(context, listen: false).setModel(Group());
     return Stack(
       children: [
         Center(
@@ -88,6 +89,10 @@ class _GroupFormState extends State<GroupFormAdd> {
                                 Group g = Provider.of<GroupProvider>(context,
                                         listen: false)
                                     .model;
+                                // ignore: use_build_context_synchronously
+                                Provider.of<GroupsProvider>(context,
+                                        listen: false)
+                                    .addModel(g);
                                 g.name = groupController.text;
                                 // ignore: use_build_context_synchronously
                                 Provider.of<GroupProvider>(context,

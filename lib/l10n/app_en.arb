@@ -8,7 +8,6 @@
     "done": "Done",
     "email": "Email",
     "emo": "Emotional",
-    "errcrs": "Couldn't reach the server",
     "errfix": "Fix the errors in the form",
     "erric": "Invalid credentials",
     "errunauth": "Unauthorized action",
@@ -44,5 +43,10 @@
     "exists": "Already Exists",
     "savedimage": "Saved to the gallery",
     "errnosave": "Couldn't save",
-    "saving": "Saving"
+    "saving": "Saving",
+    "deleted": "Deleted Successfully",
+    "deleteconf": "Are you sure to delete ",
+    "yes": "Yes",
+    "no": "No",
+    "errcrs": "Something went wrong"
 }

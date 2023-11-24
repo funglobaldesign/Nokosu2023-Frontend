@@ -10,7 +10,6 @@
     "done": "완료",
     "email": "이메일",
     "emo": "감성적 요인",
-    "errcrs": "서버에 연결할 수 없습니다.",
     "errfix": "양식의 오류 수정",
     "erric": "잘못된 자격 증명",
     "errunauth": "무단 조치",
@@ -46,5 +45,10 @@
     "exists": "이미 존재함",
     "savedimage": "",
     "errnosave": "",
-    "saving": ""
+    "saving": "",
+    "deleted": "",
+    "deleteconf": "",
+    "yes": "",
+    "no": "",
+    "errcrs": ""
 }

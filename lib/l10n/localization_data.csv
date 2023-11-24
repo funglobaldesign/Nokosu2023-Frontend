@@ -8,7 +8,6 @@ desc,Description,説明,설명,说明
 done,Done,終了,완료,已完成
 email,Email,電子メール,이메일,电子邮件
 emo,Emotional,感情的,감성적 요인,情绪化的
-errcrs,Couldn't reach the server,サーバーにアクセスできませんでした,서버에 연결할 수 없습니다.,无法连接服务器
 errfix,Fix the errors in the form,フォームのエラーを修正する,양식의 오류 수정,修正表格中的错误
 erric,Invalid credentials,無効な認証情報,잘못된 자격 증명,证件无效
 errunauth,Unauthorized action,不正行為,무단 조치,未经授权的行动
@@ -45,3 +44,8 @@ exists,Already Exists,すでに存在する,이미 존재함,已存在
 savedimage,Saved to the gallery,,,
 errnosave,Couldn't save,,,
 saving,Saving,,,
+deleted,Deleted Successfully,,,
+deleteconf,Are you sure to delete ,,,
+yes,Yes,,,
+no,No,,,
+errcrs,Something went wrong,,,
