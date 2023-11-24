@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/info_render.dart';
 import 'package:nokosu2023/Components/bar_top.dart';
+import 'package:nokosu2023/Components/info_update.dart';
 import 'package:nokosu2023/Components/loading_overlay.dart';
 import 'package:nokosu2023/api/api.dart';
 import 'package:http/http.dart' as http;
@@ -126,8 +127,14 @@ class _InfoViewState extends State<InfoView> {
                       rightmiddleIcon: currentId == widget.info.createdBy
                           ? IconButton(
                               icon: const Icon(Icons.edit),
-                              onPressed: () {
-                                print('edit');
+                              onPressed: () async {
+                                if (infosReady) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        InfoEditPage(),
+                                  );
+                                }
                               },
                             )
                           : const SizedBox(),
@@ -160,8 +167,8 @@ class _InfoViewState extends State<InfoView> {
                       leftmiddleIcon: currentId == widget.info.createdBy
                           ? IconButton(
                               icon: const Icon(Icons.delete),
-                              onPressed: () {
-                                print('delete info single');
+                              onPressed: () async {
+                                if (infosReady) {}
                               },
                             )
                           : const SizedBox(),

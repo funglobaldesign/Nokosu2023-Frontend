@@ -51,16 +51,12 @@ class _LoginPageState extends State<LoginPage> {
                     height: 100,
                   ),
                   SizedBox(
-                    width: 100,
-                    height: 100,
+                    width: 120,
+                    height: 120,
                     child: Neumo(
                       child: Align(
                         alignment: Alignment.center,
-                        child: SvgPicture.asset(
-                          CustIcons.logo,
-                          width: 50,
-                          height: 50,
-                        ),
+                        child: SvgPicture.asset(CustIcons.logo),
                       ),
                     ),
                   ),
