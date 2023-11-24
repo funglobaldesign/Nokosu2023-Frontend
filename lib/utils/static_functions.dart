@@ -103,4 +103,19 @@ abstract class Gallery {
       return 1;
     }
   }
+
+  static Future<int> saveFolder(List<Info> infos) async {
+    try {
+      for (var info in infos) {}
+
+      await Future.delayed(Duration(seconds: 3));
+
+      return 0;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      return 1;
+    }
+  }
 }

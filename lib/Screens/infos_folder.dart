@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nokosu2023/Components/SubComponents/group_add_form.dart';
 import 'package:nokosu2023/Components/bar_bottom.dart';
 import 'package:nokosu2023/Components/bar_top.dart';
@@ -16,6 +17,7 @@ import 'package:nokosu2023/providers/profile_provider.dart';
 import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/global_vars.dart';
+import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
@@ -53,7 +55,6 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
   @override
   void initState() {
     Provider.of<HomeStateProvider>(context, listen: false).setState(1);
-    Global.isLoading = false;
     getInfos().then((_) async {
       try {
         infos = Provider.of<InfosProvider>(context, listen: false).models;
@@ -207,8 +208,30 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
                 : const SizedBox(),
             middleIcon: IconButton(
               icon: const Icon(Icons.download_sharp),
-              onPressed: () {
-                print('download info folder');
+              onPressed: () async {
+                OverlayEntry overlayEntry =
+                    OverlayEntry(builder: (context) => const LoadingOverlay());
+
+                if (infosReady) {
+                  Overlay.of(context).insert(overlayEntry);
+                  String msg = '';
+                  int e = await Gallery.saveFolder(infos);
+                  if (e == 0) {
+                    msg = locale.savedimage;
+                  } else {
+                    msg = locale.errnosave;
+                  }
+                  Fluttertoast.showToast(
+                    msg: msg,
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: ThemeColours.bgWhite,
+                    textColor: ThemeColours.txtGrey,
+                    fontSize: 16.0,
+                  );
+                  overlayEntry.remove();
+                }
               },
             ),
             leftmiddleIcon: currentId == widget.group.createdBy
@@ -221,7 +244,6 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
                 : const SizedBox(),
           ),
           const BottomBar(),
-          if (Global.isLoading) const LoadingOverlay(),
         ],
       ),
     );

@@ -73,7 +73,6 @@ class _InfoViewState extends State<InfoView> {
   @override
   void initState() {
     Provider.of<HomeStateProvider>(context, listen: false).setState(1);
-    Global.isLoading = false;
     getData().then((_) async {
       try {
         screenshotController

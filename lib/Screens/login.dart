@@ -93,9 +93,10 @@ class _LoginPageState extends State<LoginPage> {
                   ButtonSubmit(
                     text: locale.login,
                     onPressed: () async {
-                      setState(() {
-                        Global.isLoading = true;
-                      });
+                      OverlayEntry overlayEntry = OverlayEntry(
+                          builder: (context) => const LoadingOverlay());
+
+                      Overlay.of(context).insert(overlayEntry);
 
                       UserLogin data = UserLogin(
                         username: usernameController.text,
@@ -115,9 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                         loginSuccess = true;
                       }
 
-                      setState(() {
-                        Global.isLoading = false;
-                      });
+                      overlayEntry.remove();
 
                       if (loginSuccess) {
                         // ignore: use_build_context_synchronously
@@ -145,7 +144,6 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            if (Global.isLoading) const LoadingOverlay(),
           ],
         ),
       ),
