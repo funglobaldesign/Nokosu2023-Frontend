@@ -66,6 +66,9 @@ abstract class CustIcons {
   static const String shutter = 'assets/icons/shutter_mark.svg';
   static const String tutorial = 'assets/icons/tutorial.svg';
   static const String profile = 'assets/icons/profile.svg';
+  static const String flash = 'assets/icons/flash.svg';
+  static const String flashno = 'assets/icons/flash_no.svg';
+  static const String flashauto = 'assets/icons/flash_auto.svg';
 }
 
 abstract class Imgs {
