@@ -64,6 +64,8 @@ class Nokosu extends StatelessWidget {
                 future: fetchData(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
+                    Provider.of<TokenProvider>(context, listen: false)
+                        .loadDeviceToken();
                     return confProfile.id == 0
                         ? const LoginPage()
                         : const HomePage();

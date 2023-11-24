@@ -35,6 +35,8 @@ class FolderScreenState extends State<FolderScreen> {
 
     getGroups().then((_) async {
       groups = Provider.of<GroupsProvider>(context, listen: false).models;
+      print('===============GROUPSS===========');
+      print(groups.length);
       groupsReady = true;
       setState(() {});
     });
