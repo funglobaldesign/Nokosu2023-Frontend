@@ -110,8 +110,10 @@ class _LoginPageState extends State<LoginPage> {
                         formErrorController.text = "";
                         loginSuccess = true;
                       }
+                      setState(() {});
 
                       overlayEntry.remove();
+                      setState(() {});
 
                       if (loginSuccess) {
                         // ignore: use_build_context_synchronously

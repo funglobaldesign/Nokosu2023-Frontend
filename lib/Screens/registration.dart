@@ -176,8 +176,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         loginSuccess = true;
                       }
                     }
-                    overlayEntry.remove();
 
+                    overlayEntry.remove();
+                    setState(() {});
                     if (loginSuccess) {
                       // ignore: use_build_context_synchronously
                       RedirectFunctions.redirectHome(context);
