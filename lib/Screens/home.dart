@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
 
                       overlayEntry.remove();
                     },
-                    icon: SvgPicture.asset(CustIcons.capture),
+                    icon: SvgPicture.asset(CustIcons.shutter),
                   ),
                 ),
               ),

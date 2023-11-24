@@ -82,8 +82,8 @@ class CategoriesState extends State<Categories> {
                   ButtonFlip(
                     textLabelYes: locale.emo,
                     textLabelNo: locale.noemo,
-                    iconYes: CustIcons.emo,
-                    iconNo: CustIcons.noemo,
+                    iconYes: CustIcons.emotional,
+                    iconNo: CustIcons.emotionalnon,
                     onButtonPressed: (value) {
                       setState(() {
                         emotional = value;
@@ -94,8 +94,8 @@ class CategoriesState extends State<Categories> {
                   ButtonFlip(
                     textLabelYes: locale.phys,
                     textLabelNo: locale.nophys,
-                    iconYes: CustIcons.phys,
-                    iconNo: CustIcons.nophys,
+                    iconYes: CustIcons.physical,
+                    iconNo: CustIcons.physicalnon,
                     onButtonPressed: (value) {
                       setState(() {
                         physical = value;
@@ -106,8 +106,8 @@ class CategoriesState extends State<Categories> {
                   ButtonFlip(
                     textLabelYes: locale.cult,
                     textLabelNo: locale.nocult,
-                    iconYes: CustIcons.cult,
-                    iconNo: CustIcons.nocult,
+                    iconYes: CustIcons.cultural,
+                    iconNo: CustIcons.culturalnon,
                     onButtonPressed: (value) {
                       setState(() {
                         cultural = value;
