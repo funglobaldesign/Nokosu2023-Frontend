@@ -11,7 +11,6 @@ import 'package:nokosu2023/api/api.dart';
 import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/providers/form_err_res_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
-import 'package:nokosu2023/utils/global_vars.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:provider/provider.dart';
 

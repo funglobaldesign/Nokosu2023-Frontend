@@ -24,7 +24,7 @@ class Nokosu extends StatelessWidget {
 
   Future<void> fetchData() async {
     await TokenProvider().loadDeviceToken();
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 1500));
   }
 
   @override
@@ -78,14 +78,10 @@ class CustomSplashScreen extends StatelessWidget {
       backgroundColor: ThemeColours.bgBlueWhite,
       body: Center(
         child: SizedBox(
-          height: 140,
-          width: 140,
+          height: 200,
+          width: 200,
           child: Neumo(
-            child: SvgPicture.asset(
-              CustIcons.logo,
-              width: 100,
-              height: 100,
-            ),
+            child: SvgPicture.asset(CustIcons.logo),
           ),
         ),
       ),
