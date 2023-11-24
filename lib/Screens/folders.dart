@@ -33,7 +33,7 @@ class FolderScreenState extends State<FolderScreen> {
   @override
   void initState() {
     Provider.of<HomeStateProvider>(context, listen: false).setState(1);
-    Global.isLoading = false;
+
     getGroups().then((_) async {
       groups = Provider.of<GroupsProvider>(context, listen: false).models;
       groupsReady = true;
@@ -99,7 +99,6 @@ class FolderScreenState extends State<FolderScreen> {
               leftmiddleIcon: const SizedBox(),
             ),
             const BottomBar(),
-            if (Global.isLoading) const LoadingOverlay(),
           ],
         ),
       ),

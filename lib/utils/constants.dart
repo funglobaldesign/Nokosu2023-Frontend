@@ -41,16 +41,34 @@ abstract class NumericConsts {
 }
 
 abstract class CustIcons {
-  static const String logo = 'assets/icons/logo.svg';
-  static const String emo = 'assets/icons/heart.svg';
-  static const String noemo = 'assets/icons/noheart.svg';
-  static const String phys = 'assets/icons/physical.svg';
-  static const String nophys = 'assets/icons/nophysical.svg';
-  static const String cult = 'assets/icons/cultural.svg';
-  static const String nocult = 'assets/icons/nocultural.svg';
+  static const String logo = 'assets/icons/nokosu_logo.svg';
+
+  // Categories
+  static const String cultural = 'assets/icons/cultural.svg';
+  static const String culturalnon = 'assets/icons/non_cultural.svg';
+  static const String emotional = 'assets/icons/emotional.svg';
+  static const String emotionalnon = 'assets/icons/non_emotional.svg';
+  static const String physical = 'assets/icons/physical.svg';
+  static const String physicalnon = 'assets/icons/non_physical.svg';
   static const String positive = 'assets/icons/positive.svg';
   static const String negative = 'assets/icons/negative.svg';
-  static const String capture = 'assets/icons/capture.svg';
+
+  // Form icons
+  static const String comment = 'assets/icons/comment.svg';
+  static const String groups = 'assets/icons/groups.svg';
+  static const String mail = 'assets/icons/mail.svg';
+  static const String location = 'assets/icons/place.svg';
+  static const String topic = 'assets/icons/topic.svg';
+
+  // nav icons
+  static const String camera = 'assets/icons/camera.svg';
+  static const String gallery = 'assets/icons/gallery.svg';
+  static const String shutter = 'assets/icons/shutter_mark.svg';
+  static const String tutorial = 'assets/icons/tutorial.svg';
+  static const String profile = 'assets/icons/profile.svg';
+  static const String flash = 'assets/icons/flash.svg';
+  static const String flashno = 'assets/icons/flash_no.svg';
+  static const String flashauto = 'assets/icons/flash_auto.svg';
 }
 
 abstract class Imgs {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nokosu2023/Components/camera.dart';
 import 'package:nokosu2023/providers/home_state.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
@@ -72,7 +73,7 @@ class TopBarState extends State<TopBar> {
                         },
                       )
                     : IconButton(
-                        icon: const Icon(Icons.bookmarks_outlined),
+                        icon: SvgPicture.asset(CustIcons.tutorial),
                         onPressed: () {
                           RedirectFunctions.redirectTutorial(context);
                         },
@@ -82,13 +83,13 @@ class TopBarState extends State<TopBar> {
                 widget.rightmiddleIcon,
                 widget.backLocBtn
                     ? IconButton(
-                        icon: const Icon(Icons.add_location_alt_outlined),
+                        icon: SvgPicture.asset(CustIcons.location),
                         onPressed: () {
                           _openMaps(widget.location[0], widget.location[1]);
                         },
                       )
                     : IconButton(
-                        icon: const Icon(Icons.person_outline),
+                        icon: SvgPicture.asset(CustIcons.profile),
                         onPressed: () {},
                       ),
               ],

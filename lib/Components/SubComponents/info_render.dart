@@ -66,7 +66,9 @@ abstract class InfoRender {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5))),
                       child: SvgPicture.asset(
-                          info.emotion! ? CustIcons.emo : CustIcons.noemo,
+                          info.emotion!
+                              ? CustIcons.emotional
+                              : CustIcons.emotionalnon,
                           colorFilter: const ColorFilter.mode(
                               Colors.white, BlendMode.srcIn)),
                     ),
@@ -82,7 +84,9 @@ abstract class InfoRender {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5))),
                       child: SvgPicture.asset(
-                          info.physical! ? CustIcons.phys : CustIcons.phys,
+                          info.physical!
+                              ? CustIcons.physical
+                              : CustIcons.physicalnon,
                           colorFilter: const ColorFilter.mode(
                               Colors.white, BlendMode.srcIn)),
                     ),
@@ -97,7 +101,9 @@ abstract class InfoRender {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5))),
                       child: SvgPicture.asset(
-                          info.cultural! ? CustIcons.cult : CustIcons.cult,
+                          info.cultural!
+                              ? CustIcons.cultural
+                              : CustIcons.culturalnon,
                           colorFilter: const ColorFilter.mode(
                               Colors.white, BlendMode.srcIn)),
                     )

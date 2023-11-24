@@ -45,5 +45,6 @@
     "username": "사용자 이름",
     "exists": "이미 존재함",
     "savedimage": "",
-    "errnosave": ""
+    "errnosave": "",
+    "saving": ""
 }

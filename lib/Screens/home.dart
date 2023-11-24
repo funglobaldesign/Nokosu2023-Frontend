@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     Provider.of<HomeStateProvider>(context, listen: false).setState(0);
-    Global.isLoading = false;
+
     super.initState();
   }
 
@@ -109,9 +109,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: IconButton(
                     onPressed: () async {
-                      setState(() {
-                        Global.isLoading = true;
-                      });
+                      OverlayEntry overlayEntry = OverlayEntry(
+                          builder: (context) => const LoadingOverlay());
+
+                      Overlay.of(context).insert(overlayEntry);
 
                       final cameraState = cameraKey.currentState;
                       if (cameraState != null) {
@@ -124,17 +125,13 @@ class _HomePageState extends State<HomePage> {
                         RedirectFunctions.redirectInfo(context, image.path);
                       }
 
-                      setState(() {
-                        Global.isLoading = false;
-                      });
+                      overlayEntry.remove();
                     },
-                    icon: SvgPicture.asset(CustIcons.capture),
+                    icon: SvgPicture.asset(CustIcons.shutter),
                   ),
                 ),
               ),
             ),
-
-            if (Global.isLoading) const LoadingOverlay(),
           ],
         ),
       ),

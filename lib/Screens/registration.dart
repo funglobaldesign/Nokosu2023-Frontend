@@ -146,9 +146,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ButtonSubmit(
                   text: locale.register,
                   onPressed: () async {
-                    setState(() {
-                      Global.isLoading = true;
-                    });
+                    OverlayEntry overlayEntry = OverlayEntry(
+                        builder: (context) => const LoadingOverlay());
+
+                    Overlay.of(context).insert(overlayEntry);
 
                     if (usernameController.text.isEmpty ||
                         emailController.text.isEmpty ||
@@ -180,8 +181,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         loginSuccess = true;
                       }
                     }
-                    Global.isLoading = false;
-                    setState(() {});
+                    overlayEntry.remove();
 
                     if (loginSuccess) {
                       // ignore: use_build_context_synchronously
@@ -199,7 +199,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ],
             ),
           ),
-          if (Global.isLoading) const LoadingOverlay(),
           const Positioned(
             top: 55,
             left: 25,

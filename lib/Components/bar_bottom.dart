@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nokosu2023/providers/home_state.dart';
 import 'package:nokosu2023/utils/constants.dart';
@@ -50,7 +51,7 @@ class BarState extends State<BottomBar> {
               left: 30,
               bottom: 30,
               child: IconButton(
-                icon: const Icon(Icons.photo_library_outlined),
+                icon: SvgPicture.asset(CustIcons.gallery),
                 onPressed: () async {
                   XFile image =
                       (await picker.pickImage(source: ImageSource.gallery))!;
@@ -65,7 +66,7 @@ class BarState extends State<BottomBar> {
                 color: homeState == 0
                     ? ThemeColours.iconblue
                     : ThemeColours.iconBlack,
-                icon: const Icon(Icons.camera_alt),
+                icon: SvgPicture.asset(CustIcons.camera),
                 onPressed: () {
                   if (homeState != 0) {
                     setState(() {
@@ -84,7 +85,7 @@ class BarState extends State<BottomBar> {
                 color: homeState == 1
                     ? ThemeColours.iconblue
                     : ThemeColours.iconBlack,
-                icon: const Icon(Icons.supervisor_account_outlined),
+                icon: SvgPicture.asset(CustIcons.groups),
                 onPressed: () {
                   if (homeState != 1) {
                     setState(() {

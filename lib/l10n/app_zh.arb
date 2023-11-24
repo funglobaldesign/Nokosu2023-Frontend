@@ -45,5 +45,6 @@
     "username": "用户名",
     "exists": "已存在",
     "savedimage": "",
-    "errnosave": ""
+    "errnosave": "",
+    "saving": ""
 }
