@@ -76,7 +76,6 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Future<void> _emp() async {}
     int currentId = Provider.of<TokenProvider>(context, listen: false).id;
     infoWidgets = infos
         .map((info) => InfoPrevFolder(

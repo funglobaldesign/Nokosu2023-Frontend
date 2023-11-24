@@ -17,7 +17,7 @@ class LocaleProvider extends ChangeNotifier {
 
   Future<void> _loadDeviceLocale() async {
     final prefs = await SharedPreferences.getInstance();
-    final localeString = prefs.getString(DeviceMemory.locale) ?? "en";
+    final localeString = prefs.getString(DeviseMemory.locale) ?? "en";
     _locale = Locale(localeString);
     notifyListeners();
   }
@@ -25,7 +25,7 @@ class LocaleProvider extends ChangeNotifier {
   Future<void> _saveDeviceLocale(Locale locale) async {
     final prefs = await SharedPreferences.getInstance();
     final localeString = locale.toLanguageTag();
-    await prefs.setString(DeviceMemory.locale, localeString);
+    await prefs.setString(DeviseMemory.locale, localeString);
     _locale = locale;
   }
 }

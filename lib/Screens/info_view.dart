@@ -1,8 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/info_render.dart';
@@ -16,10 +14,11 @@ import 'package:nokosu2023/providers/profile_provider.dart';
 import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/global_vars.dart';
+import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class InfoView extends StatefulWidget {
   final Info info;
@@ -118,32 +117,59 @@ class _InfoViewState extends State<InfoView> {
           controller: scrollController,
           child: Column(
             children: [
-              TopBar(
-                location: [widget.info.latitude!, widget.info.longitude!],
-                backButton: true,
-                camkey: GlobalKey(),
-                rightmiddleIcon: currentId == widget.info.createdBy
-                    ? IconButton(
-                        icon: const Icon(Icons.edit),
-                        onPressed: () {
-                          print('edit');
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+                child: Stack(
+                  children: [
+                    TopBar(
+                      location: [widget.info.latitude!, widget.info.longitude!],
+                      backLocBtn: true,
+                      camkey: GlobalKey(),
+                      rightmiddleIcon: currentId == widget.info.createdBy
+                          ? IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () {
+                                print('edit');
+                              },
+                            )
+                          : const SizedBox(),
+                      middleIcon: IconButton(
+                        icon: const Icon(Icons.download_sharp),
+                        onPressed: () async {
+                          if (infosReady) {
+                            String msg = '';
+                            int e = await Gallery.saveImage(
+                              infoRenderedImageData,
+                              DeviseMemory.foldername,
+                            );
+                            if (e == 0) {
+                              msg = locale.savedimage;
+                            } else {
+                              msg = locale.errnosave;
+                            }
+                            Fluttertoast.showToast(
+                              msg: msg,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: ThemeColours.bgWhite,
+                              textColor: ThemeColours.txtGrey,
+                              fontSize: 16.0,
+                            );
+                          }
                         },
-                      )
-                    : const SizedBox(),
-                middleIcon: IconButton(
-                  icon: const Icon(Icons.download_sharp),
-                  onPressed: () {
-                    print('download info single');
-                  },
+                      ),
+                      leftmiddleIcon: currentId == widget.info.createdBy
+                          ? IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () {
+                                print('delete info single');
+                              },
+                            )
+                          : const SizedBox(),
+                    ),
+                  ],
                 ),
-                leftmiddleIcon: currentId == widget.info.createdBy
-                    ? IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () {
-                          print('delete info single');
-                        },
-                      )
-                    : const SizedBox(),
               ),
               Container(
                 padding: const EdgeInsets.all(15),

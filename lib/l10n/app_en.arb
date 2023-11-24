@@ -41,5 +41,7 @@
     "topic": "Topic",
     "unnamed": "Unnamed",
     "username": "Username",
-    "exists": "Already Exists"
+    "exists": "Already Exists",
+    "savedimage": "Saved image to the device",
+    "errnosave": "Couldn't save the image"
 }

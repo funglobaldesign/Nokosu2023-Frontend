@@ -19,15 +19,15 @@ class TokenProvider extends ChangeNotifier {
 
   Future<void> loadDeviceToken() async {
     final prefs = await SharedPreferences.getInstance();
-    _token = prefs.getString(DeviceMemory.authToken) ?? "";
-    _id = prefs.getInt(DeviceMemory.userID) ?? 0;
+    _token = prefs.getString(DeviseMemory.authToken) ?? "";
+    _id = prefs.getInt(DeviseMemory.userID) ?? 0;
     notifyListeners();
   }
 
   Future<void> _saveDeviceToken(String token, int id) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(DeviceMemory.authToken, token);
-    await prefs.setInt(DeviceMemory.userID, id);
+    await prefs.setString(DeviseMemory.authToken, token);
+    await prefs.setInt(DeviseMemory.userID, id);
     _token = token;
     _id = id;
   }

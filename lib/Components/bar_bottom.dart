@@ -125,12 +125,3 @@ class BarState extends State<BottomBar> {
     );
   }
 }
-
-
-// if (homeState == 0)
-//   Text(
-//     locale.home,
-//     style: const TextStyle(
-//       decoration: TextDecoration.underline,
-//     ),
-//   ),
