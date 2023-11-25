@@ -30,7 +30,6 @@
     "ok": "확인",
     "password": "비밀번호",
     "passwordconf": "비밀번호 확인",
-    "photodel": "이 사진 및 정보는 삭제됩니다.",
     "phys": "물리적 요인",
     "positive": "긍정적",
     "register": "등록",
@@ -51,5 +50,6 @@
     "yes": "",
     "no": "",
     "errcrs": "",
-    "logout": ""
+    "logout": "",
+    "photodel": ""
 }

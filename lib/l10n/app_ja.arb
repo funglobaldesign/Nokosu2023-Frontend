@@ -30,7 +30,6 @@
     "ok": "確認",
     "password": "パスワード",
     "passwordconf": "パスワードの確認",
-    "photodel": "この写真と情報は削除されます",
     "phys": "物理的",
     "positive": "肯定的",
     "register": "登録",
@@ -51,5 +50,6 @@
     "yes": "",
     "no": "",
     "errcrs": "",
-    "logout": ""
+    "logout": "",
+    "photodel": ""
 }

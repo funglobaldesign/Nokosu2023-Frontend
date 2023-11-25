@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
+import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PreviewPage extends StatefulWidget {
   final Image image;
+  final Info info;
+  final bool isUpdate;
 
   const PreviewPage({
     Key? key,
     required this.image,
+    required this.info,
+    this.isUpdate = false,
   }) : super(key: key);
 
   @override
@@ -80,42 +85,45 @@ class _PreviewPageState extends State<PreviewPage> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 60),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: widget.isUpdate
+                      ? MainAxisAlignment.center
+                      : MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                        height: 70,
-                        width: 70,
-                        child: Neumo(
-                            child: IconButton(
-                                color: Colors.red,
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        content: Text(locale.photodel),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text(locale.cancel),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
+                    if (!widget.isUpdate)
+                      SizedBox(
+                          height: 70,
+                          width: 70,
+                          child: Neumo(
+                              child: IconButton(
+                                  color: Colors.red,
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          content: Text(locale.photodel),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(locale.cancel),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
 
-                                              RedirectFunctions.redirectHome(
-                                                  context);
-                                            },
-                                            child: Text(locale.ok),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
-                                icon: const Icon(Icons.close)))),
+                                                RedirectFunctions.redirectHome(
+                                                    context);
+                                              },
+                                              child: Text(locale.ok),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  icon: const Icon(Icons.close)))),
                     SizedBox(
                       height: 70,
                       width: 70,

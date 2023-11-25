@@ -132,7 +132,10 @@ class _InfoViewState extends State<InfoView> {
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) =>
-                                        InfoEditPage(),
+                                        InfoEditPage(
+                                      info: widget.info,
+                                      image: widget.image,
+                                    ),
                                   );
                                 }
                               },

@@ -132,8 +132,10 @@ class _InfoPageState extends State<InfoPage> {
                     onTap: () {
                       showDialog(
                         context: context,
-                        builder: (BuildContext context) =>
-                            PreviewPage(image: Image.file(File(widget.image))),
+                        builder: (BuildContext context) => PreviewPage(
+                          image: Image.file(File(widget.image)),
+                          info: Info(),
+                        ),
                       );
                     },
                     child: Column(
@@ -257,6 +259,7 @@ class _InfoPageState extends State<InfoPage> {
                               latitude: latitude,
                               address: address,
                             ),
+                            group: Group(),
                             imagePath: widget.image,
                           ),
                         );
