@@ -474,7 +474,6 @@ Future<int> apiUpdateInfo(context, Info data, int id) async {
     String token = Provider.of<TokenProvider>(context, listen: false).token;
     var request =
         http.MultipartRequest('PUT', Uri.parse('${APILinks.base}infos/$id/'));
-    print('SENDIIIING');
     data.toJson().forEach((key, value) {
       if (key == 'topic' ||
           key == 'description' ||
@@ -491,10 +490,8 @@ Future<int> apiUpdateInfo(context, Info data, int id) async {
       }
     });
     request.headers['Authorization'] = 'Token $token';
-    print(request);
 
     final response = await request.send();
-    print(response.statusCode);
     if (response.statusCode == 200) {
       Provider.of<InfoProvider>(context, listen: false).setModel(
           Info.fromJson(jsonDecode(await response.stream.bytesToString())));
