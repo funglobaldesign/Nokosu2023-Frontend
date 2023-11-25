@@ -14,11 +14,13 @@ import 'package:provider/provider.dart';
 class GroupFormAdd extends StatefulWidget {
   final bool isUpdate;
   final int gid;
+  final bool isFolderview;
 
   const GroupFormAdd({
     Key? key,
     this.isUpdate = false,
     this.gid = 0,
+    this.isFolderview = false,
   }) : super(key: key);
 
   @override
@@ -68,11 +70,11 @@ class _GroupFormState extends State<GroupFormAdd> {
                       child: ButtonSubmit(
                           text: locale.submit,
                           onPressed: () async {
+                            int err = 0;
                             if (groupController.text.isNotEmpty) {
                               setState(() {
                                 isloading = true;
                               });
-                              int err = 0;
                               if (widget.isUpdate) {
                                 err = await apiUpdateGroup(
                                     context, groupController.text, widget.gid);
@@ -98,8 +100,6 @@ class _GroupFormState extends State<GroupFormAdd> {
                                 Provider.of<GroupProvider>(context,
                                         listen: false)
                                     .setModel(g);
-                                // ignore: use_build_context_synchronously
-                                Navigator.of(context).pop();
                               } else if (err == Errors.badreq) {
                                 errCont.text = locale.exists;
                               } else {
@@ -109,6 +109,10 @@ class _GroupFormState extends State<GroupFormAdd> {
                               setState(() {
                                 isloading = false;
                               });
+                            }
+                            if (err == 0) {
+                              // ignore: use_build_context_synchronously
+                              Navigator.of(context).pop();
                             }
                           }),
                     ),

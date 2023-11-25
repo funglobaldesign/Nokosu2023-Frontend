@@ -483,7 +483,6 @@ Future<int> apiUpdateInfo(context, Info data, int id) async {
           key == 'emotion' ||
           key == 'cultural' ||
           key == 'physical') {
-        // print(key + ' ' + value);
         if (value != null) {
           request.fields[key] = value.toString();
         }
@@ -520,7 +519,6 @@ Future<int> apiDelInfo(context, int id) async {
     final response = await request.send();
 
     if (response.statusCode == 200) {
-      Provider.of<InfoProvider>(context, listen: false).setModel(Info());
       return Errors.none;
     } else if (response.statusCode == 400) {
       return Errors.badreq;

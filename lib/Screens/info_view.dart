@@ -10,6 +10,7 @@ import 'package:nokosu2023/Components/loading_overlay.dart';
 import 'package:nokosu2023/api/api.dart';
 import 'package:http/http.dart' as http;
 import 'package:nokosu2023/models/models.dart';
+import 'package:nokosu2023/providers/group_provider.dart';
 import 'package:nokosu2023/providers/home_state.dart';
 import 'package:nokosu2023/providers/profile_provider.dart';
 import 'package:nokosu2023/providers/token_provider.dart';
@@ -42,10 +43,12 @@ class _InfoViewState extends State<InfoView> {
   Image creatorpfp = Image.asset(Imgs.pfp);
   late Uint8List infoRenderedImageData;
   ScreenshotController screenshotController = ScreenshotController();
+  Group thisgroup = Group();
 
   Future<void> getData() async {
     try {
       await apiGetProfile(context, widget.info.createdBy!);
+      await apiGetGroups(context);
 
       creatroName = Provider.of<ProfileProvider>(context, listen: false)
           .profile
@@ -82,6 +85,14 @@ class _InfoViewState extends State<InfoView> {
         )
             .then((capturedImage) {
           infoRenderedImageData = capturedImage;
+          List<Group> groups =
+              Provider.of<GroupsProvider>(context, listen: false).models;
+          for (var group in groups) {
+            if (group.id == widget.info.group!) {
+              thisgroup = group;
+              break;
+            }
+          }
           infosReady = true;
           setState(() {});
         });
@@ -106,114 +117,194 @@ class _InfoViewState extends State<InfoView> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final ScrollController scrollController = ScrollController();
-    return Scaffold(
-      appBar: null,
-      backgroundColor: ThemeColours.bgBlueWhite,
-      body: Scrollbar(
-        controller: scrollController,
-        thumbVisibility: false,
-        child: SingleChildScrollView(
+    return WillPopScope(
+      onWillPop: () async {
+        if (infosReady) {
+          RedirectFunctions.redirectHome(context);
+        }
+        return true;
+      },
+      child: Scaffold(
+        appBar: null,
+        backgroundColor: ThemeColours.bgBlueWhite,
+        body: Scrollbar(
           controller: scrollController,
-          child: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
-                child: Stack(
-                  children: [
-                    TopBar(
-                      location: [widget.info.latitude!, widget.info.longitude!],
-                      backLocBtn: true,
-                      camkey: GlobalKey(),
-                      rightmiddleIcon: currentId == widget.info.createdBy
-                          ? IconButton(
-                              icon: const Icon(Icons.edit),
-                              onPressed: () async {
-                                if (infosReady) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        InfoEditPage(
-                                      info: widget.info,
-                                      image: widget.image,
-                                    ),
-                                  );
-                                }
-                              },
-                            )
-                          : const SizedBox(),
-                      middleIcon: IconButton(
-                        icon: const Icon(Icons.download_sharp),
-                        onPressed: () async {
-                          if (infosReady) {
-                            String msg = '';
-                            int e = await Gallery.saveImage(
-                              infoRenderedImageData,
-                              DeviseMemory.foldername,
-                            );
-                            if (e == 0) {
-                              msg = locale.savedimage;
-                            } else {
-                              msg = locale.errnosave;
+          thumbVisibility: false,
+          child: SingleChildScrollView(
+            controller: scrollController,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: Stack(
+                    children: [
+                      TopBar(
+                        backBtn: IconButton(
+                          icon: const Icon(Icons.arrow_back),
+                          onPressed: () {
+                            if (infosReady) {
+                              RedirectFunctions.redirectInfoFolders(
+                                  context, thisgroup);
                             }
-                            Fluttertoast.showToast(
-                              msg: msg,
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: ThemeColours.bgWhite,
-                              textColor: ThemeColours.txtGrey,
-                              fontSize: 16.0,
-                            );
-                          }
-                        },
-                      ),
-                      leftmiddleIcon: currentId == widget.info.createdBy
-                          ? IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () async {
-                                if (infosReady) {}
-                              },
-                            )
-                          : const SizedBox(),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(15),
-                height: height,
-                width: width,
-                child: infosReady
-                    ? IntrinsicHeight(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                width: 0,
-                                color: Colors.transparent,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 8,
-                                    offset: const Offset(-3, -3),
-                                    color: ThemeColours.shadowDark
-                                        .withOpacity(0.1)),
-                                BoxShadow(
-                                  blurRadius: 8,
-                                  offset: const Offset(3, 3),
-                                  color:
-                                      ThemeColours.shadowDark.withOpacity(0.1),
-                                ),
-                              ]),
-                          child: Image.memory(
-                            infoRenderedImageData,
-                            fit: BoxFit.contain,
-                          ),
+                          },
                         ),
-                      )
-                    : const LoadingOverlay(),
-              ),
-            ],
+                        location: [
+                          widget.info.latitude!,
+                          widget.info.longitude!
+                        ],
+                        infoView: true,
+                        camkey: GlobalKey(),
+                        rightmiddleIcon: currentId == widget.info.createdBy
+                            ? IconButton(
+                                icon: const Icon(Icons.edit),
+                                onPressed: () async {
+                                  if (infosReady) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          InfoEditPage(
+                                        info: widget.info,
+                                        image: widget.image,
+                                        group: thisgroup,
+                                      ),
+                                    );
+                                  }
+                                },
+                              )
+                            : const SizedBox(),
+                        middleIcon: IconButton(
+                          icon: const Icon(Icons.download_sharp),
+                          onPressed: () async {
+                            if (infosReady) {
+                              String msg = '';
+                              int e = await Gallery.saveImage(
+                                infoRenderedImageData,
+                                DeviseMemory.foldername,
+                              );
+                              if (e == 0) {
+                                msg = locale.savedimage;
+                              } else {
+                                msg = locale.errnosave;
+                              }
+                              Fluttertoast.showToast(
+                                msg: msg,
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: ThemeColours.bgWhite,
+                                textColor: ThemeColours.txtGrey,
+                                fontSize: 16.0,
+                              );
+                            }
+                          },
+                        ),
+                        leftmiddleIcon: currentId == widget.info.createdBy
+                            ? IconButton(
+                                icon: const Icon(Icons.delete),
+                                onPressed: () async {
+                                  if (infosReady) {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          content: Text(
+                                              '${locale.deleteconf} : ${widget.info.topic!}'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                RedirectFunctions
+                                                    .redirectInfoView(
+                                                        context,
+                                                        widget.info,
+                                                        widget.image);
+                                              },
+                                              child: Text(locale.no),
+                                            ),
+                                            TextButton(
+                                              onPressed: () async {
+                                                Navigator.of(context).pop();
+                                                OverlayEntry overlayEntry =
+                                                    OverlayEntry(
+                                                        builder: (context) =>
+                                                            const LoadingOverlay());
+                                                Overlay.of(context)
+                                                    .insert(overlayEntry);
+
+                                                String msg = '';
+                                                int e = await apiDelInfo(
+                                                    context, widget.info.id!);
+                                                if (e == Errors.none) {
+                                                  msg = locale.deleted;
+                                                } else {
+                                                  msg = locale.errcrs;
+                                                }
+                                                Fluttertoast.showToast(
+                                                  msg: msg,
+                                                  toastLength:
+                                                      Toast.LENGTH_SHORT,
+                                                  gravity: ToastGravity.BOTTOM,
+                                                  timeInSecForIosWeb: 1,
+                                                  backgroundColor:
+                                                      ThemeColours.bgWhite,
+                                                  textColor:
+                                                      ThemeColours.txtGrey,
+                                                  fontSize: 16.0,
+                                                );
+                                                overlayEntry.remove();
+                                              },
+                                              child: Text(locale.yes),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+
+                                    RedirectFunctions.redirectInfoFolders(
+                                        context, thisgroup);
+                                  }
+                                },
+                              )
+                            : const SizedBox(),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(15),
+                  height: height,
+                  width: width,
+                  child: infosReady
+                      ? IntrinsicHeight(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  width: 0,
+                                  color: Colors.transparent,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 8,
+                                      offset: const Offset(-3, -3),
+                                      color: ThemeColours.shadowDark
+                                          .withOpacity(0.1)),
+                                  BoxShadow(
+                                    blurRadius: 8,
+                                    offset: const Offset(3, 3),
+                                    color: ThemeColours.shadowDark
+                                        .withOpacity(0.1),
+                                  ),
+                                ]),
+                            child: Image.memory(
+                              infoRenderedImageData,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        )
+                      : const LoadingOverlay(),
+                ),
+              ],
+            ),
           ),
         ),
       ),

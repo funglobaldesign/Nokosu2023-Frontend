@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
                 top: MediaQuery.of(context).size.height * 0.1,
                 child: Camera(key: cameraKey)),
             TopBar(
+              backBtn: const SizedBox(),
               camkey: cameraKey,
               middleIcon: IconButton(
                 icon: Icon(flashMode == 1

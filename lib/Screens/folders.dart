@@ -92,6 +92,7 @@ class FolderScreenState extends State<FolderScreen> {
               ),
             ),
             TopBar(
+              backBtn: const SizedBox(),
               camkey: GlobalKey(),
               middleIcon: const SizedBox(),
               rightmiddleIcon: const SizedBox(),

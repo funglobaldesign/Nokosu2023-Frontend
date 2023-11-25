@@ -192,6 +192,7 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
                 ),
               ),
               TopBar(
+                backBtn: const SizedBox(),
                 camkey: GlobalKey(),
                 rightmiddleIcon: currentId == widget.group.createdBy
                     ? IconButton(
@@ -260,11 +261,13 @@ class InfoFolderScreenState extends State<InfoFolderScreen> {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  content: Text(locale.deleteconf),
+                                  content: Text(
+                                      '${locale.deleteconf} : ${widget.group.name!}'),
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.of(context).pop();
+                                        RedirectFunctions.redirectInfoFolders(
+                                            context, widget.group);
                                       },
                                       child: Text(locale.no),
                                     ),
