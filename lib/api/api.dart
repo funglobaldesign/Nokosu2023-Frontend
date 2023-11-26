@@ -538,13 +538,12 @@ Future<int> apiDelInfo(context, int id) async {
 // Email
 Future<int> apigetMail(context, String data) async {
   try {
-    final response = await http.post(
-      Uri.parse('${APILinks.base}password_reset/'),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode('{"email": $data}'),
-    );
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${APILinks.base}password_reset/'));
+
+    request.fields['email'] = data;
+
+    final response = await request.send();
 
     if (response.statusCode == 200) {
       return Errors.none;

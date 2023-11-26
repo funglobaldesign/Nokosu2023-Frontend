@@ -88,36 +88,39 @@ class _LoginPageState extends State<LoginPage> {
                   ButtonSubmit(
                     text: locale.login,
                     onPressed: () async {
-                      OverlayEntry overlayEntry = OverlayEntry(
-                          builder: (context) => const LoadingOverlay());
+                      if (usernameController.text.isNotEmpty &&
+                          passwordController.text.isNotEmpty) {
+                        OverlayEntry overlayEntry = OverlayEntry(
+                            builder: (context) => const LoadingOverlay());
 
-                      Overlay.of(context).insert(overlayEntry);
+                        Overlay.of(context).insert(overlayEntry);
 
-                      UserLogin data = UserLogin(
-                        username: usernameController.text,
-                        password: passwordController.text,
-                      );
+                        UserLogin data = UserLogin(
+                          username: usernameController.text,
+                          password: passwordController.text,
+                        );
 
-                      int err = await apiLogin(context, data);
+                        int err = await apiLogin(context, data);
 
-                      if (err == Errors.badreq) {
-                        formErrorController.text = locale.erric;
-                      } else if (err == Errors.unAuth) {
-                        formErrorController.text = locale.errunauth;
-                      } else if (err == Errors.unknown) {
-                        formErrorController.text = locale.errcrs;
-                      } else {
-                        formErrorController.text = "";
-                        loginSuccess = true;
-                      }
-                      setState(() {});
+                        if (err == Errors.badreq) {
+                          formErrorController.text = locale.erric;
+                        } else if (err == Errors.unAuth) {
+                          formErrorController.text = locale.errunauth;
+                        } else if (err == Errors.unknown) {
+                          formErrorController.text = locale.errcrs;
+                        } else {
+                          formErrorController.text = "";
+                          loginSuccess = true;
+                        }
+                        setState(() {});
 
-                      overlayEntry.remove();
-                      setState(() {});
+                        overlayEntry.remove();
+                        setState(() {});
 
-                      if (loginSuccess) {
-                        // ignore: use_build_context_synchronously
-                        RedirectFunctions.redirectHome(context);
+                        if (loginSuccess) {
+                          // ignore: use_build_context_synchronously
+                          RedirectFunctions.redirectHome(context);
+                        }
                       }
                     },
                   ),

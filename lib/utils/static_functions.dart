@@ -11,6 +11,7 @@ import 'package:nokosu2023/Screens/home.dart';
 import 'package:nokosu2023/Screens/info.dart';
 import 'package:nokosu2023/Screens/infos_folder.dart';
 import 'package:nokosu2023/Screens/login.dart';
+import 'package:nokosu2023/Screens/password.dart';
 import 'package:nokosu2023/Screens/profile.dart';
 import 'package:nokosu2023/Screens/registration.dart';
 import 'package:nokosu2023/Screens/tutorial.dart';
@@ -43,7 +44,7 @@ abstract class RedirectFunctions {
   static void redirectResetPassword(context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const LoginPage()), //Make pw Ui
+      MaterialPageRoute(builder: (context) => const PasswordPage()),
     );
   }
 

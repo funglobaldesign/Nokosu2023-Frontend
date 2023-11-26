@@ -49,5 +49,7 @@
     "no": "No",
     "errcrs": "Something went wrong",
     "logout": "Logout",
-    "photodel": "This photo and information may not be saved"
+    "photodel": "This photo and information may not be saved",
+    "checkemail": "Please check your email for password reset link",
+    "noemail": "Could not find an account for the above email address"
 }
