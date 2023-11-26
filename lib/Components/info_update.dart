@@ -1,17 +1,26 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:nokosu2023/Components/SubComponents/error_field.dart';
 import 'package:nokosu2023/Components/button_submit.dart';
+import 'package:nokosu2023/Components/categories.dart';
 import 'package:nokosu2023/Components/groups_select.dart';
 import 'package:nokosu2023/Components/input_field.dart';
+import 'package:nokosu2023/Components/preview.dart';
+import 'package:nokosu2023/api/api.dart';
+import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:geolocator/geolocator.dart';
 
 class InfoEditPage extends StatefulWidget {
+  final Info info;
+  final Image image;
+  final Group group;
+
   const InfoEditPage({
     Key? key,
+    required this.info,
+    required this.image,
+    required this.group,
   }) : super(key: key);
   @override
   State<InfoEditPage> createState() => _InfoEditPageState();
@@ -32,6 +41,21 @@ class _InfoEditPageState extends State<InfoEditPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     locale = AppLocalizations.of(context)!;
+  }
+
+  Future<void> getGroups() async {
+    await apiGetGroups(context);
+  }
+
+  @override
+  void initState() {
+    topicController.text = widget.info.topic!;
+    descController.text = widget.info.description!;
+    locationController.text = widget.info.location!;
+    groupController.text = widget.info.group!.toString();
+    groupNameController.text = widget.group.name!;
+
+    super.initState();
   }
 
   Future<bool?> _showConfirmationDialog(BuildContext context) async {
@@ -82,11 +106,14 @@ class _InfoEditPageState extends State<InfoEditPage> {
                   const SizedBox(height: 30),
                   GestureDetector(
                     onTap: () {
-                      // showDialog(
-                      //   context: context,
-                      //   builder: (BuildContext context) =>
-                      //       PreviewPage(image: Image.file(File(widget.image))),
-                      // );
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => PreviewPage(
+                          image: widget.image,
+                          info: widget.info,
+                          isUpdate: true,
+                        ),
+                      );
                     },
                     child: Column(
                       children: [
@@ -122,10 +149,7 @@ class _InfoEditPageState extends State<InfoEditPage> {
                               alignment: Alignment.center,
                               child: FittedBox(
                                 fit: BoxFit.fitWidth,
-                                // child: SizedBox(
-                                //   width: 1,
-                                //   child: Image.file(File(widget.image)),
-                                // ),
+                                child: SizedBox(width: 1, child: widget.image),
                               ),
                             ),
                           ),
@@ -195,21 +219,20 @@ class _InfoEditPageState extends State<InfoEditPage> {
                         formErrorController.text = locale.allFieldsRequired;
                       } else {
                         formErrorController.text = '';
-                        // showDialog(
-                        //   context: context,
-                        //   builder: (BuildContext context) => Categories(
-                        //     info: Info(
-                        //       topic: topicController.text,
-                        //       description: descController.text,
-                        //       group: int.parse(groupController.text),
-                        //       location: locationController.text,
-                        //       longitude: longitude,
-                        //       latitude: latitude,
-                        //       address: address,
-                        //     ),
-                        //     imagePath: widget.image,
-                        //   ),
-                        // );
+                        widget.info.topic = topicController.text;
+                        widget.info.description = descController.text;
+                        widget.info.location = locationController.text;
+                        widget.info.group = int.parse(groupController.text);
+
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => Categories(
+                            info: widget.info,
+                            imagePath: '',
+                            group: widget.group,
+                            isupdate: true,
+                          ),
+                        );
                       }
                       setState(() {});
                     },

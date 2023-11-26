@@ -474,10 +474,18 @@ Future<int> apiUpdateInfo(context, Info data, int id) async {
     String token = Provider.of<TokenProvider>(context, listen: false).token;
     var request =
         http.MultipartRequest('PUT', Uri.parse('${APILinks.base}infos/$id/'));
-
     data.toJson().forEach((key, value) {
-      if (value != null && value.isNotEmpty) {
-        request.fields[key] = value.toString();
+      if (key == 'topic' ||
+          key == 'description' ||
+          key == 'location' ||
+          key == 'group' ||
+          key == 'positive' ||
+          key == 'emotion' ||
+          key == 'cultural' ||
+          key == 'physical') {
+        if (value != null) {
+          request.fields[key] = value.toString();
+        }
       }
     });
     request.headers['Authorization'] = 'Token $token';
@@ -511,7 +519,6 @@ Future<int> apiDelInfo(context, int id) async {
     final response = await request.send();
 
     if (response.statusCode == 200) {
-      Provider.of<InfoProvider>(context, listen: false).setModel(Info());
       return Errors.none;
     } else if (response.statusCode == 400) {
       return Errors.badreq;
@@ -531,13 +538,12 @@ Future<int> apiDelInfo(context, int id) async {
 // Email
 Future<int> apigetMail(context, String data) async {
   try {
-    final response = await http.post(
-      Uri.parse('${APILinks.base}password_reset/'),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode('{"email": $data}'),
-    );
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${APILinks.base}password_reset/'));
+
+    request.fields['email'] = data;
+
+    final response = await request.send();
 
     if (response.statusCode == 200) {
       return Errors.none;

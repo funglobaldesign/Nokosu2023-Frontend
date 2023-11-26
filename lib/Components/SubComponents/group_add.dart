@@ -32,11 +32,8 @@ class _GroupAddState extends State<GroupAddFolder> {
         onTap: () async {
           await showDialog(
               context: context,
-              builder: (BuildContext context) => const GroupFormAdd());
-          if (widget.folderView) {
-            // ignore: use_build_context_synchronously
-            RedirectFunctions.redirectFolders(context);
-          }
+              builder: (BuildContext context) =>
+                  GroupFormAdd(isFolderview: widget.folderView));
         },
         child: SizedBox(
           height: widget.folderView ? 120 : 80,

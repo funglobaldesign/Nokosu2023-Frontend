@@ -35,8 +35,6 @@ class FolderScreenState extends State<FolderScreen> {
 
     getGroups().then((_) async {
       groups = Provider.of<GroupsProvider>(context, listen: false).models;
-      print('===============GROUPSS===========');
-      print(groups.length);
       groupsReady = true;
       setState(() {});
     });
@@ -94,6 +92,7 @@ class FolderScreenState extends State<FolderScreen> {
               ),
             ),
             TopBar(
+              backBtn: const SizedBox(),
               camkey: GlobalKey(),
               middleIcon: const SizedBox(),
               rightmiddleIcon: const SizedBox(),

@@ -12,10 +12,15 @@ import 'package:nokosu2023/utils/static_functions.dart';
 class Categories extends StatefulWidget {
   final Info info;
   final String imagePath;
+  final Group group;
+  final bool isupdate;
+
   const Categories({
     Key? key,
     required this.info,
     required this.imagePath,
+    required this.group,
+    this.isupdate = false,
   }) : super(key: key);
 
   @override
@@ -41,6 +46,17 @@ class CategoriesState extends State<Categories> {
   }
 
   @override
+  void initState() {
+    if (widget.isupdate) {
+      positive = widget.info.positive!;
+      cultural = widget.info.cultural!;
+      physical = widget.info.physical!;
+      emotional = widget.info.emotion!;
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(children: [
       Center(
@@ -59,6 +75,7 @@ class CategoriesState extends State<Categories> {
                     textLabelNo: locale.negative,
                     iconYes: CustIcons.positive,
                     iconNo: CustIcons.negative,
+                    isyes: positive,
                     onButtonPressed: (value) {
                       setState(() {
                         positive = value;
@@ -84,6 +101,7 @@ class CategoriesState extends State<Categories> {
                     textLabelNo: locale.noemo,
                     iconYes: CustIcons.emotional,
                     iconNo: CustIcons.emotionalnon,
+                    isyes: emotional,
                     onButtonPressed: (value) {
                       setState(() {
                         emotional = value;
@@ -96,6 +114,7 @@ class CategoriesState extends State<Categories> {
                     textLabelNo: locale.nophys,
                     iconYes: CustIcons.physical,
                     iconNo: CustIcons.physicalnon,
+                    isyes: physical,
                     onButtonPressed: (value) {
                       setState(() {
                         physical = value;
@@ -108,6 +127,9 @@ class CategoriesState extends State<Categories> {
                     textLabelNo: locale.nocult,
                     iconYes: CustIcons.cultural,
                     iconNo: CustIcons.culturalnon,
+                    isyes: cultural,
+
+                    // Not changinf when isYes is there. FIXX ITT
                     onButtonPressed: (value) {
                       setState(() {
                         cultural = value;
@@ -143,8 +165,13 @@ class CategoriesState extends State<Categories> {
                             widget.info.cultural = cultural;
                             widget.info.physical = physical;
                             widget.info.emotion = emotional;
-                            int err = await apiAddInfo(
-                                context, widget.info, widget.imagePath);
+                            int err = widget.isupdate
+                                // ignore: use_build_context_synchronously
+                                ? await apiUpdateInfo(
+                                    context, widget.info, widget.info.id!)
+                                // ignore: use_build_context_synchronously
+                                : await apiAddInfo(
+                                    context, widget.info, widget.imagePath);
                             if (err != Errors.none) {
                               errorController.text = locale.errcrs;
                             }
@@ -153,8 +180,13 @@ class CategoriesState extends State<Categories> {
                             });
                             if (err == Errors.none) {
                               errorController.text = '';
-                              // ignore: use_build_context_synchronously
-                              RedirectFunctions.redirectHome(context);
+
+                              widget.isupdate
+                                  // ignore: use_build_context_synchronously
+                                  ? RedirectFunctions.redirectInfoFolders(
+                                      context, widget.group)
+                                  // ignore: use_build_context_synchronously
+                                  : RedirectFunctions.redirectHome(context);
                             }
                           },
                         ),

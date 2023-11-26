@@ -28,7 +28,6 @@ nophys,Not-Physical,非物理的,물리적요인과 상관없는,非物理
 ok,OK,確認,확인,确认
 password,Password,パスワード,비밀번호,密码
 passwordconf,Password Confirmation,パスワードの確認,비밀번호 확인,密码确认
-photodel,This photo and information will be deleted,この写真と情報は削除されます,이 사진 및 정보는 삭제됩니다.,该照片和信息将被删除
 phys,Physical,物理的,물리적 요인,物理的
 positive,Positive,肯定的,긍정적,积极的
 register,Register,登録,등록,注册
@@ -45,8 +44,11 @@ savedimage,Saved to the gallery,,,
 errnosave,Couldn't save,,,
 saving,Saving,,,
 deleted,Deleted Successfully,,,
-deleteconf,Are you sure to delete ,,,
+deleteconf,Are you sure to delete,,,
 yes,Yes,,,
 no,No,,,
 errcrs,Something went wrong,,,
 logout,Logout,,,
+photodel,This photo and information may not be saved,,,
+checkemail,Please check your email for password reset link,,,
+noemail,Could not find an account for the above email address,,,

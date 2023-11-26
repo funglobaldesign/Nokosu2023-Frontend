@@ -8,6 +8,7 @@ class ButtonFlip extends StatefulWidget {
   final String textLabelNo;
   final String iconYes;
   final String iconNo;
+  final bool isyes;
   final Function(bool) onButtonPressed;
 
   const ButtonFlip({
@@ -17,6 +18,7 @@ class ButtonFlip extends StatefulWidget {
     required this.iconYes,
     required this.iconNo,
     required this.onButtonPressed,
+    this.isyes = false,
   }) : super(key: key);
 
   @override
@@ -24,10 +26,9 @@ class ButtonFlip extends StatefulWidget {
 }
 
 class ButtonFlipState extends State<ButtonFlip> {
-  bool isYes = false;
-
   @override
   Widget build(BuildContext context) {
+    bool isYes = widget.isyes;
     return SizedBox(
       height: 60,
       width: 200,

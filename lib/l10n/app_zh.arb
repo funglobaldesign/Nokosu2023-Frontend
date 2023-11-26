@@ -30,7 +30,6 @@
     "ok": "确认",
     "password": "密码",
     "passwordconf": "密码确认",
-    "photodel": "该照片和信息将被删除",
     "phys": "物理的",
     "positive": "积极的",
     "register": "注册",
@@ -51,5 +50,8 @@
     "yes": "",
     "no": "",
     "errcrs": "",
-    "logout": ""
+    "logout": "",
+    "photodel": "",
+    "checkemail": "",
+    "noemail": ""
 }

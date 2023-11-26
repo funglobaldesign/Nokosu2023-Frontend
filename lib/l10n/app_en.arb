@@ -28,7 +28,6 @@
     "ok": "OK",
     "password": "Password",
     "passwordconf": "Password Confirmation",
-    "photodel": "This photo and information will be deleted",
     "phys": "Physical",
     "positive": "Positive",
     "register": "Register",
@@ -45,9 +44,12 @@
     "errnosave": "Couldn't save",
     "saving": "Saving",
     "deleted": "Deleted Successfully",
-    "deleteconf": "Are you sure to delete ",
+    "deleteconf": "Are you sure to delete",
     "yes": "Yes",
     "no": "No",
     "errcrs": "Something went wrong",
-    "logout": "Logout"
+    "logout": "Logout",
+    "photodel": "This photo and information may not be saved",
+    "checkemail": "Please check your email for password reset link",
+    "noemail": "Could not find an account for the above email address"
 }
