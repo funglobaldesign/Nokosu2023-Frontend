@@ -45,11 +45,11 @@ abstract class CustIcons {
 
   // Categories
   static const String cultural = 'assets/icons/cultural.svg';
-  static const String culturalnon = 'assets/icons/non_cultural.svg';
+  static const String culturalnon = 'assets/icons/cultural_no.svg';
   static const String emotional = 'assets/icons/emotional.svg';
-  static const String emotionalnon = 'assets/icons/non_emotional.svg';
+  static const String emotionalnon = 'assets/icons/emotional_no.svg';
   static const String physical = 'assets/icons/physical.svg';
-  static const String physicalnon = 'assets/icons/non_physical.svg';
+  static const String physicalnon = 'assets/icons/physical_no.svg';
   static const String positive = 'assets/icons/positive.svg';
   static const String negative = 'assets/icons/negative.svg';
 
