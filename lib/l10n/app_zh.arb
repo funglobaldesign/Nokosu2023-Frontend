@@ -53,5 +53,7 @@
     "logout": "",
     "photodel": "",
     "checkemail": "",
-    "noemail": ""
+    "noemail": "",
+    "logoutconf": "",
+    "editprof": ""
 }

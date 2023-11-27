@@ -5,7 +5,11 @@ import 'package:nokosu2023/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 class DropdownL10n extends StatefulWidget {
-  const DropdownL10n({Key? key}) : super(key: key);
+  final bool is3d;
+  const DropdownL10n({
+    Key? key,
+    this.is3d = true,
+  }) : super(key: key);
 
   @override
   DropdownL10nState createState() => DropdownL10nState();
@@ -17,36 +21,67 @@ class DropdownL10nState extends State<DropdownL10n> {
     return Container(
       height: 35,
       padding: const EdgeInsets.all(2),
-      child: Neumo(
-        child: DropdownButton<Locale>(
-          items: const [
-            DropdownMenuItem(
-              value: Locale('en'),
-              child: Text('English'),
+      child: widget.is3d
+          ? Neumo(
+              child: DropdownButton<Locale>(
+                items: const [
+                  DropdownMenuItem(
+                    value: Locale('en'),
+                    child: Text('English'),
+                  ),
+                  DropdownMenuItem(
+                    value: Locale('ja'),
+                    child: Text('日本語'),
+                  ),
+                  DropdownMenuItem(
+                    value: Locale('ko'),
+                    child: Text('한국어'),
+                  ),
+                  DropdownMenuItem(
+                    value: Locale('zh'),
+                    child: Text('中文'),
+                  ),
+                ],
+                onChanged: (newLocale) {
+                  Provider.of<LocaleProvider>(context, listen: false)
+                      .setLocale(newLocale!);
+                },
+                value: Provider.of<LocaleProvider>(context).locale,
+                underline: Container(),
+                dropdownColor: ThemeColours.bgBlueWhite,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            )
+          : SizedBox(
+              child: DropdownButton<Locale>(
+                items: const [
+                  DropdownMenuItem(
+                    value: Locale('en'),
+                    child: Text('English'),
+                  ),
+                  DropdownMenuItem(
+                    value: Locale('ja'),
+                    child: Text('日本語'),
+                  ),
+                  DropdownMenuItem(
+                    value: Locale('ko'),
+                    child: Text('한국어'),
+                  ),
+                  DropdownMenuItem(
+                    value: Locale('zh'),
+                    child: Text('中文'),
+                  ),
+                ],
+                onChanged: (newLocale) {
+                  Provider.of<LocaleProvider>(context, listen: false)
+                      .setLocale(newLocale!);
+                },
+                value: Provider.of<LocaleProvider>(context).locale,
+                underline: Container(),
+                dropdownColor: ThemeColours.bgBlueWhite,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
             ),
-            DropdownMenuItem(
-              value: Locale('ja'),
-              child: Text('日本語'),
-            ),
-            DropdownMenuItem(
-              value: Locale('ko'),
-              child: Text('한국어'),
-            ),
-            DropdownMenuItem(
-              value: Locale('zh'),
-              child: Text('中文'),
-            ),
-          ],
-          onChanged: (newLocale) {
-            Provider.of<LocaleProvider>(context, listen: false)
-                .setLocale(newLocale!);
-          },
-          value: Provider.of<LocaleProvider>(context).locale,
-          underline: Container(),
-          dropdownColor: ThemeColours.bgBlueWhite,
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
     );
   }
 }

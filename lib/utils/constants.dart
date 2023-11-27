@@ -42,6 +42,7 @@ abstract class NumericConsts {
 
 abstract class CustIcons {
   static const String logo = 'assets/icons/nokosu_logo.svg';
+  static const String globe = 'assets/icons/globe.svg';
 
   // Categories
   static const String cultural = 'assets/icons/cultural.svg';
