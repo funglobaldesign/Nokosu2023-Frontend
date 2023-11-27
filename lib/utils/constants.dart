@@ -42,6 +42,7 @@ abstract class NumericConsts {
 
 abstract class CustIcons {
   static const String logo = 'assets/icons/nokosu_logo.svg';
+  static const String globe = 'assets/icons/globe.svg';
 
   // Categories
   static const String cultural = 'assets/icons/cultural.svg';
@@ -60,10 +61,10 @@ abstract class CustIcons {
   static const String location = 'assets/icons/place.svg';
   static const String topic = 'assets/icons/topic.svg';
   static const String username = 'assets/icons/username.svg';
-  static const String firstname = 'assets/icons/firstname.svg';
-  static const String lastname = 'assets/icons/lastname.svg';
-  static const String lock = 'assets/icons/unlock.svg';
-  static const String lockconf = 'assets/icons/lock.svg';
+  static const String firstname = 'assets/icons/first_name.svg';
+  static const String lastname = 'assets/icons/last_name.svg';
+  static const String lock = 'assets/icons/password_unlock.svg';
+  static const String lockconf = 'assets/icons/password_lock.svg';
 
   // nav icons
   static const String camera = 'assets/icons/camera.svg';

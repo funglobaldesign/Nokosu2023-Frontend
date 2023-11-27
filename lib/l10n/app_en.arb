@@ -51,5 +51,13 @@
     "logout": "Logout",
     "photodel": "This photo and information may not be saved",
     "checkemail": "Please check your email for password reset link",
-    "noemail": "Could not find an account for the above email address"
+    "noemail": "Could not find an account for the above email address",
+    "logoutconf": "Are you sure to logout?",
+    "editprof": "Edit Profile",
+    "accstatus": "Account Status",
+    "admin": "Admin",
+    "staff": "Staff",
+    "regular": "Regular User",
+    "djoined": "Date Joined",
+    "lastlogin": "Last Login"
 }
