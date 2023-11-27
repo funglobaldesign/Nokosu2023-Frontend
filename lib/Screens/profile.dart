@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/Components/SubComponents/profile_info_field.dart';
 import 'package:nokosu2023/Components/button_submit.dart';
@@ -108,14 +109,14 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: ClipOval(child: pfp),
                             ),
                             const SizedBox(
-                              height: 10,
+                              height: 20,
                             ),
                             Text(
                               '${profile.user!.last_name!} ${profile.user!.first_name!}',
                               style: const TextStyle(
                                 color: ThemeColours.txtBlack,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.none,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -132,15 +133,21 @@ class _ProfilePageState extends State<ProfilePage> {
                                   InfoField(
                                       txt1: locale.email,
                                       txt2: profile.user!.email!),
-                                  // InfoField(
-                                  //     txt1: locale.status,
-                                  //     txt2: ), Show user status
-                                  // InfoField(
-                                  //     txt1: locale.username,
-                                  //     txt2: profile.user!.username!), Date joined
-                                  // InfoField(
-                                  //     txt1: locale.username,
-                                  //     txt2: profile.user!.username!), Last login
+                                  InfoField(
+                                      txt1: locale.accstatus,
+                                      txt2: profile.user!.is_superuser!
+                                          ? locale.admin
+                                          : profile.user!.is_staff!
+                                              ? locale.staff
+                                              : locale.regular),
+                                  InfoField(
+                                      txt1: locale.djoined,
+                                      txt2: DateFormat('yyyy/MM/dd')
+                                          .format(profile.user!.date_joined!)),
+                                  InfoField(
+                                      txt1: locale.lastlogin,
+                                      txt2: DateFormat('yyyy/MM/dd HH:mm')
+                                          .format(profile.user!.last_login!)),
                                 ],
                               ),
                             ),

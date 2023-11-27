@@ -55,5 +55,11 @@
     "checkemail": "",
     "noemail": "",
     "logoutconf": "",
-    "editprof": ""
+    "editprof": "",
+    "accstatus": "",
+    "admin": "",
+    "staff": "",
+    "regular": "",
+    "djoined": "",
+    "lastlogin": ""
 }
