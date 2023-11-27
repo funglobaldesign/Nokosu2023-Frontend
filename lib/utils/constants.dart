@@ -59,6 +59,11 @@ abstract class CustIcons {
   static const String mail = 'assets/icons/mail.svg';
   static const String location = 'assets/icons/place.svg';
   static const String topic = 'assets/icons/topic.svg';
+  static const String username = 'assets/icons/username.svg';
+  static const String firstname = 'assets/icons/firstname.svg';
+  static const String lastname = 'assets/icons/lastname.svg';
+  static const String lock = 'assets/icons/unlock.svg';
+  static const String lockconf = 'assets/icons/lock.svg';
 
   // nav icons
   static const String camera = 'assets/icons/camera.svg';
