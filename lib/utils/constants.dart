@@ -19,7 +19,7 @@ abstract class ThemeColours {
   static const Color txtWhite = Colors.white;
 
   // Icon Colours
-  static const Color iconBlack = Color(0xFF000000);
+  static const Color iconBlack = Color(0x88000000);
   static const Color iconblue = Color(0xFF7AA8FF);
 
   // Shadow Colours
@@ -45,11 +45,11 @@ abstract class CustIcons {
 
   // Categories
   static const String cultural = 'assets/icons/cultural.svg';
-  static const String culturalnon = 'assets/icons/non_cultural.svg';
+  static const String culturalnon = 'assets/icons/cultural_no.svg';
   static const String emotional = 'assets/icons/emotional.svg';
-  static const String emotionalnon = 'assets/icons/non_emotional.svg';
+  static const String emotionalnon = 'assets/icons/emotional_no.svg';
   static const String physical = 'assets/icons/physical.svg';
-  static const String physicalnon = 'assets/icons/non_physical.svg';
+  static const String physicalnon = 'assets/icons/physical_no.svg';
   static const String positive = 'assets/icons/positive.svg';
   static const String negative = 'assets/icons/negative.svg';
 
@@ -59,6 +59,11 @@ abstract class CustIcons {
   static const String mail = 'assets/icons/mail.svg';
   static const String location = 'assets/icons/place.svg';
   static const String topic = 'assets/icons/topic.svg';
+  static const String username = 'assets/icons/username.svg';
+  static const String firstname = 'assets/icons/firstname.svg';
+  static const String lastname = 'assets/icons/lastname.svg';
+  static const String lock = 'assets/icons/unlock.svg';
+  static const String lockconf = 'assets/icons/lock.svg';
 
   // nav icons
   static const String camera = 'assets/icons/camera.svg';

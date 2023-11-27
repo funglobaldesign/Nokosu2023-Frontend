@@ -29,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return WillPopScope(
       onWillPop: () async {
-        return false;
+        return true;
       },
       child: Scaffold(
         appBar: null,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nokosu2023/Components/SubComponents/error_field.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/Components/button_submit.dart';
@@ -47,7 +48,7 @@ class _PasswordPageState extends State<PasswordPage> {
                   InputField(
                     label: locale.email,
                     controller: emailController,
-                    prefixicon: Icons.email,
+                    prefixicon: SvgPicture.asset(CustIcons.mail),
                   ),
                   ErrorField(
                     err: formErrorController.text,

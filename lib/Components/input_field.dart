@@ -12,7 +12,7 @@ class InputField extends StatefulWidget {
   final double boxHeight;
   final TextEditingController controller;
   final bool ispasswordField;
-  final IconData prefixicon;
+  final Widget prefixicon;
   final double border;
 
   const InputField({
@@ -62,10 +62,9 @@ class InputFieldState extends State<InputField> {
                   border: InputBorder.none,
                   hintText: widget.label,
                   hintStyle: const TextStyle(color: ThemeColours.txtGrey),
-                  prefixIcon: Icon(
-                    widget.prefixicon,
-                    color: ThemeColours.iconBlack,
-                  ),
+                  prefixIcon: Container(
+                      padding: const EdgeInsets.all(10),
+                      child: widget.prefixicon),
                   suffixIcon: widget.ispasswordField
                       ? IconButton(
                           icon: Icon(

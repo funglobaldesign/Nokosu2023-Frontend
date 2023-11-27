@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nokosu2023/Components/SubComponents/error_field.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -60,9 +61,10 @@ class _GroupFormState extends State<GroupFormAdd> {
                       top: 30,
                       left: 10,
                       child: InputField(
-                          label: locale.group,
-                          controller: groupController,
-                          prefixicon: Icons.supervisor_account_outlined),
+                        label: locale.group,
+                        controller: groupController,
+                        prefixicon: SvgPicture.asset(CustIcons.groups),
+                      ),
                     ),
                     Positioned(
                       top: 130,
