@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/SubComponents/group_add_form.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nokosu2023/utils/static_functions.dart';
 
 class GroupAddFolder extends StatefulWidget {
   final bool folderView;

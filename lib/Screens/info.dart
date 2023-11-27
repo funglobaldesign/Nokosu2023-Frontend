@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:nokosu2023/Components/SubComponents/error_field.dart';
 import 'package:nokosu2023/Components/button_submit.dart';
@@ -196,14 +197,14 @@ class _InfoPageState extends State<InfoPage> {
                   InputField(
                     label: locale.topic,
                     controller: topicController,
-                    prefixicon: Icons.topic_outlined,
+                    prefixicon: SvgPicture.asset(CustIcons.topic),
                     border: 10,
                     isErr: false,
                   ),
                   InputField(
                     label: locale.desc,
                     controller: descController,
-                    prefixicon: Icons.carpenter_outlined,
+                    prefixicon: SvgPicture.asset(CustIcons.comment),
                     border: 10,
                     isErr: false,
                   ),
@@ -220,7 +221,7 @@ class _InfoPageState extends State<InfoPage> {
                     child: InputField(
                       label: locale.group,
                       controller: groupNameController,
-                      prefixicon: Icons.supervisor_account_outlined,
+                      prefixicon: SvgPicture.asset(CustIcons.groups),
                       border: 10,
                       isErr: false,
                       isEnabled: false,
@@ -229,7 +230,7 @@ class _InfoPageState extends State<InfoPage> {
                   InputField(
                     label: locale.locname,
                     controller: locationController,
-                    prefixicon: Icons.add_location_alt_outlined,
+                    prefixicon: SvgPicture.asset(CustIcons.location),
                     border: 10,
                     isErr: false,
                   ),

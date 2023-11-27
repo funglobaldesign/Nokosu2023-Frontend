@@ -7,7 +7,6 @@ import 'package:nokosu2023/Components/camera.dart';
 import 'package:nokosu2023/Components/bar_top.dart';
 import 'package:nokosu2023/Components/loading_overlay.dart';
 import 'package:nokosu2023/providers/home_state.dart';
-import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -61,11 +60,11 @@ class _HomePageState extends State<HomePage> {
               backBtn: const SizedBox(),
               camkey: cameraKey,
               middleIcon: IconButton(
-                icon: Icon(flashMode == 1
-                    ? Icons.flash_auto
+                icon: flashMode == 1
+                    ? SvgPicture.asset(CustIcons.flashauto)
                     : flashMode == 2
-                        ? Icons.flash_on
-                        : Icons.flash_off),
+                        ? SvgPicture.asset(CustIcons.flash)
+                        : SvgPicture.asset(CustIcons.flashno),
                 onPressed: () async {
                   final cameraState = cameraKey.currentState;
 
@@ -127,7 +126,10 @@ class _HomePageState extends State<HomePage> {
 
                       overlayEntry.remove();
                     },
-                    icon: SvgPicture.asset(CustIcons.shutter),
+                    icon: SvgPicture.asset(
+                      CustIcons.shutter,
+                      height: 60,
+                    ),
                   ),
                 ),
               ),
