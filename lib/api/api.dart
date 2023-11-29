@@ -19,6 +19,7 @@ void _setProfile(context, json) {
 }
 
 Future<int> confirmToken(String token, int did) async {
+  print('___________------------=----------------------------------');
   final response = await http.get(Uri.parse('${APILinks.base}profiles/$did/'),
       headers: <String, String>{
         'Content-Type': 'application/json',
@@ -26,6 +27,8 @@ Future<int> confirmToken(String token, int did) async {
       });
 
   int id = 0;
+
+  print(response);
 
   if (response.statusCode == 200) {
     Profile prof = Profile.fromJson(jsonDecode(response.body));

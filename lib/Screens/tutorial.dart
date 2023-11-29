@@ -68,8 +68,8 @@ class TutorialScreenState extends State<TutorialScreen> {
                 child: GestureDetector(
                   onTap: () {
                     _pageController.previousPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeOut,
                     );
                   },
                   child: const Text('< Back'),
@@ -80,8 +80,8 @@ class TutorialScreenState extends State<TutorialScreen> {
               child: GestureDetector(
                 onTap: () {
                   _pageController.nextPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.bounceIn,
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeIn,
                   );
                 },
                 child: const Text('Next >'),
