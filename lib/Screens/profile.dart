@@ -70,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return WillPopScope(
       onWillPop: () async {
         return true;
