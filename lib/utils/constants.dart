@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class APILinks {
-  static const String base = "nokosu.onrender.com";
+  static const String base = "https://nokosu.onrender.com";
   // "http://127.0.0.1:8000/api/";
   // "https://globaldesign2023backend.onrender.com/api/";
 
