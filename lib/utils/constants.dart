@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 abstract class APILinks {
-  static const String base = //"http://127.0.0.1:8000/api/";
-      "https://globaldesign2023backend.onrender.com/api/";
+  static const String base = "https://nokosu.onrender.com/api/";
+  // "http://127.0.0.1:8000/api/";
+  // "https://globaldesign2023backend.onrender.com/api/";
 
   static const String maps = 'https://www.google.com/maps/search/?api=1&query=';
 }
@@ -80,6 +81,13 @@ abstract class CustIcons {
 abstract class Imgs {
   static const String folder = 'assets/imgs/folder.png';
   static const String pfp = 'assets/imgs/pfp.png';
+  static const String logo = 'assets/imgs/pfp.png';
+
+  static const String p1 = 'assets/imgs/tutorial/1.png';
+  static const String p2 = 'assets/imgs/tutorial/2.png';
+  static const String p3 = 'assets/imgs/tutorial/3.png';
+  static const String p4 = 'assets/imgs/tutorial/4.png';
+  static const String p5 = 'assets/imgs/tutorial/5.png';
 }
 
 abstract class DeviseMemory {

@@ -48,6 +48,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/imgs/
+    - assets/imgs/tutorial/
 
 flutter_launcher_icons:
   android: true
