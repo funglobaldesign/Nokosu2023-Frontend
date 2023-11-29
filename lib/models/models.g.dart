@@ -7,8 +7,8 @@ part of 'models.dart';
 // **************************************************************************
 
 UserLogin _$UserLoginFromJson(Map<String, dynamic> json) => UserLogin(
-      username: json['username'] as String?,
-      password: json['password'] as String?,
+      username: json['username'] as String? ?? "",
+      password: json['password'] as String? ?? "",
     );
 
 Map<String, dynamic> _$UserLoginToJson(UserLogin instance) => <String, dynamic>{
@@ -17,12 +17,12 @@ Map<String, dynamic> _$UserLoginToJson(UserLogin instance) => <String, dynamic>{
     };
 
 UserReg _$UserRegFromJson(Map<String, dynamic> json) => UserReg(
-      username: json['username'] as String?,
-      email: json['email'] as String?,
-      first_name: json['first_name'] as String?,
-      last_name: json['last_name'] as String?,
-      password1: json['password1'] as String?,
-      password2: json['password2'] as String?,
+      username: json['username'] as String? ?? "",
+      email: json['email'] as String? ?? "",
+      first_name: json['first_name'] as String? ?? "",
+      last_name: json['last_name'] as String? ?? "",
+      password1: json['password1'] as String? ?? "",
+      password2: json['password2'] as String? ?? "",
     );
 
 Map<String, dynamic> _$UserRegToJson(UserReg instance) => <String, dynamic>{
@@ -36,8 +36,8 @@ Map<String, dynamic> _$UserRegToJson(UserReg instance) => <String, dynamic>{
 
 FormErrResponse _$FormErrResponseFromJson(Map<String, dynamic> json) =>
     FormErrResponse(
-      message: json['message'] as String?,
-      code: json['code'] as String?,
+      message: json['message'] as String? ?? "",
+      code: json['code'] as String? ?? "",
     );
 
 Map<String, dynamic> _$FormErrResponseToJson(FormErrResponse instance) =>
@@ -84,14 +84,14 @@ Map<String, dynamic> _$UserRegResponseToJson(UserRegResponse instance) =>
     };
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      id: json['id'] as int?,
-      username: json['username'] as String?,
-      email: json['email'] as String?,
-      first_name: json['first_name'] as String?,
-      last_name: json['last_name'] as String?,
-      is_active: json['is_active'] as bool?,
-      is_staff: json['is_staff'] as bool?,
-      is_superuser: json['is_superuser'] as bool?,
+      id: json['id'] as int? ?? 0,
+      username: json['username'] as String? ?? "",
+      email: json['email'] as String? ?? "",
+      first_name: json['first_name'] as String? ?? "",
+      last_name: json['last_name'] as String? ?? "",
+      is_active: json['is_active'] as bool? ?? false,
+      is_staff: json['is_staff'] as bool? ?? false,
+      is_superuser: json['is_superuser'] as bool? ?? false,
       date_joined: json['date_joined'] == null
           ? null
           : DateTime.parse(json['date_joined'] as String),
@@ -114,9 +114,9 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
     };
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
-      id: json['id'] as int?,
-      photo: json['photo'] as String?,
-      url: json['url'] as String?,
+      id: json['id'] as int? ?? 0,
+      photo: json['photo'] as String? ?? "",
+      url: json['url'] as String? ?? "",
       user: json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
@@ -130,13 +130,13 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
     };
 
 Group _$GroupFromJson(Map<String, dynamic> json) => Group(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      createdBy: json['createdBy'] as int?,
+      id: json['id'] as int? ?? 0,
+      name: json['name'] as String? ?? "",
+      createdBy: json['createdBy'] as int? ?? 0,
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
-      logo: json['logo'] as String?,
+      logo: json['logo'] as String? ?? "",
     );
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
@@ -148,24 +148,24 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
     };
 
 Info _$InfoFromJson(Map<String, dynamic> json) => Info(
-      id: json['id'] as int?,
-      topic: json['topic'] as String?,
-      description: json['description'] as String?,
+      id: json['id'] as int? ?? 0,
+      topic: json['topic'] as String? ?? "",
+      description: json['description'] as String? ?? "",
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
-      photo: json['photo'] as String?,
-      url: json['url'] as String?,
-      group: json['group'] as int?,
-      createdBy: json['createdBy'] as int?,
-      positive: json['positive'] as bool?,
-      emotion: json['emotion'] as bool?,
-      cultural: json['cultural'] as bool?,
-      physical: json['physical'] as bool?,
-      location: json['location'] as String?,
-      latitude: (json['latitude'] as num?)?.toDouble(),
-      longitude: (json['longitude'] as num?)?.toDouble(),
-      address: json['address'] as String?,
+      photo: json['photo'] as String? ?? "",
+      url: json['url'] as String? ?? "",
+      group: json['group'] as int? ?? -1,
+      createdBy: json['createdBy'] as int? ?? 0,
+      positive: json['positive'] as bool? ?? false,
+      emotion: json['emotion'] as bool? ?? false,
+      cultural: json['cultural'] as bool? ?? false,
+      physical: json['physical'] as bool? ?? false,
+      location: json['location'] as String? ?? "",
+      latitude: (json['latitude'] as num?)?.toDouble() ?? 0.0,
+      longitude: (json['longitude'] as num?)?.toDouble() ?? 0.0,
+      address: json['address'] as String? ?? "",
     );
 
 Map<String, dynamic> _$InfoToJson(Info instance) => <String, dynamic>{

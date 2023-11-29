@@ -40,7 +40,7 @@ class Nokosu extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+    //SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
 
     return MultiProvider(
       providers: [

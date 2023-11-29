@@ -43,7 +43,7 @@ class FolderScreenState extends State<FolderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     groupWidgets = groups
         .map((group) => GroupFolder(
               group: group,

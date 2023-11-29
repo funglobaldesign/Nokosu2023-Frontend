@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return WillPopScope(
       onWillPop: () async {
         return false;
