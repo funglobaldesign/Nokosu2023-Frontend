@@ -63,8 +63,8 @@ class TutorialScreenState extends State<TutorialScreen> {
         child: Stack(
           children: [
             Positioned(
-                left: width * 0.13,
-                bottom: height * 0.2,
+                left: width * 0.05,
+                bottom: height * 0.01,
                 child: GestureDetector(
                   onTap: () {
                     _pageController.previousPage(
@@ -72,11 +72,20 @@ class TutorialScreenState extends State<TutorialScreen> {
                       curve: Curves.easeOut,
                     );
                   },
-                  child: const Text('< Back'),
+                  child: Container(
+                    height: height * 0.22,
+                    width: width * 0.42,
+                    color: Colors.transparent,
+                    padding: EdgeInsets.only(bottom: height * 0.16, left: 20),
+                    child: const Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text('< Back'),
+                    ),
+                  ),
                 )),
             Positioned(
-              right: width * 0.13 - 15,
-              bottom: height * 0.2,
+              right: width * 0.05 - 15,
+              bottom: height * 0.01,
               child: GestureDetector(
                 onTap: () {
                   _pageController.nextPage(
@@ -84,7 +93,16 @@ class TutorialScreenState extends State<TutorialScreen> {
                     curve: Curves.easeIn,
                   );
                 },
-                child: const Text('Next >'),
+                child: Container(
+                  height: height * 0.22,
+                  width: width * 0.42,
+                  color: Colors.transparent,
+                  padding: EdgeInsets.only(bottom: height * 0.16, right: 20),
+                  child: const Align(
+                    alignment: Alignment.bottomRight,
+                    child: Text('Next >'),
+                  ),
+                ),
               ),
             ),
             Positioned(

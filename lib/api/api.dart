@@ -21,7 +21,7 @@ void _setProfile(context, json) {
 Future<int> confirmToken(String token, int did) async {
   final response = await http.get(Uri.parse('${APILinks.base}profiles/$did/'),
       headers: <String, String>{
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8',
         'Authorization': 'Token $token',
       });
 
@@ -74,7 +74,7 @@ Future<int> apiLogin(context, UserLogin data) async {
     final response = await http.post(
       Uri.parse('${APILinks.base}users/login/'),
       headers: <String, String>{
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8',
       },
       body: jsonEncode(data.toJson()),
     );
@@ -104,7 +104,7 @@ Future<int> apiLogout(context) async {
     final response = await http.post(
       Uri.parse('${APILinks.base}users/logout/'),
       headers: <String, String>{
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8',
         'Authorization': 'Token $token',
       },
     );
@@ -134,7 +134,7 @@ Future<int> apiGetProfile(context, int id) async {
 
     final response = await http.get(Uri.parse('${APILinks.base}profiles/$id/'),
         headers: <String, String>{
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json;charset=utf-8',
           'Authorization': 'Token $token',
         });
 
@@ -233,14 +233,15 @@ Future<int> apiGetGroups(context) async {
     print(token);
     final response = await http
         .get(Uri.parse('${APILinks.base}groups/'), headers: <String, String>{
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
       'Authorization': 'Token $token',
     });
 
     if (response.statusCode == 200) {
       Provider.of<GroupsProvider>(context, listen: false).setModels([]);
-      var json = jsonDecode(response.body);
-      for (var each in json) {
+      // var json = jsonDecode(response.body);
+      var jsonResponse = json.decode(utf8.decode(response.bodyBytes));
+      for (var each in jsonResponse) {
         Provider.of<GroupsProvider>(context, listen: false)
             .addModel(Group.fromJson(each));
       }
@@ -264,14 +265,15 @@ Future<int> apiGetGroup(context, int id) async {
 
     final response = await http.get(Uri.parse('${APILinks.base}groups/$id/'),
         headers: <String, String>{
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json;charset=utf-8',
           'Authorization': 'Token $token',
         });
 
     if (response.statusCode == 200) {
       Provider.of<InfosProvider>(context, listen: false).setModels([]);
-      var json = jsonDecode(response.body);
-      for (var each in json) {
+      // var json = jsonDecode(response.body);
+      var jsonResponse = json.decode(utf8.decode(response.bodyBytes));
+      for (var each in jsonResponse) {
         Provider.of<InfosProvider>(context, listen: false)
             .addModel(Info.fromJson(each));
       }
@@ -385,14 +387,15 @@ Future<int> apiGetInfos(context) async {
 
     final response = await http
         .get(Uri.parse('${APILinks.base}infos/'), headers: <String, String>{
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
       'Authorization': 'Token $token',
     });
 
     if (response.statusCode == 200) {
       Provider.of<InfosProvider>(context, listen: false).setModels([]);
-      var json = jsonDecode(response.body);
-      for (var each in json) {
+      // var json = jsonDecode(response.body);
+      var jsonResponse = json.decode(utf8.decode(response.bodyBytes));
+      for (var each in jsonResponse) {
         Provider.of<InfosProvider>(context, listen: false)
             .addModel(Info.fromJson(each));
       }
@@ -416,7 +419,7 @@ Future<int> apiGetInfo(context, int id) async {
 
     final response = await http
         .get(Uri.parse('${APILinks.base}infos/$id/'), headers: <String, String>{
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
       'Authorization': 'Token $token',
     });
 
