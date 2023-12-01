@@ -230,7 +230,6 @@ Future<int> apiDelProfile(context, int id) async {
 Future<int> apiGetGroups(context) async {
   try {
     String token = Provider.of<TokenProvider>(context, listen: false).token;
-    print(token);
     final response = await http
         .get(Uri.parse('${APILinks.base}groups/'), headers: <String, String>{
       'Content-Type': 'application/json;charset=utf-8',
