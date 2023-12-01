@@ -45,6 +45,8 @@ Future<int> apiRegister(context, UserReg data) async {
     data.toJson().forEach((key, value) {
       request.fields[key] = value.toString();
     });
+    request.headers['Content-Type'] =
+        'application/x-www-form-urlencoded; charset=utf-8';
     final response = await request.send();
     if (response.statusCode == 200) {
       _setProfile(context, jsonDecode(await response.stream.bytesToString()));
@@ -169,6 +171,8 @@ Future<int> apiUpdateProfile(context, UserReg data, String file, int id) async {
         request.fields[key] = value.toString();
       }
     });
+    request.headers['Content-Type'] =
+        'application/x-www-form-urlencoded; charset=utf-8';
     request.headers['Authorization'] = 'Token $token';
     request.files.add(await http.MultipartFile.fromPath('photo', file));
 
@@ -205,6 +209,8 @@ Future<int> apiDelProfile(context, int id) async {
         'DELETE', Uri.parse('${APILinks.base}profiles/$id/'));
 
     request.headers['Authorization'] = 'Token $token';
+    request.headers['Content-Type'] =
+        'application/x-www-form-urlencoded; charset=utf-8';
 
     final response = await request.send();
 
@@ -299,6 +305,8 @@ Future<int> apiAddgroup(context, String data) async {
 
     request.fields['name'] = data;
     request.headers['Authorization'] = 'Token $token';
+    request.headers['Content-Type'] =
+        'application/x-www-form-urlencoded; charset=utf-8';
 
     final response = await request.send();
 
@@ -330,6 +338,8 @@ Future<int> apiUpdateGroup(context, String data, int id) async {
 
     request.fields['name'] = data;
     request.headers['Authorization'] = 'Token $token';
+    request.headers['Content-Type'] =
+        'application/x-www-form-urlencoded; charset=utf-8';
 
     final response = await request.send();
     if (response.statusCode == 200) {
@@ -359,6 +369,8 @@ Future<int> apiDelGroup(context, int id) async {
         'DELETE', Uri.parse('${APILinks.base}groups/$id/'));
 
     request.headers['Authorization'] = 'Token $token';
+    request.headers['Content-Type'] =
+        'application/x-www-form-urlencoded; charset=utf-8';
 
     final response = await request.send();
 
@@ -452,6 +464,8 @@ Future<int> apiAddInfo(context, Info data, String file) async {
     });
     request.files.add(await http.MultipartFile.fromPath('photo', file));
     request.headers['Authorization'] = 'Token $token';
+    request.headers['Content-Type'] =
+        'application/x-www-form-urlencoded; charset=utf-8';
 
     final response = await request.send();
     if (response.statusCode == 200) {
@@ -491,6 +505,8 @@ Future<int> apiUpdateInfo(context, Info data, int id) async {
       }
     });
     request.headers['Authorization'] = 'Token $token';
+    request.headers['Content-Type'] =
+        'application/x-www-form-urlencoded; charset=utf-8';
 
     final response = await request.send();
     if (response.statusCode == 200) {
@@ -517,6 +533,8 @@ Future<int> apiDelInfo(context, int id) async {
         'DELETE', Uri.parse('${APILinks.base}infos/$id/'));
 
     request.headers['Authorization'] = 'Token $token';
+    request.headers['Content-Type'] =
+        'application/x-www-form-urlencoded; charset=utf-8';
 
     final response = await request.send();
 
@@ -544,6 +562,8 @@ Future<int> apigetMail(context, String data) async {
         'POST', Uri.parse('${APILinks.base}password_reset/'));
 
     request.fields['email'] = data;
+    request.headers['Content-Type'] =
+        'application/x-www-form-urlencoded; charset=utf-8';
 
     final response = await request.send();
 
