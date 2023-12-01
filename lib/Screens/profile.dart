@@ -242,7 +242,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      content: Text(locale.deleteconf),
+                                      content: Text(locale.logoutconf),
                                       actions: <Widget>[
                                         TextButton(
                                           onPressed: () {
