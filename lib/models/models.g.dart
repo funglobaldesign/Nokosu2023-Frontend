@@ -94,10 +94,10 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       is_superuser: json['is_superuser'] as bool? ?? false,
       date_joined: json['date_joined'] == null
           ? DateTime.now()
-          : DateTime.parse(json['date_joined'] as String),
+          : DateTime.parse(json['date_joined'] as String).toLocal(),
       last_login: json['last_login'] == null
           ? DateTime.now()
-          : DateTime.parse(json['last_login'] as String),
+          : DateTime.parse(json['last_login'] as String).toLocal(),
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -134,8 +134,8 @@ Group _$GroupFromJson(Map<String, dynamic> json) => Group(
       name: json['name'] as String? ?? "",
       createdBy: json['createdBy'] as int? ?? 0,
       created: json['created'] == null
-          ? null
-          : DateTime.parse(json['created'] as String),
+          ? DateTime.now()
+          : DateTime.parse(json['created'] as String).toLocal(),
       logo: json['logo'] as String? ?? "",
     );
 
@@ -152,8 +152,8 @@ Info _$InfoFromJson(Map<String, dynamic> json) => Info(
       topic: json['topic'] as String? ?? "",
       description: json['description'] as String? ?? "",
       created: json['created'] == null
-          ? null
-          : DateTime.parse(json['created'] as String),
+          ? DateTime.now()
+          : DateTime.parse(json['created'] as String).toLocal(),
       photo: json['photo'] as String? ?? "",
       url: json['url'] as String? ?? "",
       group: json['group'] as int? ?? -1,
