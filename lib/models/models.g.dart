@@ -93,10 +93,10 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       is_staff: json['is_staff'] as bool? ?? false,
       is_superuser: json['is_superuser'] as bool? ?? false,
       date_joined: json['date_joined'] == null
-          ? null
+          ? DateTime.now()
           : DateTime.parse(json['date_joined'] as String),
       last_login: json['last_login'] == null
-          ? null
+          ? DateTime.now()
           : DateTime.parse(json['last_login'] as String),
     );
 
